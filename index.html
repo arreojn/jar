@@ -1055,6 +1055,9 @@
             
             // Check if dark mode is enabled
             checkDarkMode();
+
+            // Set initial screen to home
+            showScreen('home');
         }
 
         // Load user data from local storage
@@ -1087,9 +1090,20 @@
                         const icon = card.querySelector('.fa-book-open').parentNode;
                         icon.classList.remove('bg-blue-100', 'dark:bg-blue-900');
                         icon.classList.add('bg-green-100', 'dark:bg-green-900');
-                        const checkIcon = document.createElement('i');
-                        checkIcon.className = 'fas fa-check-circle text-green-600 dark:text-green-300 ml-2';
-                        card.querySelector('h3').appendChild(checkIcon);
+                        const existingCheckIcon = card.querySelector('.fa-check-circle');
+                        if (!existingCheckIcon) {
+                            const checkIcon = document.createElement('i');
+                            checkIcon.className = 'fas fa-check-circle text-green-600 dark:text-green-300 ml-2';
+                            card.querySelector('h3').appendChild(checkIcon);
+                        }
+                    } else {
+                        const icon = card.querySelector('.fa-book-open').parentNode;
+                        icon.classList.remove('bg-green-100', 'dark:bg-green-900');
+                        icon.classList.add('bg-blue-100', 'dark:bg-blue-900');
+                        const existingCheckIcon = card.querySelector('.fa-check-circle');
+                        if (existingCheckIcon) {
+                            existingCheckIcon.remove();
+                        }
                     }
                 });
             }
@@ -1313,6 +1327,227 @@
                     
                     // Update UI
                     elements.markCompleteBtn.textContent = 'Completed';
-                    elements.markCompleteBtn.classList.remove('bg-blue
-<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=arreojn/jar" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+                    elements.markCompleteBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    elements.markCompleteBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                    elements.markCompleteBtn.disabled = true;
+                    
+                    loadProgressData(); // Reload progress to update stats and lesson card
+                }
+            }
+        }
+
+        // Save profile data
+        function saveProfile() {
+            const user = db.get('user');
+            if (user) {
+                user.name = elements.nameInput.value;
+                user.email = elements.emailInput.value;
+                user.occupation = elements.occupationInput.value;
+                db.set('user', user);
+                loadUserData(); // Update displayed profile info
+                alert('Profile saved successfully!');
+            }
+        }
+
+        // Logout function (resets user data and reloads app)
+        function logout() {
+            if (confirm('Are you sure you want to log out? This will reset your progress.')) {
+                db.remove('user');
+                db.remove('lessons');
+                db.remove('checklist');
+                db.remove('quiz');
+                location.reload(); // Reload the page to reset the app
+            }
+        }
+
+        // Toggle dark mode
+        function toggleDarkMode() {
+            const user = db.get('user');
+            if (user) {
+                user.darkMode = elements.darkModeToggle.checked;
+                db.set('user', user);
+                checkDarkMode();
+            }
+        }
+
+        // Apply dark mode based on user setting
+        function checkDarkMode() {
+            const user = db.get('user');
+            if (user && user.darkMode) {
+                document.body.classList.add('dark');
+                elements.themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.classList.remove('dark');
+                elements.themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        // Toggle theme (used by header button)
+        function toggleTheme() {
+            const user = db.get('user');
+            if (user) {
+                user.darkMode = !user.darkMode;
+                db.set('user', user);
+                checkDarkMode();
+            }
+        }
+
+        // Toggle notifications
+        function toggleNotifications() {
+            const user = db.get('user');
+            if (user) {
+                user.notifications = elements.notificationsToggle.checked;
+                db.set('user', user);
+                // Implement actual notification logic here if needed
+                alert(`Notifications are now ${user.notifications ? 'enabled' : 'disabled'}.`);
+            }
+        }
+
+        // Update checklist item status
+        function updateChecklist(event) {
+            const checklist = db.get('checklist');
+            const itemId = event.target.id;
+            const isChecked = event.target.checked;
+            
+            const itemIndex = checklist.items.findIndex(item => item.id === itemId);
+            if (itemIndex !== -1) {
+                checklist.items[itemIndex].completed = isChecked;
+                db.set('checklist', checklist);
+                loadProgressData(); // Reload progress to update stats and progress bar
+            }
+        }
+
+        // Show quiz intro screen
+        function showQuizIntro() {
+            elements.quizContent.innerHTML = `
+                <div class="text-center py-8">
+                    <i class="fas fa-question-circle text-5xl text-purple-500 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Test Your Knowledge</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">Take this quiz to assess your understanding of occupational health and safety in computer system servicing.</p>
+                    <button id="start-quiz-btn" class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        Start Quiz
+                    </button>
+                </div>
+            `;
+            document.getElementById('start-quiz-btn').addEventListener('click', startQuiz);
+        }
+
+        // Start the quiz
+        function startQuiz() {
+            state.quiz.currentQuestion = 0;
+            state.quiz.userAnswers = [];
+            state.quiz.started = true;
+            showScreen('quiz-questions');
+            loadQuestion();
+        }
+
+        // Load a quiz question
+        function loadQuestion() {
+            const currentQ = quizQuestions[state.quiz.currentQuestion];
+            if (currentQ) {
+                elements.questionNumber.textContent = state.quiz.currentQuestion + 1;
+                elements.quizQuestion.textContent = currentQ.question;
+                elements.quizOptions.innerHTML = ''; // Clear previous options
+                
+                currentQ.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'flex items-center';
+                    optionDiv.innerHTML = `
+                        <input type="radio" id="option-${index}" name="quiz-option" value="${index}" class="custom-checkbox mr-3">
+                        <label for="option-${index}" class="text-gray-700 dark:text-gray-300">${option}</label>
+                    `;
+                    elements.quizOptions.appendChild(optionDiv);
+                    
+                    // Pre-select if already answered
+                    if (state.quiz.userAnswers[state.quiz.currentQuestion] === index) {
+                        document.getElementById(`option-${index}`).checked = true;
+                    }
+                });
+
+                // Show/hide next/submit buttons
+                if (state.quiz.currentQuestion < quizQuestions.length - 1) {
+                    elements.nextQuestionBtn.classList.remove('hidden');
+                    elements.submitQuizBtn.classList.add('hidden');
+                } else {
+                    elements.nextQuestionBtn.classList.add('hidden');
+                    elements.submitQuizBtn.classList.remove('hidden');
+                }
+            } else {
+                submitQuiz(); // If somehow no more questions, submit
+            }
+        }
+
+        // Move to the next question
+        function nextQuestion() {
+            const selectedOption = document.querySelector('input[name="quiz-option"]:checked');
+            if (selectedOption) {
+                state.quiz.userAnswers[state.quiz.currentQuestion] = parseInt(selectedOption.value);
+                state.quiz.currentQuestion++;
+                loadQuestion();
+            } else {
+                alert('Please select an answer before proceeding.');
+            }
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            const selectedOption = document.querySelector('input[name="quiz-option"]:checked');
+            if (selectedOption) {
+                state.quiz.userAnswers[state.quiz.currentQuestion] = parseInt(selectedOption.value);
+            } else {
+                alert('Please select an answer before submitting.');
+                return;
+            }
+
+            let correctCount = 0;
+            quizQuestions.forEach((q, index) => {
+                if (state.quiz.userAnswers[index] === q.correctAnswer) {
+                    correctCount++;
+                }
+            });
+
+            const score = (correctCount / quizQuestions.length) * 100;
+            db.set('quiz', {
+                lastScore: score,
+                lastAttempt: new Date().toISOString()
+            });
+
+            elements.quizScore.textContent = `${Math.round(score)}%`;
+            elements.correctAnswers.textContent = `${correctCount}/${quizQuestions.length}`;
+            elements.quizProgressBar.style.setProperty('--progress', `${score}%`);
+
+            if (score >= 70) { // Example pass mark
+                elements.quizResultTitle.textContent = 'Good Job!';
+                elements.quizResultDescription.textContent = 'You have a good understanding of occupational health and safety procedures.';
+                elements.quizProgressBar.classList.remove('bg-red-600');
+                elements.quizProgressBar.classList.add('bg-green-600');
+                elements.quizScore.classList.remove('text-red-600', 'dark:text-red-300');
+                elements.quizScore.classList.add('text-green-600', 'dark:text-green-300');
+            } else {
+                elements.quizResultTitle.textContent = 'Needs Improvement';
+                elements.quizResultDescription.textContent = 'Review the lessons to improve your understanding.';
+                elements.quizProgressBar.classList.remove('bg-green-600');
+                elements.quizProgressBar.classList.add('bg-red-600');
+                elements.quizScore.classList.remove('text-green-600', 'dark:text-green-300');
+                elements.quizScore.classList.add('text-red-600', 'dark:text-red-300');
+            }
+
+            showScreen('quiz-results-screen');
+        }
+
+        // Review quiz answers (placeholder)
+        function reviewQuiz() {
+            alert('Review Answers functionality not yet implemented.');
+            // You would typically navigate to a screen showing questions, user answers, and correct answers.
+        }
+
+        // Retake quiz
+        function retakeQuiz() {
+            startQuiz();
+        }
+
+        // Call initApp when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+    <p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=arreojn/jar" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
 </html>
