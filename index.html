@@ -589,300 +589,447 @@
             1: {
                 title: "Introduction to OHS in CSS",
                 content: `
-                    <h3 class="text-xl font-bold mb-4">What is Occupational Health and Safety (OHS)?</h3>
-                    <p class="mb-4">Occupational Health and Safety (OHS) refers to the laws, standards, and programs aimed at protecting the health and safety of workers in their workplace. In the context of Computer System Servicing (CSS), OHS focuses on identifying and mitigating hazards associated with working with computer hardware, software, and related equipment.</p>
-                    
-                    <div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 mb-4">
-                        <p class="font-medium text-blue-700 dark:text-blue-300">Why is OHS important in CSS?</p>
-                        <ul class="list-disc pl-5 mt-2 text-blue-700 dark:text-blue-300">
-                            <li>Prevents workplace injuries and illnesses</li>
-                            <li>Reduces risk of electrical shocks and burns</li>
-                            <li>Minimizes exposure to hazardous materials</li>
-                            <li>Promotes proper ergonomics to prevent musculoskeletal disorders</li>
-                            <li>Ensures compliance with legal requirements</li>
-                        </ul>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4 mt-6">Common Hazards in Computer System Servicing</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Electrical Hazards</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Exposure to live wires, faulty equipment, or improper grounding can cause electric shocks or fires.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Ergonomic Hazards</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Poor workstation setup can lead to repetitive strain injuries, back pain, and eye strain.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Chemical Hazards</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Exposure to cleaning solvents, toners, or other chemicals used in maintenance.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Physical Hazards</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Cuts from sharp edges, trips from cables, or injuries from moving heavy equipment.</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Basic OHS Principles for CSS</h3>
-                    <ol class="list-decimal pl-5 space-y-2 mb-6">
-                        <li>Always disconnect power before working on equipment</li>
-                        <li>Use appropriate personal protective equipment (PPE)</li>
-                        <li>Maintain a clean and organized work area</li>
-                        <li>Follow proper lifting techniques for heavy equipment</li>
-                        <li>Know the location of emergency exits and first aid kits</li>
-                        <li>Report any hazards or incidents immediately</li>
-                    </ol>
+                   <h3 class="text-2xl font-bold mb-4">What is Occupational Health and Safety (OHS)?</h3>
+<p class="mb-4 text-gray-700 dark:text-gray-300">
+    Occupational Health and Safety (OHS) refers to the set of <span class="font-semibold">laws, standards, and best practices</span> that aim to protect the physical and mental well-being of workers in their workplace. 
+    In the context of <span class="font-semibold">Computer System Servicing (CSS)</span>, OHS emphasizes identifying and reducing risks associated with handling computer hardware, software, networking tools, and related electronic equipment.
+</p>
+
+<div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 mb-6 rounded">
+    <p class="font-semibold text-blue-700 dark:text-blue-300">Why is OHS important in CSS?</p>
+    <ul class="list-disc pl-5 mt-2 text-blue-700 dark:text-blue-300 space-y-1">
+        <li>Prevents workplace injuries and illnesses</li>
+        <li>Reduces risks of <span class="font-semibold">electrical shocks, burns, and fires</span></li>
+        <li>Minimizes exposure to <span class="font-semibold">hazardous materials and chemicals</span></li>
+        <li>Promotes proper <span class="font-semibold">ergonomic practices</span> to avoid musculoskeletal disorders</li>
+        <li>Encourages a safe, efficient, and <span class="font-semibold">productivity-boosting environment</span></li>
+        <li>Ensures compliance with <span class="font-semibold">legal and regulatory requirements</span></li>
+        <li>Raises awareness of <span class="font-semibold">emergency procedures and first aid response</span></li>
+    </ul>
+</div>
+
+<h3 class="text-2xl font-bold mb-4 mt-6">Common Hazards in Computer System Servicing</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Electrical Hazards</h4>
+        <p class="text-gray-600 dark:text-gray-300">Exposure to live wires, faulty components, overloaded circuits, or poor grounding can result in electric shocks, equipment damage, or fires.</p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Ergonomic Hazards</h4>
+        <p class="text-gray-600 dark:text-gray-300">Improper workstation setup, poor posture, and repetitive tasks may lead to back pain, carpal tunnel syndrome, eye strain, or fatigue.</p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Chemical Hazards</h4>
+        <p class="text-gray-600 dark:text-gray-300">Exposure to printer toners, cleaning solvents, soldering fumes, and other chemicals used in maintenance can cause skin or respiratory issues if mishandled.</p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Physical Hazards</h4>
+        <p class="text-gray-600 dark:text-gray-300">Sharp edges of metal casings, tripping over cables, lifting heavy equipment, or mishandling tools can result in cuts, bruises, or sprains.</p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Fire Hazards</h4>
+        <p class="text-gray-600 dark:text-gray-300">Overheating components, short circuits, or improper storage of flammable materials can trigger workplace fires if safety measures are ignored.</p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Psychosocial Hazards</h4>
+        <p class="text-gray-600 dark:text-gray-300">Stress, long working hours, or lack of proper breaks may affect focus, leading to errors and accidents.</p>
+    </div>
+</div>
+
+<h3 class="text-2xl font-bold mb-4">Basic OHS Principles for CSS</h3>
+<ol class="list-decimal pl-5 space-y-2 mb-6 text-gray-700 dark:text-gray-300">
+    <li>Always disconnect power before repairing or servicing equipment</li>
+    <li>Use appropriate <span class="font-semibold">Personal Protective Equipment (PPE)</span> such as gloves and anti-static wrist straps</li>
+    <li>Maintain a clean, dry, and organized work area free of clutter and spills</li>
+    <li>Follow proper lifting techniques to avoid back injuries when moving heavy equipment</li>
+    <li>Practice <span class="font-semibold">safe cable management</span> to prevent tripping hazards</li>
+    <li>Know the location of emergency exits, alarms, and fire extinguishers</li>
+    <li>Have easy access to <span class="font-semibold">first aid kits</span> and emergency contact numbers</li>
+    <li>Report and document any hazards, accidents, or near-misses immediately</li>
+    <li>Attend regular <span class="font-semibold">OHS training and drills</span> to stay updated on safety protocols</li>
+    <li>Always follow manufacturer’s guidelines and industry best practices when servicing equipment</li>
+</ol>
+
+<div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
+    <p class="font-semibold text-yellow-800 dark:text-yellow-300">Remember:</p>
+    <p class="text-yellow-700 dark:text-yellow-400">A safe technician is an effective technician. By following OHS principles, you not only protect yourself but also ensure the reliability and longevity of the systems you maintain.</p>
+</div>
+
                 `
             },
             2: {
                 title: "Electrical Safety",
                 content: `
-                    <h3 class="text-xl font-bold mb-4">Understanding Electrical Hazards in CSS</h3>
-                    <p class="mb-4">Working with computer systems involves dealing with electrical components that can pose serious risks if not handled properly. Electrical safety is crucial to prevent shocks, burns, fires, and even fatalities.</p>
-                    
-                    <div class="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 p-4 mb-6">
-                        <p class="font-medium text-red-700 dark:text-red-300">Dangerous Practices to Avoid:</p>
-                        <ul class="list-disc pl-5 mt-2 text-red-700 dark:text-red-300">
-                            <li>Working on live circuits unless absolutely necessary</li>
-                            <li>Using damaged or frayed power cords</li>
-                            <li>Overloading power outlets or extension cords</li>
-                            <li>Using metal tools near live components</li>
-                            <li>Working with wet hands or in damp environments</li>
-                        </ul>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Essential Electrical Safety Measures</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">1. Power Disconnection</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Always unplug equipment before servicing. For complete isolation, disconnect from the wall outlet.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">2. Use of PPE</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Wear insulated gloves and use insulated tools when working with electrical components.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">3. Proper Grounding</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Ensure all equipment is properly grounded to prevent electrical shocks.</p>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">4. Static Electricity Control</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Use anti-static wrist straps and mats to prevent electrostatic discharge (ESD) damage.</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Working with Capacitors</h3>
-                    <p class="mb-4">Capacitors in power supplies can hold dangerous charges even after power is disconnected. Always discharge capacitors before working on power supplies:</p>
-                    <ol class="list-decimal pl-5 space-y-2 mb-6">
-                        <li>Unplug the power supply and let it sit for at least 15 minutes</li>
-                        <li>Use a properly rated resistor (usually 10-20k ohm) to discharge capacitors</li>
-                        <li>Never short capacitors with a screwdriver or other metal tool</li>
-                        <li>Verify with a multimeter that voltage is zero before proceeding</li>
-                    </ol>
-                    
-                    <div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-4">
-                        <p class="font-medium text-green-700 dark:text-green-300">Best Practices for Electrical Safety:</p>
-                        <ul class="list-disc pl-5 mt-2 text-green-700 dark:text-green-300">
-                            <li>Regularly inspect cords and equipment for damage</li>
-                            <li>Use surge protectors for sensitive equipment</li>
-                            <li>Label circuits clearly in service areas</li>
-                            <li>Keep liquids away from electrical equipment</li>
-                            <li>Know the location of circuit breakers and how to use them</li>
-                        </ul>
-                    </div>
-                `
+                    <h3 class="text-2xl font-bold mb-4">Understanding Electrical Hazards in CSS</h3>
+<p class="mb-4 text-gray-700 dark:text-gray-300">
+    Computer System Servicing (CSS) often involves handling electrical and electronic components. 
+    Without proper precautions, workers are exposed to risks such as <span class="font-semibold">electric shocks, burns, equipment damage, fires, or even fatalities</span>. 
+    Electrical safety is not just a precaution—it is a vital discipline that protects both technicians and the systems they maintain.
+</p>
+
+<div class="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 p-4 mb-6 rounded">
+    <p class="font-semibold text-red-700 dark:text-red-300">Dangerous Practices to Avoid:</p>
+    <ul class="list-disc pl-5 mt-2 text-red-700 dark:text-red-300 space-y-1">
+        <li>Working on live circuits unless absolutely necessary and authorized</li>
+        <li>Using damaged, frayed, or makeshift power cords</li>
+        <li>Overloading outlets, extension cords, or power strips</li>
+        <li>Using metal tools or jewelry near exposed circuits</li>
+        <li>Working with wet hands, damp clothing, or in humid environments</li>
+        <li>Bypassing safety features such as fuses or circuit breakers</li>
+    </ul>
+</div>
+
+<h3 class="text-2xl font-bold mb-4">Essential Electrical Safety Measures</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">1. Power Disconnection</h4>
+        <p class="text-gray-600 dark:text-gray-300">
+            Always unplug and isolate equipment before servicing. Disconnect from the wall outlet 
+            rather than just switching off the power supply.
+        </p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">2. Use of PPE</h4>
+        <p class="text-gray-600 dark:text-gray-300">
+            Wear insulated gloves and shoes, and use insulated tools. Anti-static wrist straps should 
+            be properly grounded to prevent damage to components.
+        </p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">3. Proper Grounding</h4>
+        <p class="text-gray-600 dark:text-gray-300">
+            Ensure all equipment is properly grounded. Use three-pronged plugs and test outlets 
+            for proper wiring before use.
+        </p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">4. Static Electricity Control</h4>
+        <p class="text-gray-600 dark:text-gray-300">
+            Use anti-static mats, wrist straps, and ESD-safe tools to prevent electrostatic discharge 
+            (ESD) which can destroy sensitive electronic components.
+        </p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">5. Circuit Awareness</h4>
+        <p class="text-gray-600 dark:text-gray-300">
+            Label circuits clearly, and always verify with a multimeter before touching any component 
+            assumed to be “off.”
+        </p>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">6. Safe Workspace</h4>
+        <p class="text-gray-600 dark:text-gray-300">
+            Keep the work area clean, dry, and free from conductive clutter. Avoid running power cords 
+            under carpets or across walkways.
+        </p>
+    </div>
+</div>
+
+<h3 class="text-2xl font-bold mb-4">Working with Capacitors</h3>
+<p class="mb-4 text-gray-700 dark:text-gray-300">
+    Capacitors—especially in power supplies and monitors—can store a <span class="font-semibold">dangerous charge 
+    long after the device is unplugged</span>. Mishandling them can lead to severe electric shocks. 
+    Always follow these safety steps:
+</p>
+<ol class="list-decimal pl-5 space-y-2 mb-6 text-gray-700 dark:text-gray-300">
+    <li>Unplug the power supply and allow at least <span class="font-semibold">15–30 minutes</span> for natural discharge.</li>
+    <li>Use a properly rated resistor (10–20k ohm, 5W) to safely discharge capacitors.</li>
+    <li>Never short capacitors with screwdrivers or pliers—this can cause sparks, explosions, or permanent damage.</li>
+    <li>After discharging, confirm with a multimeter that the voltage is at zero.</li>
+    <li>If unsure, treat all capacitors as if they are still charged.</li>
+</ol>
+
+<div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-4 rounded">
+    <p class="font-semibold text-green-700 dark:text-green-300">Best Practices for Electrical Safety:</p>
+    <ul class="list-disc pl-5 mt-2 text-green-700 dark:text-green-300 space-y-1">
+        <li>Inspect cords, plugs, and outlets regularly for wear or damage</li>
+        <li>Use surge protectors or UPS for sensitive computer equipment</li>
+        <li>Clearly label high-voltage areas and restrict access to authorized personnel only</li>
+        <li>Keep liquids, sprays, and conductive objects away from equipment</li>
+        <li>Know the location of circuit breakers and how to safely reset them</li>
+        <li>Have a <span class="font-semibold">Class C fire extinguisher</span> available in electrical work areas</li>
+        <li>Always work with a buddy or inform someone when performing high-risk electrical servicing</li>
+    </ul>
+</div>
+
             },
             3: {
                 title: "Fire Safety",
                 content: `
-                    <h3 class="text-xl font-bold mb-4">Fire Hazards in Computer System Servicing</h3>
-                    <p class="mb-4">Computer equipment and work environments present several fire hazards that technicians need to be aware of. Understanding these risks is the first step in preventing fires and knowing how to respond if one occurs.</p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Common Fire Causes</h4>
-                            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
-                                <li>Overloaded electrical circuits</li>
-                                <li>Faulty or damaged wiring</li>
-                                <li>Overheating components</li>
-                                <li>Improperly stored flammable materials</li>
-                                <li>Battery malfunctions</li>
-                            </ul>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Fire Prevention Measures</h4>
-                            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
-                                <li>Regular equipment maintenance</li>
-                                <li>Proper ventilation for equipment</li>
-                                <li>Correct storage of flammable materials</li>
-                                <li>Avoiding circuit overloads</li>
-                                <li>Keeping work areas clean and clutter-free</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Types of Fire Extinguishers</h3>
-                    <p class="mb-4">Different types of fires require different extinguishing methods. Using the wrong type can make the fire worse. Here are the common classes of fires and appropriate extinguishers:</p>
-                    
-                    <div class="overflow-x-auto mb-6">
-                        <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
-                            <thead class="bg-gray-100 dark:bg-gray-600">
-                                <tr>
-                                    <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Fire Class</th>
-                                    <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Description</th>
-                                    <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Extinguisher Type</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
-                                <tr>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class A</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Ordinary combustibles (wood, paper, cloth)</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Water, foam, dry chemical</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class B</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Flammable liquids (gasoline, oil, grease)</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">CO2, dry chemical</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class C</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Electrical equipment</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">CO2, dry chemical (non-conductive)</td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class D</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Combustible metals</td>
-                                    <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Special dry powder</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 mb-6">
-                        <p class="font-medium text-yellow-700 dark:text-yellow-300">Important Note:</p>
-                        <p class="text-yellow-700 dark:text-yellow-300 mt-2">Never use water or foam extinguishers on electrical fires (Class C). Water conducts electricity and can cause electrocution or spread the fire.</p>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Emergency Response Plan</h3>
-                    <p class="mb-4">Every workplace should have a clear emergency response plan for fires. As a computer technician, you should:</p>
-                    <ol class="list-decimal pl-5 space-y-2 mb-6">
-                        <li>Know the location of all fire exits and extinguishers</li>
-                        <li>Understand the evacuation routes and assembly points</li>
-                        <li>Be trained in proper use of fire extinguishers (PASS method: Pull, Aim, Squeeze, Sweep)</li>
-                        <li>Know how to shut off power in an emergency</li>
-                        <li>Understand when to fight a small fire and when to evacuate</li>
-                    </ol>
-                    
-                    <div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4">
-                        <p class="font-medium text-blue-700 dark:text-blue-300">Fire Safety Checklist for Computer Technicians:</p>
-                        <ul class="list-disc pl-5 mt-2 text-blue-700 dark:text-blue-300">
-                            <li>Keep work areas free of paper and other combustibles</li>
-                            <li>Ensure proper ventilation for equipment</li>
-                            <li>Regularly check for damaged cords and overheating components</li>
-                            <li>Never block fire exits or equipment</li>
-                            <li>Report any fire hazards immediately</li>
-                        </ul>
-                    </div>
+                  <h3 class="text-xl font-bold mb-4">Fire Hazards in Computer System Servicing</h3>
+<p class="mb-4">
+    Computer equipment and work environments present several potential fire hazards that technicians must be aware of. 
+    Fires in IT or electronics workplaces not only threaten human lives but can also damage expensive equipment, 
+    destroy important data, and interrupt business operations. Understanding these risks is the first step 
+    in preventing fires and knowing how to respond if one occurs.
+</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Common Fire Causes</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Overloaded or improperly connected electrical circuits</li>
+            <li>Faulty, frayed, or damaged wiring</li>
+            <li>Overheating components such as CPUs, power supplies, or batteries</li>
+            <li>Improperly stored or spilled flammable materials (cleaning solvents, aerosols)</li>
+            <li>Battery malfunctions (especially lithium-ion batteries in laptops and UPS units)</li>
+            <li>Dust buildup inside equipment that ignites when overheated</li>
+            <li>Blocked ventilation preventing heat dissipation</li>
+        </ul>
+    </div>
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Fire Prevention Measures</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Schedule regular equipment maintenance and cleaning</li>
+            <li>Ensure proper ventilation and cooling systems for computers and servers</li>
+            <li>Store flammable liquids and chemicals in labeled, fire-resistant containers</li>
+            <li>Avoid overloading power strips and extension cords</li>
+            <li>Use surge protectors and Uninterruptible Power Supplies (UPS) correctly</li>
+            <li>Keep cables organized to prevent overheating and tripping hazards</li>
+            <li>Maintain a clean and clutter-free workspace at all times</li>
+        </ul>
+    </div>
+</div>
+
+<h3 class="text-xl font-bold mb-4">Types of Fire Extinguishers</h3>
+<p class="mb-4">
+    Different types of fires require different extinguishing methods. 
+    Using the wrong type can worsen the fire or put the responder in danger. 
+    Below are the most common fire classes and the appropriate extinguishers:
+</p>
+
+<div class="overflow-x-auto mb-6">
+    <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+        <thead class="bg-gray-100 dark:bg-gray-600">
+            <tr>
+                <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Fire Class</th>
+                <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Description</th>
+                <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Extinguisher Type</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+            <tr>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class A</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Ordinary combustibles (wood, paper, cloth, plastics)</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Water, foam, dry chemical</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class B</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Flammable liquids (gasoline, oil, solvents, grease)</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">CO₂, dry chemical, foam</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class C</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Electrical equipment (computers, servers, appliances)</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">CO₂, dry chemical (non-conductive)</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class D</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Combustible metals (magnesium, lithium, sodium)</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Special dry powder extinguishers</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class K</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Cooking oils and fats (common in cafeterias or staff kitchens)</td>
+                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Wet chemical extinguishers</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 mb-6">
+    <p class="font-medium text-yellow-700 dark:text-yellow-300">Important Note:</p>
+    <p class="text-yellow-700 dark:text-yellow-300 mt-2">
+        Never use water or foam extinguishers on electrical fires (Class C). 
+        Water conducts electricity and can cause electrocution or spread the fire. 
+        Always use a CO₂ or non-conductive dry chemical extinguisher for electrical equipment.
+    </p>
+</div>
+
+<h3 class="text-xl font-bold mb-4">Emergency Response Plan</h3>
+<p class="mb-4">
+    Every workplace should have a clear and well-communicated emergency response plan for fires. 
+    As a computer technician, you are expected to be familiar with the procedures and act responsibly during emergencies:
+</p>
+<ol class="list-decimal pl-5 space-y-2 mb-6">
+    <li>Know the location of all fire exits, alarms, and extinguishers in your area.</li>
+    <li>Familiarize yourself with evacuation routes and designated assembly points.</li>
+    <li>Be trained in the proper use of fire extinguishers (PASS method: Pull, Aim, Squeeze, Sweep).</li>
+    <li>Know how to shut off main power sources in case of an electrical fire.</li>
+    <li>Never attempt to fight a large or spreading fire — evacuate immediately and call emergency services.</li>
+    <li>Assist coworkers or clients in evacuating, especially those with mobility issues.</li>
+</ol>
+
+<div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4">
+    <p class="font-medium text-blue-700 dark:text-blue-300">Fire Safety Checklist for Computer Technicians:</p>
+    <ul class="list-disc pl-5 mt-2 text-blue-700 dark:text-blue-300">
+        <li>Keep work areas free of paper, boxes, and other combustibles.</li>
+        <li>Ensure proper ventilation for computer equipment and server racks.</li>
+        <li>Regularly inspect cables, plugs, and power strips for damage or overheating.</li>
+        <li>Never block access to fire exits, alarms, or firefighting equipment.</li>
+        <li>Report any fire hazards or unusual smells (like burning plastic) immediately.</li>
+        <li>Participate in fire drills and take them seriously.</li>
+    </ul>
+</div>
+
                 `
             },
             4: {
                 title: "Hazard Identification",
                 content: `
-                    <h3 class="text-xl font-bold mb-4">Understanding Hazards in CSS</h3>
-                    <p class="mb-4">Hazard identification is the process of recognizing potential sources of harm in the workplace. In computer system servicing, hazards can be physical, chemical, biological, ergonomic, or psychological in nature.</p>
-                    
-                    <div class="bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-500 p-4 mb-6">
-                        <p class="font-medium text-purple-700 dark:text-purple-300">Key Terms:</p>
-                        <ul class="list-disc pl-5 mt-2 text-purple-700 dark:text-purple-300">
-                            <li><strong>Hazard:</strong> Any source of potential damage, harm or adverse health effects</li>
-                            <li><strong>Risk:</strong> The chance or probability that a person will be harmed if exposed to a hazard</li>
-                            <li><strong>Control Measure:</strong> Steps taken to eliminate or reduce risk</li>
-                        </ul>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Common Hazards in CSS</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Physical Hazards</h4>
-                            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
-                                <li>Cuts from sharp edges inside computer cases</li>
-                                <li>Trips from loose cables on the floor</li>
-                                <li>Eye injuries from flying debris when drilling</li>
-                                <li>Back injuries from lifting heavy equipment</li>
-                            </ul>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Chemical Hazards</h4>
-                            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
-                                <li>Exposure to cleaning solvents</li>
-                                <li>Printer toner particles</li>
-                                <li>Battery acid from UPS systems</li>
-                                <li>Solder fumes</li>
-                            </ul>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Biological Hazards</h4>
-                            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
-                                <li>Dust mites in old equipment</li>
-                                <li>Mold in damp environments</li>
-                                <li>Bacteria on shared equipment</li>
-                            </ul>
-                        </div>
-                        <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                            <h4 class="font-bold text-gray-800 dark:text-white mb-2">Ergonomic Hazards</h4>
-                            <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
-                                <li>Poor workstation setup</li>
-                                <li>Repetitive strain from keyboard/mouse use</li>
-                                <li>Awkward postures when servicing equipment</li>
-                                <li>Eye strain from prolonged screen time</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Hazard Identification Process</h3>
-                    <p class="mb-4">Systematic hazard identification involves these steps:</p>
-                    <ol class="list-decimal pl-5 space-y-2 mb-6">
-                        <li><strong>Workplace Inspection:</strong> Regularly examine the work area for potential hazards</li>
-                        <li><strong>Task Analysis:</strong> Break down work activities to identify hazards at each step</li>
-                        <li><strong>Equipment Review:</strong> Check all tools and equipment for potential hazards</li>
-                        <li><strong>Incident Investigation:</strong> Analyze any accidents or near-misses to identify hazards</li>
-                        <li><strong>Worker Consultation:</strong> Talk to colleagues about hazards they've noticed</li>
-                    </ol>
-                    
-                    <div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-4 mb-6">
-                        <p class="font-medium text-green-700 dark:text-green-300">Hazard Identification Tools:</p>
-                        <ul class="list-disc pl-5 mt-2 text-green-700 dark:text-green-300">
-                            <li><strong>Checklists:</strong> Standardized lists of potential hazards</li>
-                            <li><strong>Job Safety Analysis (JSA):</strong> Breaking down jobs into steps and identifying hazards at each step</li>
-                            <li><strong>SWIFT Analysis:</strong> Structured What-If Technique for identifying hazards</li>
-                            <li><strong>Hazard Reporting System:</strong> Formal process for workers to report hazards</li>
-                        </ul>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold mb-4">Hierarchy of Controls</h3>
-                    <p class="mb-4">Once hazards are identified, use this hierarchy to control risks:</p>
-                    <div class="bg-white dark:bg-gray-700 rounded-lg shadow overflow-hidden mb-6">
-                        <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-                            <h4 class="font-bold text-gray-800 dark:text-white">1. Elimination</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Remove the hazard completely from the workplace</p>
-                        </div>
-                        <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-                            <h4 class="font-bold text-gray-800 dark:text-white">2. Substitution</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Replace with a less hazardous alternative</p>
-                        </div>
-                        <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-                            <h4 class="font-bold text-gray-800 dark:text-white">3. Engineering Controls</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Isolate people from the hazard (e.g., machine guards)</p>
-                        </div>
-                        <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-                            <h4 class="font-bold text-gray-800 dark:text-white">4. Administrative Controls</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Change work procedures or policies (e.g., job rotation)</p>
-                        </div>
-                        <div class="p-4">
-                            <h4 class="font-bold text-gray-800 dark:text-white">5. PPE</h4>
-                            <p class="text-gray-600 dark:text-gray-300">Personal protective equipment as a last line of defense</p>
-                        </div>
-                    </div>
+                  <h3 class="text-xl font-bold mb-4">Understanding Hazards in CSS</h3>
+<p class="mb-4">
+    Hazard identification is the process of recognizing potential sources of harm in the workplace. 
+    In computer system servicing, hazards can be physical, chemical, biological, ergonomic, 
+    electrical, or psychological in nature. Recognizing hazards is the first step to ensuring 
+    workplace safety and preventing accidents.
+</p>
+
+<div class="bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-500 p-4 mb-6">
+    <p class="font-medium text-purple-700 dark:text-purple-300">Key Terms:</p>
+    <ul class="list-disc pl-5 mt-2 text-purple-700 dark:text-purple-300">
+        <li><strong>Hazard:</strong> Any source of potential damage, harm, or adverse health effects</li>
+        <li><strong>Risk:</strong> The chance or probability that a person will be harmed if exposed to a hazard</li>
+        <li><strong>Control Measure:</strong> Steps taken to eliminate or reduce risk</li>
+        <li><strong>Incident:</strong> An event that may or may not result in injury, but reveals a safety weakness</li>
+    </ul>
+</div>
+
+<h3 class="text-xl font-bold mb-4">Common Hazards in CSS</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Physical Hazards</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Cuts from sharp edges inside computer cases</li>
+            <li>Trips from loose cables on the floor</li>
+            <li>Eye injuries from flying debris when drilling</li>
+            <li>Back injuries from lifting heavy equipment</li>
+        </ul>
+    </div>
+
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Chemical Hazards</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Exposure to cleaning solvents</li>
+            <li>Printer toner particles</li>
+            <li>Battery acid from UPS systems</li>
+            <li>Solder fumes</li>
+        </ul>
+    </div>
+
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Biological Hazards</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Dust mites in old equipment</li>
+            <li>Mold in damp environments</li>
+            <li>Bacteria on shared equipment</li>
+        </ul>
+    </div>
+
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Ergonomic Hazards</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Poor workstation setup</li>
+            <li>Repetitive strain from keyboard/mouse use</li>
+            <li>Awkward postures when servicing equipment</li>
+            <li>Eye strain from prolonged screen time</li>
+        </ul>
+    </div>
+
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Electrical Hazards</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Electric shock from exposed wires</li>
+            <li>Overloaded power outlets and extension cords</li>
+            <li>Improper grounding of equipment</li>
+            <li>Short circuits and fire risks</li>
+        </ul>
+    </div>
+
+    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
+        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Psychological Hazards</h4>
+        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+            <li>Stress due to high workload or deadlines</li>
+            <li>Mental fatigue from prolonged troubleshooting</li>
+            <li>Frustration from repetitive technical issues</li>
+            <li>Burnout from poor work-life balance</li>
+        </ul>
+    </div>
+
+</div>
+
+<h3 class="text-xl font-bold mb-4">Hazard Identification Process</h3>
+<p class="mb-4">Systematic hazard identification involves these steps:</p>
+<ol class="list-decimal pl-5 space-y-2 mb-6">
+    <li><strong>Workplace Inspection:</strong> Regularly examine the work area for potential hazards</li>
+    <li><strong>Task Analysis:</strong> Break down work activities to identify hazards at each step</li>
+    <li><strong>Equipment Review:</strong> Check all tools and equipment for potential hazards</li>
+    <li><strong>Incident Investigation:</strong> Analyze accidents or near-misses to identify hazards</li>
+    <li><strong>Worker Consultation:</strong> Talk to colleagues about hazards they've noticed</li>
+</ol>
+
+<div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-4 mb-6">
+    <p class="font-medium text-green-700 dark:text-green-300">Hazard Identification Tools:</p>
+    <ul class="list-disc pl-5 mt-2 text-green-700 dark:text-green-300">
+        <li><strong>Checklists:</strong> Standardized lists of potential hazards</li>
+        <li><strong>Job Safety Analysis (JSA):</strong> Breaking down jobs into steps and identifying hazards</li>
+        <li><strong>SWIFT Analysis:</strong> Structured What-If Technique for identifying hazards</li>
+        <li><strong>Hazard Reporting System:</strong> Formal process for workers to report hazards</li>
+    </ul>
+</div>
+
+<h3 class="text-xl font-bold mb-4">Hierarchy of Controls</h3>
+<p class="mb-4">Once hazards are identified, use this hierarchy to control risks:</p>
+<div class="bg-white dark:bg-gray-700 rounded-lg shadow overflow-hidden mb-6">
+    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
+        <h4 class="font-bold text-gray-800 dark:text-white">1. Elimination</h4>
+        <p class="text-gray-600 dark:text-gray-300">Remove the hazard completely from the workplace</p>
+    </div>
+    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
+        <h4 class="font-bold text-gray-800 dark:text-white">2. Substitution</h4>
+        <p class="text-gray-600 dark:text-gray-300">Replace with a less hazardous alternative</p>
+    </div>
+    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
+        <h4 class="font-bold text-gray-800 dark:text-white">3. Engineering Controls</h4>
+        <p class="text-gray-600 dark:text-gray-300">Isolate people from the hazard (e.g., machine guards, circuit breakers)</p>
+    </div>
+    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
+        <h4 class="font-bold text-gray-800 dark:text-white">4. Administrative Controls</h4>
+        <p class="text-gray-600 dark:text-gray-300">Change work procedures or policies (e.g., job rotation, safety training)</p>
+    </div>
+    <div class="p-4">
+        <h4 class="font-bold text-gray-800 dark:text-white">5. PPE</h4>
+        <p class="text-gray-600 dark:text-gray-300">Personal protective equipment as a last line of defense (gloves, goggles, anti-static wrist straps)</p>
+    </div>
+</div>
+
+<h3 class="text-xl font-bold mb-4">Preventive Measures</h3>
+<ul class="list-disc pl-5 mb-6 text-gray-600 dark:text-gray-300">
+    <li>Always power off and unplug devices before servicing</li>
+    <li>Use proper lifting techniques to avoid back injuries</li>
+    <li>Ensure proper ventilation when soldering or using chemicals</li>
+    <li>Label and organize cables to prevent tripping hazards</li>
+    <li>Take regular breaks to reduce eye strain and fatigue</li>
+    <li>Use ESD (Electrostatic Discharge) protection when handling components</li>
+</ul>
+
+<div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 mb-6">
+    <p class="font-medium text-yellow-700 dark:text-yellow-300">Quick Safety Tips:</p>
+    <ul class="list-disc pl-5 mt-2 text-yellow-700 dark:text-yellow-300">
+        <li>"If in doubt, ask" — never assume a procedure is safe</li>
+        <li>Keep a fire extinguisher and first aid kit accessible</li>
+        <li>Report hazards immediately to supervisors</li>
+        <li>Stay updated with safety training and drills</li>
+    </ul>
+</div>
+
+<h3 class="text-xl font-bold mb-4">Case Scenario</h3>
+<p class="mb-4">
+    <strong>Example:</strong> A technician lifted a heavy CPU tower without assistance, resulting in a back injury. 
+    This could have been prevented through proper ergonomic training and the use of lifting aids.
+</p>
+
                 `
             }
         };
@@ -1549,5 +1696,4 @@
         // Call initApp when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
-    <p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=arreojn/jar" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
 </html>
