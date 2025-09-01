@@ -313,6 +313,54 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="lesson-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6" data-lesson="5">
+                        <div class="flex items-start">
+                            <div class="p-3 rounded-full bg-indigo-100 dark:bg-indigo-900 mr-4">
+                                <i class="fas fa-chair text-indigo-600 dark:text-indigo-300"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">Ergonomics in the Workplace</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mt-1">Proper workstation setup and posture.</p>
+                                <div class="mt-3 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                    <i class="fas fa-book-open mr-1"></i>
+                                    <span>5 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6" data-lesson="6">
+                        <div class="flex items-start">
+                            <div class="p-3 rounded-full bg-pink-100 dark:bg-pink-900 mr-4">
+                                <i class="fas fa-vial text-pink-600 dark:text-pink-300"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">Chemical Safety</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mt-1">Safe handling and storage of chemicals.</p>
+                                <div class="mt-3 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                    <i class="fas fa-book-open mr-1"></i>
+                                    <span>4 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6" data-lesson="7">
+                        <div class="flex items-start">
+                            <div class="p-3 rounded-full bg-orange-100 dark:bg-orange-900 mr-4">
+                                <i class="fas fa-ambulance text-orange-600 dark:text-orange-300"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">Emergency Preparedness</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mt-1">What to do in case of emergencies.</p>
+                                <div class="mt-3 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                    <i class="fas fa-book-open mr-1"></i>
+                                    <span>3 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -546,7 +594,7 @@
                     <button id="quiz-questions-back-btn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
                         <i class="fas fa-arrow-left text-gray-700 dark:text-white"></i>
                     </button>
-                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Question <span id="question-number">1</span>/5</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Question <span id="question-number">1</span>/10</h2>
                     <div class="w-8"></div> <!-- Spacer for alignment -->
                 </div>
 
@@ -588,7 +636,7 @@
                     <div class="mb-6">
                         <div class="flex justify-between mb-2">
                             <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Correct Answers</span>
-                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300" id="correct-answers">4/5</span>
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300" id="correct-answers">4/10</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
                             <div id="quiz-progress-bar" class="bg-green-600 h-2.5 rounded-full progress-bar" style="--progress: 80%"></div>
@@ -657,7 +705,7 @@
             });
         }
 
-        if (!db.get('checklist')) {
+           if (!db.get('checklist')) {
             db.set('checklist', {
                 items: [
                     { id: 'check-1', completed: false },
@@ -669,7 +717,21 @@
                     { id: 'check-7', completed: false },
                     { id: 'check-8', completed: false },
                     { id: 'check-9', completed: false },
-                    { id: 'check-10', completed: false }
+                    { id: 'check-10', completed: false },
+                    { id: 'check-11', completed: false },
+                    { id: 'check-12', completed: false },
+                    { id: 'check-13', completed: false },
+                    { id: 'check-14', completed: false },
+                    { id: 'check-15', completed: false },
+                    { id: 'check-16', completed: false },
+                    { id: 'check-17', completed: false },
+                    { id: 'check-18', completed: false },
+                    { id: 'check-19', completed: false },
+                    { id: 'check-20', completed: false },
+                    { id: 'check-21', completed: false },
+                    { id: 'check-22', completed: false },
+                    { id: 'check-23', completed: false },
+                    { id: 'check-24', completed: false }
                 ],
                 progress: 0
             });
@@ -985,7 +1047,7 @@
     workplace safety and preventing accidents.
 </p>
 
-<div class="bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-500 p-4 mb-6">
+<div class="bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-500 p-4 mb-6 rounded">
     <p class="font-medium text-purple-700 dark:text-purple-300">Key Terms:</p>
     <ul class="list-disc pl-5 mt-2 text-purple-700 dark:text-purple-300">
         <li><strong>Hazard:</strong> Any source of potential damage, harm, or adverse health effects</li>
@@ -1131,11 +1193,150 @@
 </p>
 
                 `
-            }
+            },
+5: {
+    title: "Ergonomics in the Workplace",
+    content: `
+        <h3 class="text-2xl font-bold mb-4">Ergonomics in Computer System Servicing</h3>
+        <img src="abc.png" alt="Ergonomic workstation example" class="w-full rounded-lg shadow mb-4">
+        <p class="mb-4 text-gray-700 dark:text-gray-300">
+            Ergonomics is the science of designing the workplace, keeping in mind the capabilities and limitations of the worker. 
+            In CSS, proper ergonomics helps prevent injuries such as back pain, eye strain, and repetitive strain injuries.
+        </p>
+        
+        <h4 class="text-xl font-semibold mb-2">Best Practices</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li>Adjust your chair and monitor to maintain good posture.</li>
+            <li>Keep your feet flat on the floor and wrists straight while typing.</li>
+            <li>Take regular breaks to prevent eye strain and fatigue.</li>
+            <li>Use wrist rests and footrests as needed.</li>
+            <li>Arrange tools and components within easy reach to avoid awkward movements.</li>
+        </ul>
+
+        <h4 class="text-xl font-semibold mb-2">Do’s and Don’ts</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li><b>Do:</b> Sit with your back straight and monitor at eye level.</li>
+            <li><b>Don’t:</b> Slouch or lean forward for long periods.</li>
+            <li><b>Do:</b> Adjust lighting to reduce glare on the screen.</li>
+            <li><b>Don’t:</b> Place monitors too close to your eyes.</li>
+        </ul>
+
+        <h4 class="text-xl font-semibold mb-2">Stretching Exercises</h4>
+        <p class="mb-2 text-gray-700 dark:text-gray-300">Try these quick stretches every 30–60 minutes:</p>
+        <ul class="list-disc pl-5 mb-4">
+            <li>Neck rotations and shoulder rolls.</li>
+            <li>Wrist and finger stretches.</li>
+            <li>Standing and stretching your back and legs.</li>
+        </ul>
+
+        <div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 rounded">
+            <p class="font-semibold text-blue-700 dark:text-blue-300">Tip:</p>
+            <p class="text-blue-700 dark:text-blue-300">
+                Follow the 20-20-20 rule: Every 20 minutes, look at something 20 feet away for 20 seconds to reduce eye strain.
+            </p>
+        </div>
+    `
+},
+6: {
+    title: "Chemical Safety",
+    content: `
+        <h3 class="text-2xl font-bold mb-4">Chemical Safety in CSS</h3>
+        <img src="chem.jpg" alt="Chemical safety in computer labs" class="w-full rounded-lg shadow mb-4">
+        <p class="mb-4 text-gray-700 dark:text-gray-300">
+            Chemicals such as cleaning solvents, printer toner, and soldering flux are common in computer servicing. Mishandling these can cause skin irritation, respiratory problems, or even fires.
+        </p>
+
+        <h4 class="text-xl font-semibold mb-2">Safe Handling Practices</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li>Store chemicals in labeled, sealed containers away from heat sources.</li>
+            <li>Wear gloves, masks, and goggles when handling hazardous substances.</li>
+            <li>Work in well-ventilated areas to avoid inhaling fumes.</li>
+            <li>Dispose of chemical waste according to local regulations.</li>
+            <li>Read and follow Material Safety Data Sheets (MSDS) for all chemicals used.</li>
+        </ul>
+
+        <h4 class="text-xl font-semibold mb-2">First Aid Procedures</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li>If toner contacts skin: rinse immediately with cold water.</li>
+            <li>If chemical splashes into eyes: flush with clean water for at least 15 minutes.</li>
+            <li>If fumes are inhaled: move to fresh air immediately.</li>
+            <li>Always report incidents to your supervisor or teacher.</li>
+        </ul>
+
+        <h4 class="text-xl font-semibold mb-2">Color-Coded Labels</h4>
+        <p class="mb-4 text-gray-700 dark:text-gray-300">
+            Chemicals must be clearly labeled. For example:
+        </p>
+        <ul class="list-disc pl-5 mb-4">
+            <li><span class="font-bold text-red-600">Red:</span> Flammable</li>
+            <li><span class="font-bold text-yellow-600">Yellow:</span> Reactive</li>
+            <li><span class="font-bold text-green-600">Green:</span> Safe / Non-hazardous</li>
+            <li><span class="font-bold text-blue-600">Blue:</span> Health Hazard</li>
+        </ul>
+
+        <div class="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
+            <p class="font-semibold text-red-700 dark:text-red-300">Warning:</p>
+            <p class="text-red-700 dark:text-red-300">
+                Never mix chemicals unless you are sure it is safe. Some combinations can produce toxic gases.
+            </p>
+        </div>
+    `
+},
+7: {
+    title: "Emergency Preparedness",
+    content: `
+        <h3 class="text-2xl font-bold mb-4">Emergency Preparedness</h3>
+        <img src="emergency.jpg" alt="Emergency preparedness drill" class="w-full rounded-lg shadow mb-4">
+        <p class="mb-4 text-gray-700 dark:text-gray-300">
+            Being prepared for emergencies can save lives and minimize damage. This includes knowing what to do in case of fire, electrical accidents, chemical spills, or medical emergencies.
+        </p>
+
+        <h4 class="text-xl font-semibold mb-2">Basic Guidelines</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li>Know the location of fire exits, alarms, and extinguishers.</li>
+            <li>Be familiar with evacuation routes and assembly points.</li>
+            <li>Participate in regular emergency drills and training.</li>
+            <li>Keep emergency contact numbers visible and accessible.</li>
+            <li>Report all incidents and near-misses to supervisors immediately.</li>
+        </ul>
+
+        <h4 class="text-xl font-semibold mb-2">Types of Fire Extinguishers</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li><b>Class A:</b> For wood, paper, cloth (ordinary combustibles).</li>
+            <li><b>Class B:</b> For flammable liquids like oil or gasoline.</li>
+            <li><b>Class C:</b> For electrical fires — most relevant in CSS labs.</li>
+        </ul>
+
+        <h4 class="text-xl font-semibold mb-2">Emergency Kit Checklist</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li>Flashlight with spare batteries</li>
+            <li>First aid kit</li>
+            <li>Whistle for signaling</li>
+            <li>List of emergency contacts</li>
+            <li>Basic tools (pliers, wrench, screwdriver)</li>
+        </ul>
+
+        <h4 class="text-xl font-semibold mb-2">Roles and Responsibilities</h4>
+        <ul class="list-disc pl-5 mb-4">
+            <li><b>Fire Marshal:</b> Ensures safe evacuation.</li>
+            <li><b>First Aid Responder:</b> Provides immediate care for injuries.</li>
+            <li><b>Communicator:</b> Calls emergency services and informs supervisors.</li>
+        </ul>
+
+        <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
+            <p class="font-semibold text-yellow-700 dark:text-yellow-300">Remember:</p>
+            <p class="text-yellow-700 dark:text-yellow-300">
+                Do not attempt to fight large fires. Evacuate immediately and let professionals handle the situation.
+            </p>
+        </div>
+    `
+}
+
+            
         };
 
         // Quiz questions
-        const quizQuestions = [
+        const quizQuestionsPool = [
             {
                 question: "What is the first thing you should do before working on computer hardware?",
                 options: [
@@ -1190,10 +1391,94 @@
                 ],
                 correctAnswer: 2,
                 explanation: "Damaged power cords should be immediately tagged out of service and reported to prevent electrical hazards."
+            },
+            {
+                question: "Why is it important to use proper lifting techniques?",
+                options: [
+                    "To look professional",
+                    "To avoid back injuries",
+                    "To impress coworkers",
+                    "To save time"
+                ],
+                correctAnswer: 1,
+                explanation: "Proper lifting techniques help prevent back injuries when handling heavy equipment."
+            },
+            {
+                question: "What is the best way to prevent tripping hazards in the workplace?",
+                options: [
+                    "Wear bright shoes",
+                    "Keep cables organized and out of walkways",
+                    "Walk slowly",
+                    "Use warning signs"
+                ],
+                correctAnswer: 1,
+                explanation: "Organizing and securing cables prevents tripping hazards."
+            },
+            {
+                question: "Which PPE is most important when handling chemicals?",
+                options: [
+                    "Safety goggles and gloves",
+                    "Ear plugs",
+                    "Steel-toed boots",
+                    "Reflective vest"
+                ],
+                correctAnswer: 0,
+                explanation: "Goggles and gloves protect you from chemical splashes and contact."
+            },
+            {
+                question: "What should you do if you feel fatigued while working?",
+                options: [
+                    "Ignore it and keep working",
+                    "Take a scheduled break",
+                    "Drink coffee only",
+                    "Ask someone else to finish your work"
+                ],
+                correctAnswer: 1,
+                explanation: "Taking regular breaks helps prevent fatigue and maintain focus."
+            },
+            {
+                question: "What is the correct response if you notice a fire in the workplace?",
+                options: [
+                    "Try to put it out without alerting anyone",
+                    "Evacuate immediately and alert others",
+                    "Finish your current task first",
+                    "Ignore it if it's small"
+                ],
+                correctAnswer: 1,
+                explanation: "Always evacuate and alert others in case of fire."
+            },
+            {
+                question: "Why should you avoid using water on electrical fires?",
+                options: [
+                    "It makes the fire worse",
+                    "Water conducts electricity and can cause electrocution",
+                    "It damages the equipment",
+                    "It creates smoke"
+                ],
+                correctAnswer: 1,
+                explanation: "Water conducts electricity and can cause electrocution during electrical fires."
+            },
+            {
+                question: "What is the main purpose of a checklist in OHS?",
+                options: [
+                    "To make work slower",
+                    "To ensure all safety steps are followed",
+                    "To impress your boss",
+                    "To avoid paperwork"
+                ],
+                correctAnswer: 1,
+                explanation: "Checklists help ensure all safety procedures are followed."
             }
+            // Add more questions as needed
         ];
 
-        // App state
+        // 2. Helper function to get N random, non-repeating questions
+        function getRandomQuestions(pool, count) {
+            const shuffled = pool.slice().sort(() => Math.random() - 0.5);
+            return shuffled.slice(0, count);
+        }
+
+        // 3. Update state to store the current quiz questions
         const state = {
             currentScreen: 'home',
             previousScreen: '',
@@ -1201,7 +1486,8 @@
             quiz: {
                 currentQuestion: 0,
                 userAnswers: [],
-                started: false
+                started: false,
+                questions: [] // Store the randomized questions for this attempt
             }
         };
 
@@ -1327,7 +1613,7 @@
             const lessons = db.get('lessons');
             if (lessons && lessons.completed) {
                 const completedCount = lessons.completed.length;
-                const totalLessons = 4; // We have 4 lessons
+                const totalLessons = 7; // We have 4 lessons
                 elements.completedLessons.textContent = `${completedCount}/${totalLessons}`;
                 
                 // Update lesson cards with completion status
@@ -1391,7 +1677,7 @@
             
             // Lessons progress (weight: 40%)
             if (lessons && lessons.completed) {
-                totalItems += 4; // 4 lessons
+                totalItems += 7; // 4 lessons
                 completedItems += lessons.completed.length;
             }
             
@@ -1684,13 +1970,14 @@
             state.quiz.currentQuestion = 0;
             state.quiz.userAnswers = [];
             state.quiz.started = true;
+            state.quiz.questions = getRandomQuestions(quizQuestionsPool, 10); // 10 random questions
             showScreen('quiz-questions');
             loadQuestion();
         }
 
         // Load a quiz question
         function loadQuestion() {
-            const currentQ = quizQuestions[state.quiz.currentQuestion];
+            const currentQ = state.quiz.questions[state.quiz.currentQuestion];
             if (currentQ) {
                 elements.questionNumber.textContent = state.quiz.currentQuestion + 1;
                 elements.quizQuestion.textContent = currentQ.question;
@@ -1712,7 +1999,7 @@
                 });
 
                 // Show/hide next/submit buttons
-                if (state.quiz.currentQuestion < quizQuestions.length - 1) {
+                if (state.quiz.currentQuestion < state.quiz.questions.length - 1) {
                     elements.nextQuestionBtn.classList.remove('hidden');
                     elements.submitQuizBtn.classList.add('hidden');
                 } else {
@@ -1747,20 +2034,20 @@
             }
 
             let correctCount = 0;
-            quizQuestions.forEach((q, index) => {
+            state.quiz.questions.forEach((q, index) => {
                 if (state.quiz.userAnswers[index] === q.correctAnswer) {
                     correctCount++;
                 }
             });
 
-            const score = (correctCount / quizQuestions.length) * 100;
+            const score = (correctCount / state.quiz.questions.length) * 100;
             db.set('quiz', {
                 lastScore: score,
                 lastAttempt: new Date().toISOString()
             });
 
             elements.quizScore.textContent = `${Math.round(score)}%`;
-            elements.correctAnswers.textContent = `${correctCount}/${quizQuestions.length}`;
+            elements.correctAnswers.textContent = `${correctCount}/${state.quiz.questions.length}`;
             elements.quizProgressBar.style.setProperty('--progress', `${score}%`);
 
             if (score >= 70) { // Example pass mark
@@ -1779,13 +2066,83 @@
                 elements.quizScore.classList.add('text-red-600', 'dark:text-red-300');
             }
 
-            showScreen('quiz-results-screen');
+            showScreen('quiz-results');
         }
 
         // Review quiz answers (placeholder)
         function reviewQuiz() {
-            alert('Review Answers functionality not yet implemented.');
-            // You would typically navigate to a screen showing questions, user answers, and correct answers.
+            // Prepare review content
+            let reviewHtml = '';
+            state.quiz.questions.forEach((q, idx) => {
+                const userAnswer = state.quiz.userAnswers[idx];
+                const isCorrect = userAnswer === q.correctAnswer;
+                reviewHtml += `
+                    <div class="mb-6 p-4 rounded-lg shadow ${isCorrect ? 'bg-green-50 dark:bg-green-900/30' : 'bg-red-50 dark:bg-red-900/30'}">
+                        <div class="mb-2 flex items-center">
+                            <span class="font-bold text-lg mr-2">Q${idx + 1}:</span>
+                            <span class="font-medium text-gray-800 dark:text-white">${q.question}</span>
+                        </div>
+                        <ul class="mb-2">
+                            ${q.options.map((opt, i) => {
+                                let style = '';
+                                if (i === q.correctAnswer) style = 'font-bold text-green-700 dark:text-green-300';
+                                if (i === userAnswer && i !== q.correctAnswer) style = 'font-bold text-red-700 dark:text-red-300';
+                                return `<li class="ml-6 ${style}">${String.fromCharCode(65 + i)}. ${opt}</li>`;
+                            }).join('')}
+                        </ul>
+                        <div class="mb-1">
+                            <span class="font-medium">Your answer:</span>
+                            <span class="${isCorrect ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}">
+                                ${userAnswer !== undefined ? q.options[userAnswer] : '<em>No answer</em>'}
+                            </span>
+                        </div>
+                        <div>
+                            <span class="font-medium">Correct answer:</span>
+                            <span class="text-green-700 dark:text-green-300">${q.options[q.correctAnswer]}</span>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+                            <span class="font-medium">Explanation:</span> ${q.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+        
+            // Show review in quiz-questions screen
+            elements.quizQuestionsScreen.classList.remove('hidden');
+            elements.quizQuestionsScreen.classList.add('slide-enter-active');
+            elements.quizResultsScreen.classList.add('hidden');
+            elements.quizResultsScreen.classList.remove('slide-enter-active');
+        
+            // Hide navigation and buttons not needed
+            elements.quizQuestionContainer.innerHTML = `
+                <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white text-center">Quiz Review</h3>
+                ${reviewHtml}
+                <div class="flex justify-center mt-6">
+                    <button id="back-to-results-btn" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        Back to Results
+                    </button>
+                </div>
+            `;
+            elements.quizOptions.innerHTML = '';
+            elements.nextQuestionBtn.classList.add('hidden');
+            elements.submitQuizBtn.classList.add('hidden');
+            elements.questionNumber.textContent = '';
+        
+            // Back button to results
+            document.getElementById('back-to-results-btn').onclick = function () {
+                // Hide review (quiz-questions) screen
+                elements.quizQuestionsScreen.classList.add('hidden');
+                elements.quizQuestionsScreen.classList.remove('slide-enter-active');
+                // Show results screen
+                elements.quizResultsScreen.classList.remove('hidden');
+                elements.quizResultsScreen.classList.add('slide-enter-active');
+                // Restore the original quiz question container content if needed
+                // Optionally, you can reload the results screen or reset the question container here
+                updateActiveNavItem('quiz');
+            };
+        
+            // Update nav highlight
+            updateActiveNavItem('quiz');
         }
 
         // Retake quiz
