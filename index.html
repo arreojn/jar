@@ -84,7 +84,7 @@
         <!-- Main Content Area -->
         <main class="flex-grow container mx-auto px-4 py-6">
             <!-- Home Screen (default view) -->
-            <div id="home-screen" class="slide-enter-active">
+            <div id="home-screen" class="hidden">   
                 <div class="mb-8">
                     <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Occupational Health & Safety</h2>
                     <p class="text-gray-600 dark:text-gray-300">
@@ -676,6 +676,49 @@
                 </div>
             </div>
         </nav>
+<div id="splash-screen" class="fixed inset-0 flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-400 z-50">
+    <div class="flex flex-col items-center space-y-4">
+        
+        <!-- App Logo with animation -->
+        <img src="logo.png" alt="App Logo" 
+             class="w-24 h-24 animate-bounce rounded-full shadow-lg border-4 border-white">
+        
+        <!-- Icon for extra effect -->
+        <i class="fas fa-shield-alt text-white text-5xl animate-spin-slow"></i>
+        
+        <!-- App Title -->
+        <h2 class="text-3xl font-extrabold text-white tracking-wide drop-shadow-lg animate-fade-in">
+            OHS CSS App
+        </h2>
+        
+        <!-- Loading Text -->
+        <span class="text-white text-lg animate-pulse">
+            Loading, please wait...
+        </span>
+    </div>
+</div>
+
+<!-- Custom Animations -->
+<style>
+    /* Slower spinning animation for the shield icon */
+    @keyframes spin-slow {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+        animation: spin-slow 6s linear infinite;
+    }
+
+    /* Smooth fade-in for title */
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+        animation: fade-in 1.5s ease-in-out forwards;
+    }
+</style>
+
     </div>
 
     <script>
@@ -1590,7 +1633,11 @@
             checkDarkMode();
 
             // Set initial screen to home
-            showScreen('home');
+    setTimeout(() => {
+        document.getElementById('splash-screen').style.display = 'none';
+        state.currentScreen = '';
+        showScreen('home');
+    }, 3000); // 1.5 seconds
         }
 
         // Load user data from local storage
@@ -2153,4 +2200,5 @@
         // Call initApp when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
+</body>
 </html>
