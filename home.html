@@ -1,181 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Occupational Health and Safety Procedures - Computer System Servicing</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class'
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="h-full bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+<body>
     <!-- Splash Screen removed -->
-    <div class="min-h-full flex flex-col">
+    <div class="main-wrapper">
         <!-- Header -->
-        <header class="bg-blue-600 text-white shadow-md dark:bg-gray-800">
-            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                <h1 class="text-xl font-bold">Occupational Health and Safety Procedures - Computer System Servicing</h1>
-                <!-- Light/Dark Mode Toggle -->
-                <button id="theme-toggle" class="ml-4 p-2 rounded-full bg-white dark:bg-gray-700 text-blue-600 dark:text-yellow-300 shadow transition-colors" title="Toggle light/dark mode">
-                    <i id="theme-icon" class="fas"></i>
-                </button>
+        <header class="header small-header">
+            <div class="header-container">
+                <h1 class="header-title">Occupational Health and Safety Procedures - CSS</h1>
             </div>
         </header>
+        <div id="greeting" class="greeting-block" style="display:flex;justify-content:center;">
+            <!-- Greeting will be injected here -->
+        </div>
 
         <!-- Main Content Area -->
-        <main class="flex-grow container mx-auto px-4 py-6">
-            <div class="mb-8">
-                <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Occupational Health & Safety</h2>
-                <p class="text-gray-600 dark:text-gray-300">
-                    Learn essential safety procedures for Computer System Servicing to protect yourself and others in the workplace.
-                </p>
+    <main class="main-content">
+            <div class="intro-block">
+                <h2 class="main-title">Occupational Health & Safety</h2>
+                <p class="main-desc">Learn essential safety procedures for Computer System Servicing to protect yourself and others in the workplace.</p>
             </div>
 
             <!-- Quick Stats -->
-            <div class="grid grid-cols-2 gap-4 mb-8">
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                    <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900 mr-3">
-                            <i class="fas fa-book text-blue-600 dark:text-blue-300"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">Lessons</p>
-                            <p class="font-bold text-gray-800 dark:text-white" id="completed-lessons">0/7</p>
-                        </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon"><img src="src/book.png" alt="Lessons" class="stat-img"></div>
+                    <div class="stat-info">
+                        <p class="stat-label">Lessons</p>
+                        <p class="stat-value" id="completed-lessons">0/7</p>
                     </div>
                 </div>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-                    <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-green-100 dark:bg-green-900 mr-3">
-                            <i class="fas fa-check-circle text-green-600 dark:text-green-300"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">Checklist</p>
-                            <p class="font-bold text-gray-800 dark:text-white" id="completed-checklist">0/24</p>
-                        </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><img src="src/checklist1.png" alt="Checklist" class="stat-img"></div>
+                    <div class="stat-info">
+                        <p class="stat-label">Checklist</p>
+                        <p class="stat-value" id="completed-checklist">0/24</p>
                     </div>
                 </div>
             </div>
 
             <!-- Progress Bar -->
-            <div class="mb-8">
-                <div class="flex justify-between mb-2">
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Your Progress</span>
-                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300" id="progress-percent">0%</span>
+            <div class="progress-block">
+                <div class="progress-labels">
+                    <span class="progress-label">Your Progress</span>
+                    <span class="progress-value" id="progress-percent">0%</span>
                 </div>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width:0%"></div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar" class="progress-bar" style="width:0%"></div>
                 </div>
             </div>
 
-            <!-- Last Quiz Score -->
-            <div class="mb-8">
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex items-center">
-                    <div class="p-3 rounded-full bg-purple-100 dark:bg-purple-900 mr-3">
-                        <i class="fas fa-question-circle text-purple-600 dark:text-purple-300"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Last Quiz Score</p>
-                        <p class="font-bold text-gray-800 dark:text-white" id="quiz-score">No attempts yet</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- Feature Cards -->
-            <div class="grid gap-6">
-                <a href="lessons.html" class="feature-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-left hover:shadow-lg transition-shadow block">
-                    <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900 mr-4">
-                            <i class="fas fa-book-open text-blue-600 dark:text-blue-300 text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800 dark:text-white">Educational Content</h3>
-                            <p class="text-gray-600 dark:text-gray-300 mt-1">Learn OHS procedures for CSS</p>
-                        </div>
+            <div class="feature-row">
+                <a href="lessons.html" class="feature-card">
+                    <div class="feature-icon"><img src="src/lesson.png" alt="Educational Content" class="feature-img"></div>
+                    <div class="feature-info">
+                        <h3 class="feature-title">Educational Content</h3>
+                        <p class="feature-desc">Learn OHS procedures for CSS</p>
                     </div>
                 </a>
-                <a href="checklist.html" class="feature-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-left hover:shadow-lg transition-shadow block">
-                    <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-green-100 dark:bg-green-900 mr-4">
-                            <i class="fas fa-clipboard-list text-green-600 dark:text-green-300 text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800 dark:text-white">Safety Checklist</h3>
-                            <p class="text-gray-600 dark:text-gray-300 mt-1">Track your safety procedures</p>
-                        </div>
+                <a href="checklist.html" class="feature-card">
+                    <div class="feature-icon"><img src="src/checklist2.png" alt="Safety Checklist" class="feature-img"></div>
+                    <div class="feature-info">
+                        <h3 class="feature-title">Safety Checklist</h3>
+                        <p class="feature-desc">Track your safety procedures</p>
                     </div>
                 </a>
-                <a href="assessment.html" class="feature-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-left hover:shadow-lg transition-shadow block">
-                    <div class="flex items-center">
-                        <div class="p-3 rounded-full bg-purple-100 dark:bg-purple-900 mr-4">
-                            <i class="fas fa-question-circle text-purple-600 dark:text-purple-300 text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800 dark:text-white">Assessment</h3>
-                            <p class="text-gray-600 dark:text-gray-300 mt-1">Test your knowledge</p>
-                        </div>
+                <a href="assessment.html" class="feature-card">
+                    <div class="feature-icon"><img src="src/assessment.png" alt="Assessment" class="feature-img"></div>
+                    <div class="feature-info">
+                        <h3 class="feature-title">Assessment</h3>
+                        <p class="feature-desc">Test your knowledge</p>
                     </div>
                 </a>
             </div>
         </main>
         <!-- Mobile Icon Navigation Bar -->
-        <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow flex justify-around py-2 z-40">
-            <a href="home.html" class="flex flex-col items-center text-blue-600 dark:text-blue-300">
-                <i class="fas fa-home text-xl"></i>
-                <span class="text-xs">Home</span>
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-link active">
+                <img src="src/home.png" alt="Home" class="nav-img">
+                <span class="nav-label">Home</span>
             </a>
-            <a href="lessons.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-                <i class="fas fa-book text-xl"></i>
-                <span class="text-xs">Lessons</span>
+            <a href="lessons.html" class="nav-link">
+                <img src="src/book.png" alt="Lessons" class="nav-img">
+                <span class="nav-label">Lessons</span>
             </a>
-            <a href="checklist.html" class="flex flex-col items-center text-green-600 dark:text-green-300">
-                <i class="fas fa-clipboard-list text-xl"></i>
-                <span class="text-xs">Checklist</span>
+            <a href="checklist.html" class="nav-link">
+                <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+                <span class="nav-label">Checklist</span>
             </a>
-            <a href="assessment.html" class="flex flex-col items-center text-purple-600 dark:text-purple-300">
-                <i class="fas fa-question-circle text-xl"></i>
-                <span class="text-xs">Assessment</span>
+            <a href="assessment.html" class="nav-link">
+                <img src="src/assessment.png" alt="Assessment" class="nav-img">
+                <span class="nav-label">Assessment</span>
+            </a>
+            <a href="settings.html" class="nav-link">
+                <img src="src/settings.png" alt="Settings" class="nav-img">
+                <span class="nav-label">Settings</span>
             </a>
         </nav>
     </div>
-   <script>
+    <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-
-        function updateIcon(isDark) {
-            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        // Palette system: apply palette from localStorage
+        function setPalette(palette) {
+            document.documentElement.classList.remove('palette-light', 'palette-dark', 'palette-pastel1', 'palette-pastel2', 'palette-pastel3');
+            document.documentElement.classList.add('palette-' + palette);
         }
+        const savedPalette = localStorage.getItem('palette');
+        setPalette(savedPalette ? savedPalette : 'light');
 
-        function setTheme(mode) {
-            if (mode === 'dark') {
-                document.documentElement.classList.add('dark');
-                updateIcon(true);
-            } else {
-                document.documentElement.classList.remove('dark');
-                updateIcon(false);
+        // Greeting logic
+        function showGreeting() {
+            let name = 'Guest';
+            let image = null;
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                try {
+                    const parsed = JSON.parse(userData);
+                    if (parsed.name) name = parsed.name;
+                    if (parsed.image) image = parsed.image;
+                } catch (e) {}
             }
-            localStorage.setItem('theme', mode);
+            const initial = name && name.length > 0 ? name.trim()[0].toUpperCase() : 'G';
+            const avatarHtml = image
+                ? `<img src="${image}" alt="Learner Photo" class="greeting-avatar" style="object-fit:cover;">`
+                : `<div class="greeting-avatar">${initial}</div>`;
+            document.getElementById('greeting').innerHTML = `
+                <div class="greeting-card">
+                    ${avatarHtml}
+                    <div class="greeting-texts">
+                        <div class="greeting-title">Hello, ${name}!</div>
+                        <div class="greeting-sub">Welcome to your OHS learning dashboard.</div>
+                    </div>
+                </div>
+            `;
         }
-
-        // Initial theme setup
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            setTheme('dark');
-        } else {
-            setTheme('light');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.contains('dark');
-            setTheme(isDark ? 'light' : 'dark');
-        });
+        showGreeting();
 
         // Stats logic
         function getLessonsProgress() {
@@ -187,26 +153,45 @@
             return checklist.items.filter(i => i.completed).length;
         }
         function getQuizScore() {
-            const quiz = JSON.parse(localStorage.getItem('quiz')) || { lastScore: null };
-            return quiz.lastScore ? Math.round(quiz.lastScore) + '%' : 'No attempts yet';
+            const quizHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+            if (quizHistory.length === 0) return 'No attempts yet';
+            for (let i = quizHistory.length - 1; i >= 0; i--) {
+                let perc = quizHistory[i].percentage;
+                if (perc !== undefined && perc !== null && perc !== '') {
+                    if (typeof perc === 'string') {
+                        perc = perc.replace('%','');
+                        if (!isNaN(perc)) return perc + '%';
+                    } else if (typeof perc === 'number') {
+                        return perc + '%';
+                    }
+                }
+            }
+            return 'No attempts yet';
         }
-
         function updateStats() {
             const lessons = getLessonsProgress();
             const checklist = getChecklistProgress();
             const total = 7 + 24;
             const percent = Math.round(((lessons + checklist) / total) * 100);
-
             document.getElementById('completed-lessons').textContent = lessons + '/7';
             document.getElementById('completed-checklist').textContent = checklist + '/24';
             document.getElementById('progress-percent').textContent = percent + '%';
             document.getElementById('progress-bar').style.width = percent + '%';
-            document.getElementById('quiz-score').textContent = getQuizScore();
+            var quizScoreElem = document.getElementById('quiz-score');
+            if (quizScoreElem) {
+                quizScoreElem.textContent = getQuizScore();
+            }
         }
-
         updateStats();
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'quizHistory') {
+                updateStats();
+            }
+        });
     });
 </script>
 
 </body>
+
+
 </html>

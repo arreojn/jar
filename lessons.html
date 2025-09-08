@@ -1,776 +1,716 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lessons | OHS CSS App</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class'
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Lessons | OHS CSS App</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="h-full bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-    <div class="min-h-full flex flex-col">
-        <!-- Header -->
-        <header class="bg-blue-600 text-white shadow-md dark:bg-gray-800">
-            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-                <h1 class="text-xl font-bold">Occupational Health and Safety - Computer System Servicing</h1>
-                <!-- Light/Dark Mode Toggle -->
-                <button id="theme-toggle" class="ml-4 p-2 rounded-full bg-white dark:bg-gray-700 text-blue-600 dark:text-yellow-300 shadow transition-colors" title="Toggle light/dark mode">
-                    <i id="theme-icon" class="fas"></i>
-                </button>
-            </div>
-        </header>
+<body>
+<div class="main-wrapper">
+  <!-- Header -->
+  <header class="header small-header">
+    <div class="header-container">
+      <h1 class="header-title">Occupational Health and Safety Procedures - CSS</h1>
+    </div>
+  </header>
+  <!-- After header -->
+<div id="greeting" class="greeting-block" style="display:flex;justify-content:center;">
+    <!-- Greeting will be injected here -->
+</div>
+    <div id="greeting" class="greeting-block" style="display:flex;justify-content:center;">
+      <!-- Greeting will be injected here -->
+  </div>
+  <main class="main-content">
+    <section id="lessons-list">
+      <h2 class="main-title">Lessons</h2>
+      <div id="lesson-cards"></div>
+    </section>
+    <section id="lesson-detail" class="hidden">
+      <h2 id="lesson-title" class="main-title"></h2>
+      <div id="lesson-content"></div>
+      <button id="mark-complete" class="button">Mark as Complete</button>
+      <button id="back-to-list" class="button">Back to List</button>
+    </section>
+  </main>
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-link">
+      <img src="src/home.png" alt="Home" class="nav-img">
+      <span class="nav-label">Home</span>
+    </a>
+    <a href="lessons.html" class="nav-link active">
+      <img src="src/book.png" alt="Lessons" class="nav-img">
+      <span class="nav-label">Lessons</span>
+    </a>
+    <a href="checklist.html" class="nav-link">
+      <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+      <span class="nav-label">Checklist</span>
+    </a>
+    <a href="assessment.html" class="nav-link">
+      <img src="src/assessment.png" alt="Assessment" class="nav-img">
+      <span class="nav-label">Assessment</span>
+    </a>
+    <a href="settings.html" class="nav-link">
+      <img src="src/settings.png" alt="Settings" class="nav-img">
+      <span class="nav-label">Settings</span>
+    </a>
+  </nav>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Palette system (optional, if you use themes)
+    const palette = localStorage.getItem('palette') || 'light';
+    document.documentElement.classList.remove(
+        'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+    );
+    document.documentElement.classList.add('palette-' + palette);
 
-        <!-- Main Content Area -->
-        <main class="flex-grow container mx-auto px-4 py-6 pb-20">
-            <div id="lessons-list">
-                <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Lessons</h2>
-                <div class="space-y-4" id="lesson-cards"></div>
-            </div>
-            <div id="lesson-detail" class="hidden">
-                <div class="mb-6 flex justify-between items-center">
-                    <button id="back-to-list" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
-                        <i class="fas fa-arrow-left text-gray-700 dark:text-white"></i>
-                    </button>
-                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white" id="lesson-title">Lesson Title</h2>
-                    <div class="w-8"></div>
+    // Greeting logic
+    function showGreeting() {
+        let name = 'Guest';
+        let image = null;
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            try {
+                const parsed = JSON.parse(userData);
+                if (parsed.name) name = parsed.name;
+                if (parsed.image) image = parsed.image;
+            } catch (e) {}
+        }
+        const initial = name && name.length > 0 ? name.trim()[0].toUpperCase() : 'G';
+        const avatarHtml = image
+            ? `<img src="${image}" alt="Learner Photo" class="greeting-avatar">`
+            : `<div class="greeting-avatar">${initial}</div>`;
+        document.getElementById('greeting').innerHTML = `
+            <div class="greeting-card">
+                ${avatarHtml}
+                <div class="greeting-texts">
+                    <div class="greeting-title">${name}!</div>
+                    <div class="greeting-sub">These are the lessons that you need to understand</div>
                 </div>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-                    <div id="lesson-content" class="prose dark:prose-invert max-w-none"></div>
-                </div>
-                <button id="mark-complete" class="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    Mark as Complete
-                </button>
             </div>
-        </main>
-        <!-- Mobile Icon Navigation Bar -->
-        <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow flex justify-around py-2 z-40">
-            <a href="home.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-                <i class="fas fa-home text-xl"></i>
-                <span class="text-xs">Home</span>
-            </a>
-            <a href="lessons.html" class="flex flex-col items-center text-blue-600 dark:text-blue-300">
-                <i class="fas fa-book text-xl"></i>
-                <span class="text-xs">Lessons</span>
-            </a>
-            <a href="checklist.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-                <i class="fas fa-clipboard-list text-xl"></i>
-                <span class="text-xs">Checklist</span>
-            </a>
-            <a href="assessment.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-                <i class="fas fa-question-circle text-xl"></i>
-                <span class="text-xs">Assessment</span>
-            </a>
-        </nav>
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeIcon = document.getElementById('theme-icon');
+        `;
+    }
+    showGreeting();
+});
+</script>
 
-            function updateIcon(isDark) {
-                if (isDark) {
-                    themeIcon.className = 'fas fa-sun'; // Show sun to indicate switch to light
-                } else {
-                    themeIcon.className = 'fas fa-moon'; // Show moon to indicate switch to dark
-                }
-            }
-
-            function setTheme(mode) {
-                if (mode === 'dark') {
-                    document.documentElement.classList.add('dark');
-                    updateIcon(true);
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    updateIcon(false);
-                }
-                localStorage.setItem('theme', mode);
-            }
-
-            // Initial theme setup
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                setTheme(savedTheme);
-            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                setTheme('dark');
-            } else {
-                setTheme('light');
-            }
-
-            themeToggle.addEventListener('click', () => {
-                const isDark = document.documentElement.classList.contains('dark');
-                setTheme(isDark ? 'light' : 'dark');
-            });
-        });
-
-        // Lessons content (copy from your main file)
-       const lessonsContent = {
-            1: {
-                title: "Introduction to OHS in CSS",
-                content: `
-                   <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">What is Occupational Health and Safety (OHS)?</h3>
-<p class="mb-4 text-gray-700 dark:text-gray-300">
-<span class="font-semibold text-gray-800 dark:text-white">laws, standards, and best practices</span>
-<span class="font-semibold text-gray-800 dark:text-white">Computer System Servicing (CSS)</span>
-</p>
-
-<div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 mb-6 rounded">
-    <p class="font-semibold text-blue-700 dark:text-blue-300">Why is OHS important in CSS?</p>
-    <ul class="list-disc pl-5 mt-2 text-blue-700 dark:text-blue-300 space-y-1">
-        <li>Prevents workplace injuries and illnesses</li>
-        <li>Reduces risks of <span class="font-semibold text-gray-800 dark:text-white">electrical shocks, burns, and fires</span></li>
-        <li>Minimizes exposure to <span class="font-semibold text-gray-800 dark:text-white">hazardous materials and chemicals</span></li>
-        <li>Promotes proper <span class="font-semibold text-gray-800 dark:text-white">ergonomic practices</span> to avoid musculoskeletal disorders</li>
-        <li>Encourages a safe, efficient, and <span class="font-semibold text-gray-800 dark:text-white">productivity-boosting environment</span></li>
-        <li>Ensures compliance with <span class="font-semibold text-gray-800 dark:text-white">legal and regulatory requirements</span></li>
-        <li>Raises awareness of <span class="font-semibold text-gray-800 dark:text-white">emergency procedures and first aid response</span></li>
-    </ul>
-</div>
-
-<h3 class="text-2xl font-bold mb-4 mt-6 text-gray-800 dark:text-white">Common Hazards in Computer System Servicing</h3>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Electrical Hazards</h4>
-        <p class="text-gray-600 dark:text-gray-300">Exposure to live wires, faulty components, overloaded circuits, or poor grounding can result in electric shocks, equipment damage, or fires.</p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Ergonomic Hazards</h4>
-        <p class="text-gray-600 dark:text-gray-300">Improper workstation setup, poor posture, and repetitive tasks may lead to back pain, carpal tunnel syndrome, eye strain, or fatigue.</p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Chemical Hazards</h4>
-        <p class="text-gray-600 dark:text-gray-300">Exposure to printer toners, cleaning solvents, soldering fumes, and other chemicals used in maintenance can cause skin or respiratory issues if mishandled.</p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Physical Hazards</h4>
-        <p class="text-gray-600 dark:text-gray-300">Sharp edges of metal casings, tripping over cables, lifting heavy equipment, or mishandling tools can result in cuts, bruises, or sprains.</p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Fire Hazards</h4>
-        <p class="text-gray-600 dark:text-gray-300">Overheating components, short circuits, or improper storage of flammable materials can trigger workplace fires if safety measures are ignored.</p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Psychosocial Hazards</h4>
-        <p class="text-gray-600 dark:text-gray-300">Stress, long working hours, or lack of proper breaks may affect focus, leading to errors and accidents.</p>
-    </div>
-</div>
-
-<h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Basic OHS Principles for CSS</h3>
-<ol class="list-decimal pl-5 space-y-2 mb-6 text-gray-700 dark:text-gray-300">
-    <li>Always disconnect power before repairing or servicing equipment</li>
-    <li>Use appropriate <span class="font-semibold">Personal Protective Equipment (PPE)</span> such as gloves and anti-static wrist straps</li>
-    <li>Maintain a clean, dry, and organized work area free of clutter and spills</li>
-    <li>Follow proper lifting techniques to avoid back injuries when moving heavy equipment</li>
-    <li>Practice <span class="font-semibold">safe cable management</span> to prevent tripping hazards</li>
-    <li>Know the location of emergency exits, alarms, and fire extinguishers</li>
-    <li>Have easy access to <span class="font-semibold">first aid kits</span> and emergency contact numbers</li>
-    <li>Report and document any hazards, accidents, or near-misses immediately</li>
-    <li>Attend regular <span class="font-semibold">OHS training and drills</span> to stay updated on safety protocols</li>
-    <li>Always follow manufacturer’s guidelines and industry best practices when servicing equipment</li>
-</ol>
-
-<div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
-    <p class="font-semibold text-yellow-800 dark:text-yellow-300">Remember:</p>
-    <p class="text-yellow-700 dark:text-yellow-400">A safe technician is an effective technician. By following OHS principles, you not only protect yourself but also ensure the reliability and longevity of the systems you maintain.</p>
-</div>
-
-                `
-            },
-            2: {
-                title: "Electrical Safety",
-                content: `
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Understanding Electrical Hazards in CSS</h3>
-<p class="mb-4 text-gray-700 dark:text-gray-300">
-    Computer System Servicing (CSS) often involves handling electrical and electronic components. 
-    Without proper precautions, workers are exposed to risks such as <span class="font-semibold">electric shocks, burns, equipment damage, fires, or even fatalities</span>. 
-    Electrical safety is not just a precaution—it is a vital discipline that protects both technicians and the systems they maintain.
-</p>
-
-<div class="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 p-4 mb-6 rounded">
-    <p class="font-semibold text-red-700 dark:text-red-300">Dangerous Practices to Avoid:</p>
-    <ul class="list-disc pl-5 mt-2 text-red-700 dark:text-red-300 space-y-1">
-        <li>Working on live circuits unless absolutely necessary and authorized</li>
-        <li>Using damaged, frayed, or makeshift power cords</li>
-        <li>Overloading outlets, extension cords, or power strips</li>
-        <li>Using metal tools or jewelry near exposed circuits</li>
-        <li>Working with wet hands, damp clothing, or in humid environments</li>
-        <li>Bypassing safety features such as fuses or circuit breakers</li>
-    </ul>
-</div>
-
-<h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Essential Electrical Safety Measures</h3>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">1. Power Disconnection</h4>
-        <p class="text-gray-600 dark:text-gray-300">
-            Always unplug and isolate equipment before servicing. Disconnect from the wall outlet 
-            rather than just switching off the power supply.
+<script>
+// Define lessonsContent globally so all functions can access it
+const lessonsContent = {
+  1: {
+    title: "Introduction to OHS in CSS",
+    short: "Overview of OHS principles and importance in Computer System Servicing.",
+    icon: "src/book.png",
+    content: `
+      <div class="lesson-card-content glass-card">
+        <h3 class="lesson-section-title">What is Occupational Health and Safety (OHS)?</h3>
+        <p class="lesson-paragraph">
+          Occupational Health and Safety (OHS) refers to laws, standards, and best practices that ensure the safety and well-being of workers in Computer System Servicing (CSS).
         </p>
+        <div class="lesson-highlight lesson-blue glass-card">
+          <strong>Why is OHS important in CSS?</strong>
+          <ul>
+            <li>Prevents workplace injuries and illnesses</li>
+            <li>Reduces risks of electrical shocks, burns, and fires</li>
+            <li>Minimizes exposure to hazardous materials and chemicals</li>
+            <li>Promotes proper ergonomic practices to avoid musculoskeletal disorders</li>
+            <li>Encourages a safe, efficient, and productivity-boosting environment</li>
+            <li>Ensures compliance with legal and regulatory requirements</li>
+            <li>Raises awareness of emergency procedures and first aid response</li>
+          </ul>
+        </div>
+        <h3 class="lesson-section-title">Common Hazards in Computer System Servicing</h3>
+        <div class="lesson-hazards">
+          <div class="lesson-hazard glass-card">
+            <img src="src/electrical.png" alt="Electrical Hazards" class="lesson-img" />
+            <h4>Electrical Hazards</h4>
+            <p>Exposure to live wires, faulty components, overloaded circuits, or poor grounding can result in electric shocks, equipment damage, or fires.</p>
+          </div>
+          <div class="lesson-hazard glass-card">
+            <img src="src/ergo.png" alt="Ergonomic Hazards" class="lesson-img" />
+            <h4>Ergonomic Hazards</h4>
+            <p>Improper workstation setup, poor posture, and repetitive tasks may lead to back pain, carpal tunnel syndrome, eye strain, or fatigue.</p>
+          </div>
+          <div class="lesson-hazard glass-card">
+            <img src="src/chemical.png" alt="Chemical Hazards" class="lesson-img" />
+            <h4>Chemical Hazards</h4>
+            <p>Exposure to printer toners, cleaning solvents, soldering fumes, and other chemicals used in maintenance can cause skin or respiratory issues if mishandled.</p>
+          </div>
+          <div class="lesson-hazard glass-card">
+            <img src="src/physical.png" alt="Physical Hazards" class="lesson-img" />
+            <h4>Physical Hazards</h4>
+            <p>Sharp edges of metal casings, tripping over cables, lifting heavy equipment, or mishandling tools can result in cuts, bruises, or sprains.</p>
+          </div>
+          <div class="lesson-hazard glass-card">
+            <img src="src/fire.png" alt="Fire Hazards" class="lesson-img" />
+            <h4>Fire Hazards</h4>
+            <p>Overheating components, short circuits, or improper storage of flammable materials can trigger workplace fires if safety measures are ignored.</p>
+          </div>
+          <div class="lesson-hazard glass-card">
+            <img src="src/stress.png" alt="Psychological Hazards" class="lesson-img" />
+            <h4>Psychological Hazards</h4>
+            <p>Stress, long working hours, or lack of proper breaks may affect focus, leading to errors and accidents.</p>
+          </div>
+        </div>
+        <h3 class="lesson-section-title">Basic OHS Principles for CSS</h3>
+        <ol class="lesson-list">
+          <li>Always disconnect power before repairing or servicing equipment</li>
+          <li>Use appropriate Personal Protective Equipment (PPE) such as gloves and anti-static wrist straps</li>
+          <li>Maintain a clean, dry, and organized work area free of clutter and spills</li>
+          <li>Follow proper lifting techniques to avoid back injuries when moving heavy equipment</li>
+          <li>Practice safe cable management to prevent tripping hazards</li>
+          <li>Know the location of emergency exits, alarms, and fire extinguishers</li>
+          <li>Have easy access to first aid kits and emergency contact numbers</li>
+          <li>Report and document any hazards, accidents, or near-misses immediately</li>
+          <li>Attend regular OHS training and drills to stay updated on safety protocols</li>
+          <li>Always follow manufacturer’s guidelines and industry best practices when servicing equipment</li>
+        </ol>
+        <div class="lesson-highlight lesson-yellow glass-card">
+          <strong>Remember:</strong>
+          <p>A safe technician is an effective technician. By following OHS principles, you not only protect yourself but also ensure the reliability and longevity of the systems you maintain.</p>
+        </div>
+      </div>
+    `
+  },
+  2: {
+    title: "Electrical Safety",
+    short: "Key electrical hazards and safety measures.",
+    icon: "src/electrical.png",
+    content: `
+    <div class="lesson-card-content glass-card">
+      <h3 class="lesson-section-title">Understanding Electrical Hazards in CSS</h3>
+      <p class="lesson-paragraph">
+        Computer System Servicing (CSS) involves handling electrical and electronic components. Without proper precautions, workers are exposed to risks such as <strong>electric shocks, burns, equipment damage, fires, or even fatalities</strong>.
+      </p>
+      <div class="lesson-highlight lesson-red glass-card">
+        <strong>Dangerous Practices to Avoid:</strong>
+        <ul>
+          <li>Working on live circuits unless absolutely necessary and authorized</li>
+          <li>Using damaged, frayed, or makeshift power cords</li>
+          <li>Overloading outlets, extension cords, or power strips</li>
+          <li>Using metal tools or jewelry near exposed circuits</li>
+          <li>Working with wet hands, damp clothing, or in humid environments</li>
+          <li>Bypassing safety features such as fuses or circuit breakers</li>
+        </ul>
+      </div>
+      <h3 class="lesson-section-title">Essential Electrical Safety Measures</h3>
+      <div class="lesson-hazards">
+        <div class="lesson-hazard glass-card">
+          <img src="src/disconnect.png" alt="Power Disconnection" class="lesson-img" />
+          <h4>Power Disconnection</h4>
+          <p>Always unplug and isolate equipment before servicing. Disconnect from the wall outlet rather than just switching off the power supply.</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/ppe.png" alt="Use of PPE" class="lesson-img" />
+          <h4>Use of PPE</h4>
+          <p>Wear insulated gloves and shoes, and use insulated tools. Anti-static wrist straps should be properly grounded to prevent damage to components.</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/ground.png" alt="Proper Grounding" class="lesson-img" />
+          <h4>Proper Grounding</h4>
+          <p>Ensure all equipment is properly grounded. Use three-pronged plugs and test outlets for proper wiring before use.</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/esd.png" alt="Static Electricity Control" class="lesson-img" />
+          <h4>Static Electricity Control</h4>
+          <p>Use anti-static mats, wrist straps, and ESD-safe tools to prevent electrostatic discharge (ESD) which can destroy sensitive electronic components.</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/safe.jpg" alt="Safe Workspace" class="lesson-img" />
+          <h4>Safe Workspace</h4>
+          <p>Keep the work area clean, dry, and free from conductive clutter. Avoid running power cords under carpets or across walkways.</p>
+        </div>
+      </div>
+      <h3 class="lesson-section-title">Working with Capacitors</h3>
+      <div class="lesson-highlight lesson-yellow glass-card">
+        <strong>Safety Steps:</strong>
+        <ol class="lesson-list">
+          <li>Unplug the power supply and allow at least <strong>15–30 minutes</strong> for natural discharge.</li>
+          <li>Use a properly rated resistor (10–20k ohm, 5W) to safely discharge capacitors.</li>
+          <li>Never short capacitors with screwdrivers or pliers—this can cause sparks, explosions, or permanent damage.</li>
+          <li>After discharging, confirm with a multimeter that the voltage is at zero.</li>
+          <li>If unsure, treat all capacitors as if they are still charged.</li>
+        </ol>
+      </div>
+      <div class="lesson-highlight lesson-green glass-card">
+        <strong>Best Practices for Electrical Safety:</strong>
+        <ul>
+          <li>Inspect cords, plugs, and outlets regularly for wear or damage</li>
+          <li>Use surge protectors or UPS for sensitive computer equipment</li>
+          <li>Clearly label high-voltage areas and restrict access to authorized personnel only</li>
+          <li>Keep liquids, sprays, and conductive objects away from equipment</li>
+          <li>Know the location of circuit breakers and how to safely reset them</li>
+          <li>Have a <strong>Class C fire extinguisher</strong> available in electrical work areas</li>
+          <li>Always work with a buddy or inform someone when performing high-risk electrical servicing</li>
+        </ul>
+      </div>
     </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">2. Use of PPE</h4>
-        <p class="text-gray-600 dark:text-gray-300">
-            Wear insulated gloves and shoes, and use insulated tools. Anti-static wrist straps should 
-            be properly grounded to prevent damage to components.
-        </p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">3. Proper Grounding</h4>
-        <p class="text-gray-600 dark:text-gray-300">
-            Ensure all equipment is properly grounded. Use three-pronged plugs and test outlets 
-            for proper wiring before use.
-        </p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">4. Static Electricity Control</h4>
-        <p class="text-gray-600 dark:text-gray-300">
-            Use anti-static mats, wrist straps, and ESD-safe tools to prevent electrostatic discharge 
-            (ESD) which can destroy sensitive electronic components.
-        </p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">5. Circuit Awareness</h4>
-        <p class="text-gray-600 dark:text-gray-300">
-            Label circuits clearly, and always verify with a multimeter before touching any component 
-            assumed to be “off.”
-        </p>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">6. Safe Workspace</h4>
-        <p class="text-gray-600 dark:text-gray-300">
-            Keep the work area clean, dry, and free from conductive clutter. Avoid running power cords 
-            under carpets or across walkways.
-        </p>
-    </div>
-</div>
-
-<h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Working with Capacitors</h3>
-<p class="mb-4 text-gray-700 dark:text-gray-300">
-    Capacitors—especially in power supplies and monitors—can store a <span class="font-semibold">dangerous charge 
-    long after the device is unplugged</span>. Mishandling them can lead to severe electric shocks. 
-    Always follow these safety steps:
-</p>
-<ol class="list-decimal pl-5 space-y-2 mb-6 text-gray-700 dark:text-gray-300">
-    <li>Unplug the power supply and allow at least <span class="font-semibold">15–30 minutes</span> for natural discharge.</li>
-    <li>Use a properly rated resistor (10–20k ohm, 5W) to safely discharge capacitors.</li>
-    <li>Never short capacitors with screwdrivers or pliers—this can cause sparks, explosions, or permanent damage.</li>
-    <li>After discharging, confirm with a multimeter that the voltage is at zero.</li>
-    <li>If unsure, treat all capacitors as if they are still charged.</li>
-</ol>
-
-<div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-4 rounded">
-    <p class="font-semibold text-green-700 dark:text-green-300">Best Practices for Electrical Safety:</p>
-    <ul class="list-disc pl-5 mt-2 text-green-700 dark:text-green-300 space-y-1">
-        <li>Inspect cords, plugs, and outlets regularly for wear or damage</li>
-        <li>Use surge protectors or UPS for sensitive computer equipment</li>
-        <li>Clearly label high-voltage areas and restrict access to authorized personnel only</li>
-        <li>Keep liquids, sprays, and conductive objects away from equipment</li>
-        <li>Know the location of circuit breakers and how to safely reset them</li>
-        <li>Have a <span class="font-semibold">Class C fire extinguisher</span> available in electrical work areas</li>
-        <li>Always work with a buddy or inform someone when performing high-risk electrical servicing</li>
-    </ul>
-</div>
-
-            
-                `
-},
-            3: {
-                title: "Fire Safety",
-                content: `
-                  <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Fire Hazards in Computer System Servicing</h3>
-<p class="mb-4 text-gray-700 dark:text-gray-300">
-    Computer equipment and work environments present several potential fire hazards that technicians must be aware of. 
-    Fires in IT or electronics workplaces not only threaten human lives but can also damage expensive equipment, 
-    destroy important data, and interrupt business operations. Understanding these risks is the first step 
-    in preventing fires and knowing how to respond if one occurs.
-</p>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Common Fire Causes</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+  `
+  },
+  3: {
+    title: "Fire Safety",
+    short: "Fire hazards and prevention in CSS.",
+    icon: "src/fire.png",
+    content: `
+    <div class="lesson-card-content glass-card">
+      <h3 class="lesson-section-title">Fire Hazards in Computer System Servicing</h3>
+      <p class="lesson-paragraph">
+        Computer equipment and work environments present several potential fire hazards that technicians must be aware of. Fires in IT or electronics workplaces not only threaten human lives but can also damage expensive equipment, destroy important data, and interrupt business operations.
+      </p>
+      <div class="lesson-hazards">
+        <div class="lesson-hazard glass-card">
+          <img src="src/fire.png" alt="Fire Hazard" class="lesson-img" />
+          <h4>Common Fire Causes</h4>
+          <ul>
             <li>Overloaded or improperly connected electrical circuits</li>
             <li>Faulty, frayed, or damaged wiring</li>
             <li>Overheating components such as CPUs, power supplies, or batteries</li>
-            <li>Improperly stored or spilled flammable materials (cleaning solvents, aerosols)</li>
-            <li>Battery malfunctions (especially lithium-ion batteries in laptops and UPS units)</li>
+            <li>Improperly stored or spilled flammable materials</li>
+            <li>Battery malfunctions (especially lithium-ion batteries)</li>
             <li>Dust buildup inside equipment that ignites when overheated</li>
             <li>Blocked ventilation preventing heat dissipation</li>
-        </ul>
-    </div>
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Fire Prevention Measures</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+          </ul>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/fireext.png" alt="Fire Extinguisher" class="lesson-img" />
+          <h4>Fire Prevention Measures</h4>
+          <ul>
             <li>Schedule regular equipment maintenance and cleaning</li>
-            <li>Ensure proper ventilation and cooling systems for computers and servers</li>
+            <li>Ensure proper ventilation and cooling systems</li>
             <li>Store flammable liquids and chemicals in labeled, fire-resistant containers</li>
             <li>Avoid overloading power strips and extension cords</li>
-            <li>Use surge protectors and Uninterruptible Power Supplies (UPS) correctly</li>
+            <li>Use surge protectors and UPS correctly</li>
             <li>Keep cables organized to prevent overheating and tripping hazards</li>
-            <li>Maintain a clean and clutter-free workspace at all times</li>
+            <li>Maintain a clean and clutter-free workspace</li>
+          </ul>
+        </div>
+      </div>
+      <h3 class="lesson-section-title">Types of Fire Extinguishers</h3>
+      <div class="lesson-highlight lesson-blue glass-card">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Fire Class</th>
+              <th>Description</th>
+              <th>Extinguisher Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Class A</td>
+              <td>Ordinary combustibles (wood, paper, cloth, plastics)</td>
+              <td>Water, foam, dry chemical</td>
+            </tr>
+            <tr>
+              <td>Class B</td>
+              <td>Flammable liquids (gasoline, oil, solvents, grease)</td>
+              <td>CO₂, dry chemical, foam</td>
+            </tr>
+            <tr>
+              <td>Class C</td>
+              <td>Electrical equipment (computers, servers, appliances)</td>
+              <td>CO₂, dry chemical (non-conductive)</td>
+            </tr>
+            <tr>
+              <td>Class D</td>
+              <td>Combustible metals (magnesium, lithium, sodium)</td>
+              <td>Special dry powder extinguishers</td>
+            </tr>
+            <tr>
+              <td>Class K</td>
+              <td>Cooking oils and fats</td>
+              <td>Wet chemical extinguishers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lesson-highlight lesson-yellow glass-card">
+        <strong>Important Note:</strong>
+        <p>Never use water or foam extinguishers on electrical fires (Class C). Water conducts electricity and can cause electrocution or spread the fire. Always use a CO₂ or non-conductive dry chemical extinguisher for electrical equipment.</p>
+      </div>
+      <h3 class="lesson-section-title">Emergency Response Plan</h3>
+      <ol class="lesson-list">
+        <li>Know the location of all fire exits, alarms, and extinguishers in your area.</li>
+        <li>Familiarize yourself with evacuation routes and designated assembly points.</li>
+        <li>Be trained in the proper use of fire extinguishers (PASS method: Pull, Aim, Squeeze, Sweep).</li>
+        <li>Know how to shut off main power sources in case of an electrical fire.</li>
+        <li>Never attempt to fight a large or spreading fire — evacuate immediately and call emergency services.</li>
+        <li>Assist coworkers or clients in evacuating, especially those with mobility issues.</li>
+      </ol>
+      <div class="lesson-highlight lesson-blue glass-card">
+        <strong>Fire Safety Checklist:</strong>
+        <ul>
+          <li>Keep work areas free of paper, boxes, and other combustibles.</li>
+          <li>Ensure proper ventilation for computer equipment and server racks.</li>
+          <li>Regularly inspect cables, plugs, and power strips for damage or overheating.</li>
+          <li>Never block access to fire exits, alarms, or firefighting equipment.</li>
+          <li>Report any fire hazards or unusual smells immediately.</li>
+          <li>Participate in fire drills and take them seriously.</li>
         </ul>
+      </div>
     </div>
-</div>
-
-<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Types of Fire Extinguishers</h3>
-<p class="mb-4 text-gray-700 dark:text-gray-300">
-    Different types of fires require different extinguishing methods. 
-    Using the wrong type can worsen the fire or put the responder in danger. 
-    Below are the most common fire classes and the appropriate extinguishers:
-</p>
-
-<div class="overflow-x-auto mb-6">
-    <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
-        <thead class="bg-gray-100 dark:bg-gray-600">
-            <tr>
-                <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Fire Class</th>
-                <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Description</th>
-                <th class="px-4 py-2 text-left text-gray-700 dark:text-white">Extinguisher Type</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
-            <tr>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class A</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Ordinary combustibles (wood, paper, cloth, plastics)</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Water, foam, dry chemical</td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class B</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Flammable liquids (gasoline, oil, solvents, grease)</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">CO₂, dry chemical, foam</td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class C</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Electrical equipment (computers, servers, appliances)</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">CO₂, dry chemical (non-conductive)</td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class D</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Combustible metals (magnesium, lithium, sodium)</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Special dry powder extinguishers</td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Class K</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Cooking oils and fats (common in cafeterias or staff kitchens)</td>
-                <td class="px-4 py-2 text-gray-700 dark:text-gray-300">Wet chemical extinguishers</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 mb-6">
-    <p class="font-medium text-yellow-700 dark:text-yellow-300">Important Note:</p>
-    <p class="text-yellow-700 dark:text-yellow-300 mt-2">
-        Never use water or foam extinguishers on electrical fires (Class C). 
-        Water conducts electricity and can cause electrocution or spread the fire. 
-        Always use a CO₂ or non-conductive dry chemical extinguisher for electrical equipment.
-    </p>
-</div>
-
-<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Emergency Response Plan</h3>
-<p class="mb-4 text-gray-700 dark:text-gray-300">
-    Every workplace should have a clear and well-communicated emergency response plan for fires. 
-    As a computer technician, you are expected to be familiar with the procedures and act responsibly during emergencies:
-</p>
-<ol class="list-decimal pl-5 space-y-2 mb-6 text-gray-700 dark:text-gray-300">
-    <li>Know the location of all fire exits, alarms, and extinguishers in your area.</li>
-    <li>Familiarize yourself with evacuation routes and designated assembly points.</li>
-    <li>Be trained in the proper use of fire extinguishers (PASS method: Pull, Aim, Squeeze, Sweep).</li>
-    <li>Know how to shut off main power sources in case of an electrical fire.</li>
-    <li>Never attempt to fight a large or spreading fire — evacuate immediately and call emergency services.</li>
-    <li>Assist coworkers or clients in evacuating, especially those with mobility issues.</li>
-</ol>
-
-<div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4">
-    <p class="font-medium text-blue-700 dark:text-blue-300">Fire Safety Checklist for Computer Technicians:</p>
-    <ul class="list-disc pl-5 mt-2 text-blue-700 dark:text-blue-300">
-        <li>Keep work areas free of paper, boxes, and other combustibles.</li>
-        <li>Ensure proper ventilation for computer equipment and server racks.</li>
-        <li>Regularly inspect cables, plugs, and power strips for damage or overheating.</li>
-        <li>Never block access to fire exits, alarms, or firefighting equipment.</li>
-        <li>Report any fire hazards or unusual smells (like burning plastic) immediately.</li>
-        <li>Participate in fire drills and take them seriously.</li>
-    </ul>
-</div>
-
-                `
-            },
-            4: {
-                title: "Hazard Identification",
-                content: `
-                  <h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Understanding Hazards in CSS</h3>
-<p class="mb-4 text-gray-700 dark:text-gray-300">
-    Hazard identification is the process of recognizing potential sources of harm in the workplace. 
-    In computer system servicing, hazards can be physical, chemical, biological, ergonomic, 
-    electrical, or psychological in nature. Recognizing hazards is the first step to ensuring 
-    workplace safety and preventing accidents.
-</p>
-
-<div class="bg-purple-50 dark:bg-purple-900/30 border-l-4 border-purple-500 p-4 mb-6 rounded">
-    <p class="font-medium text-purple-700 dark:text-purple-300">Key Terms:</p>
-    <ul class="list-disc pl-5 mt-2 text-purple-700 dark:text-purple-300">
-        <li><strong>Hazard:</strong> Any source of potential damage, harm, or adverse health effects</li>
-        <li><strong>Risk:</strong> The chance or probability that a person will be harmed if exposed to a hazard</li>
-        <li><strong>Control Measure:</strong> Steps taken to eliminate or reduce risk</li>
-        <li><strong>Incident:</strong> An event that may or may not result in injury, but reveals a safety weakness</li>
-    </ul>
-</div>
-
-
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Physical Hazards</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+  `
+  },
+  4: {
+    title: "Hazard Identification",
+    short: "Identifying workplace hazards in CSS.",
+    icon: "src/hazardiden.png",
+    content: `
+    <div class="lesson-card-content glass-card">
+      <h3 class="lesson-section-title">Understanding Hazards in CSS</h3>
+      <p class="lesson-paragraph">
+        Hazard identification is the process of recognizing potential sources of harm in the workplace. In computer system servicing, hazards can be physical, chemical, biological, ergonomic, electrical, or psychological in nature.
+      </p>
+      <div class="lesson-highlight lesson-purple glass-card">
+        <strong>Key Terms:</strong>
+        <ul>
+          <li><strong>Hazard:</strong> Any source of potential damage, harm, or adverse health effects</li>
+          <li><strong>Risk:</strong> The chance or probability that a person will be harmed if exposed to a hazard</li>
+          <li><strong>Control Measure:</strong> Steps taken to eliminate or reduce risk</li>
+          <li><strong>Incident:</strong> An event that may or may not result in injury, but reveals a safety weakness</li>
+        </ul>
+      </div>
+      <div class="lesson-hazards">
+        <div class="lesson-hazard glass-card">
+          <img src="src/physical.png" alt="Physical Hazards" class="lesson-img" />
+          <h4>Physical Hazards</h4>
+          <ul>
             <li>Cuts from sharp edges inside computer cases</li>
             <li>Trips from loose cables on the floor</li>
             <li>Eye injuries from flying debris when drilling</li>
             <li>Back injuries from lifting heavy equipment</li>
-        </ul>
-    </div>
-
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Chemical Hazards</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+          </ul>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/chemical.png" alt="Chemical Hazards" class="lesson-img" />
+          <h4>Chemical Hazards</h4>
+          <ul>
             <li>Exposure to cleaning solvents</li>
             <li>Printer toner particles</li>
             <li>Battery acid from UPS systems</li>
             <li>Solder fumes</li>
-        </ul>
-    </div>
-
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Biological Hazards</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+          </ul>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/bio.png" alt="Biological Hazards" class="lesson-img" />
+          <h4>Biological Hazards</h4>
+          <ul>
             <li>Dust mites in old equipment</li>
             <li>Mold in damp environments</li>
             <li>Bacteria on shared equipment</li>
-        </ul>
-    </div>
-
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Ergonomic Hazards</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+          </ul>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/ergo.png" alt="Ergonomic Hazards" class="lesson-img" />
+          <h4>Ergonomic Hazards</h4>
+          <ul>
             <li>Poor workstation setup</li>
             <li>Repetitive strain from keyboard/mouse use</li>
             <li>Awkward postures when servicing equipment</li>
             <li>Eye strain from prolonged screen time</li>
-        </ul>
-    </div>
-
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Electrical Hazards</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+          </ul>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/electrical.png" alt="Electrical Hazards" class="lesson-img" />
+          <h4>Electrical Hazards</h4>
+          <ul>
             <li>Electric shock from exposed wires</li>
             <li>Overloaded power outlets and extension cords</li>
             <li>Improper grounding of equipment</li>
             <li>Short circuits and fire risks</li>
-        </ul>
-    </div>
-
-    <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-        <h4 class="font-bold text-gray-800 dark:text-white mb-2">Psychological Hazards</h4>
-        <ul class="list-disc pl-5 text-gray-600 dark:text-gray-300">
+          </ul>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <img src="src/stress.png" alt="Psychological Hazards" class="lesson-img" />
+          <h4>Psychological Hazards</h4>
+          <ul>
             <li>Stress due to high workload or deadlines</li>
             <li>Mental fatigue from prolonged troubleshooting</li>
             <li>Frustration from repetitive technical issues</li>
             <li>Burnout from poor work-life balance</li>
-        </ul>
-    </div>
-
-</div>
-
-<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Hazard Identification Process</h3>
-<p class="mb-4 text-gray-800 dark:text-white">Systematic hazard identification involves these steps:</p>
-<ol class="list-decimal pl-5 space-y-2 mb-6 text-gray-800 dark:text-white">
-    <li><strong>Workplace Inspection:</strong> Regularly examine the work area for potential hazards</li>
-    <li><strong>Task Analysis:</strong> Break down work activities to identify hazards at each step</li>
-    <li><strong>Equipment Review:</strong> Check all tools and equipment for potential hazards</li>
-    <li><strong>Incident Investigation:</strong> Analyze accidents or near-misses to identify hazards</li>
-    <li><strong>Worker Consultation:</strong> Talk to colleagues about hazards they've noticed</li>
-</ol>
-
-<div class="bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-4 mb-6">
-    <p class="font-medium text-green-700 dark:text-green-300">Hazard Identification Tools:</p>
-    <ul class="list-disc pl-5 mt-2 text-green-700 dark:text-green-300">
-        <li><strong>Checklists:</strong> Standardized lists of potential hazards</li>
-        <li><strong>Job Safety Analysis (JSA):</strong> Breaking down jobs into steps and identifying hazards</li>
-        <li><strong>SWIFT Analysis:</strong> Structured What-If Technique for identifying hazards</li>
-        <li><strong>Hazard Reporting System:</strong> Formal process for workers to report hazards</li>
-    </ul>
-</div>
-
-<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Hierarchy of Controls</h3>
-<p class="mb-4 text-gray-800 dark:text-white">Once hazards are identified, use this hierarchy to control risks:</p>
-<div class="bg-white dark:bg-gray-700 rounded-lg shadow overflow-hidden mb-6">
-    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-        <h4 class="font-bold text-gray-800 dark:text-white">1. Elimination</h4>
-        <p class="text-gray-600 dark:text-gray-300">Remove the hazard completely from the workplace</p>
-    </div>
-    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-        <h4 class="font-bold text-gray-800 dark:text-white">2. Substitution</h4>
-        <p class="text-gray-600 dark:text-gray-300">Replace with a less hazardous alternative</p>
-    </div>
-    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-        <h4 class="font-bold text-gray-800 dark:text-white">3. Engineering Controls</h4>
-        <p class="text-gray-600 dark:text-gray-300">Isolate people from the hazard (e.g., machine guards, circuit breakers)</p>
-    </div>
-    <div class="p-4 border-b border-gray-200 dark:border-gray-600">
-        <h4 class="font-bold text-gray-800 dark:text-white">4. Administrative Controls</h4>
-        <p class="text-gray-600 dark:text-gray-300">Change work procedures or policies (e.g., job rotation, safety training)</p>
-    </div>
-    <div class="p-4">
-        <h4 class="font-bold text-gray-800 dark:text-white">5. PPE</h4>
-        <p class="text-gray-600 dark:text-gray-300">Personal protective equipment as a last line of defense (gloves, goggles, anti-static wrist straps)</p>
-    </div>
-</div>
-
-<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Preventive Measures</h3>
-<ul class="list-disc pl-5 mb-6 text-gray-600 dark:text-gray-300">
-    <li>Always power off and unplug devices before servicing</li>
-    <li>Use proper lifting techniques to avoid back injuries</li>
-    <li>Ensure proper ventilation when soldering or using chemicals</li>
-    <li>Label and organize cables to prevent tripping hazards</li>
-    <li>Take regular breaks to reduce eye strain and fatigue</li>
-    <li>Use ESD (Electrostatic Discharge) protection when handling components</li>
-</ul>
-
-<div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 mb-6">
-    <p class="font-medium text-yellow-700 dark:text-yellow-300">Quick Safety Tips:</p>
-    <ul class="list-disc pl-5 mt-2 text-yellow-700 dark:text-yellow-300">
-        <li>"If in doubt, ask" — never assume a procedure is safe</li>
-        <li>Keep a fire extinguisher and first aid kit accessible</li>
-        <li>Report hazards immediately to supervisors</li>
-        <li>Stay updated with safety training and drills</li>
-    </ul>
-</div>
-
-<h3 class="text-xl font-bold mb-4 text-gray-800 dark:text-white">Case Scenario</h3>
-<p class="mb-4 text-gray-800 dark:text-white">
-    <strong>Example:</strong> A technician lifted a heavy CPU tower without assistance, resulting in a back injury. 
-    This could have been prevented through proper ergonomic training and the use of lifting aids.
-</p>
-
-                `
-            },
-5: {
-    title: "Ergonomics in the Workplace",
-    content: `
-        <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Ergonomics in Computer System Servicing</h3>
-        <img src="abc.png" alt="Ergonomic workstation example" class="w-full rounded-lg shadow mb-4">
-        <p class="mb-4 text-gray-700 dark:text-gray-300">
-            Ergonomics is the science of designing the workplace, keeping in mind the capabilities and limitations of the worker. 
-            In CSS, proper ergonomics helps prevent injuries such as back pain, eye strain, and repetitive strain injuries.
-        </p>
-        
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Best Practices</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li>Adjust your chair and monitor to maintain good posture.</li>
-            <li>Keep your feet flat on the floor and wrists straight while typing.</li>
-            <li>Take regular breaks to prevent eye strain and fatigue.</li>
-            <li>Use wrist rests and footrests as needed.</li>
-            <li>Arrange tools and components within easy reach to avoid awkward movements.</li>
-        </ul>
-
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Do’s and Don’ts</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li><b>Do:</b> Sit with your back straight and monitor at eye level.</li>
-            <li><b>Don’t:</b> Slouch or lean forward for long periods.</li>
-            <li><b>Do:</b> Adjust lighting to reduce glare on the screen.</li>
-            <li><b>Don’t:</b> Place monitors too close to your eyes.</li>
-        </ul>
-
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Stretching Exercises</h4>
-        <p class="mb-2 text-gray-700 dark:text-gray-300 text-gray-800 dark:text-white">Try these quick stretches every 30–60 minutes:</p>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li>Neck rotations and shoulder rolls.</li>
-            <li>Wrist and finger stretches.</li>
-            <li>Standing and stretching your back and legs.</li>
-        </ul>
-
-        <div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 rounded">
-            <p class="font-semibold text-blue-700 dark:text-blue-300">Tip:</p>
-            <p class="text-blue-700 dark:text-blue-300">
-                Follow the 20-20-20 rule: Every 20 minutes, look at something 20 feet away for 20 seconds to reduce eye strain.
-            </p>
+          </ul>
         </div>
-    `
-},
-6: {
+      </div>
+      <h3 class="lesson-section-title">Hazard Identification Process</h3>
+      <ol class="lesson-list">
+        <li><strong>Workplace Inspection:</strong> Regularly examine the work area for potential hazards</li>
+        <li><strong>Task Analysis:</strong> Break down work activities to identify hazards at each step</li>
+        <li><strong>Equipment Review:</strong> Check all tools and equipment for potential hazards</li>
+        <li><strong>Incident Investigation:</strong> Analyze accidents or near-misses to identify hazards</li>
+        <li><strong>Worker Consultation:</strong> Talk to colleagues about hazards they've noticed</li>
+      </ol>
+      <div class="lesson-highlight lesson-green glass-card">
+        <strong>Hazard Identification Tools:</strong>
+        <ul>
+          <li><strong>Checklists:</strong> Standardized lists of potential hazards</li>
+          <li><strong>Job Safety Analysis (JSA):</strong> Breaking down jobs into steps and identifying hazards</li>
+          <li><strong>SWIFT Analysis:</strong> Structured What-If Technique for identifying hazards</li>
+          <li><strong>Hazard Reporting System:</strong> Formal process for workers to report hazards</li>
+        </ul>
+      </div>
+      <h3 class="lesson-section-title">Hierarchy of Controls</h3>
+      <div class="lesson-hazards">
+        <div class="lesson-hazard glass-card">
+          <h4>Elimination</h4>
+          <p>Remove the hazard completely from the workplace</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <h4>Substitution</h4>
+          <p>Replace with a less hazardous alternative</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <h4>Engineering Controls</h4>
+          <p>Isolate people from the hazard (e.g., machine guards, circuit breakers)</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <h4>Administrative Controls</h4>
+          <p>Change work procedures or policies (e.g., job rotation, safety training)</p>
+        </div>
+        <div class="lesson-hazard glass-card">
+          <h4>PPE</h4>
+          <p>Personal protective equipment as a last line of defense (gloves, goggles, anti-static wrist straps)</p>
+        </div>
+      </div>
+      <h3 class="lesson-section-title">Preventive Measures</h3>
+      <ul class="lesson-list">
+        <li>Always power off and unplug devices before servicing</li>
+        <li>Use proper lifting techniques to avoid back injuries</li>
+        <li>Ensure proper ventilation when soldering or using chemicals</li>
+        <li>Label and organize cables to prevent tripping hazards</li>
+        <li>Take regular breaks to reduce eye strain and fatigue</li>
+        <li>Use ESD protection when handling components</li>
+      </ul>
+      <div class="lesson-highlight lesson-yellow glass-card">
+        <strong>Quick Safety Tips:</strong>
+        <ul>
+          <li>"If in doubt, ask" — never assume a procedure is safe</li>
+          <li>Keep a fire extinguisher and first aid kit accessible</li>
+          <li>Report hazards immediately to supervisors</li>
+          <li>Stay updated with safety training and drills</li>
+        </ul>
+      </div>
+      <h3 class="lesson-section-title">Case Scenario</h3>
+      <p class="lesson-paragraph">
+        <strong>Example:</strong> A technician lifted a heavy CPU tower without assistance, resulting in a back injury. This could have been prevented through proper ergonomic training and the use of lifting aids.
+      </p>
+    </div>
+  `
+  },
+  5: {
+    title: "Ergonomics Hazards",
+    short: "Ergonomic risks in CSS workplaces.",
+    icon: "src/ergonomics.png",
+    content: `
+    <div class="lesson-card-content glass-card">
+      <h3 class="lesson-section-title">Ergonomics in Computer System Servicing</h3>
+      <img src="src/ergonomic.png" alt="Ergonomic workstation example" class="lesson-img" />
+      <p class="lesson-paragraph">
+        Ergonomics is the science of designing the workplace, keeping in mind the capabilities and limitations of the worker. In CSS, proper ergonomics helps prevent injuries such as back pain, eye strain, and repetitive strain injuries.
+      </p>
+      <h4 class="lesson-section-title">Best Practices</h4>
+      <ul class="lesson-list">
+        <li>Adjust your chair and monitor to maintain good posture.</li>
+        <li>Keep your feet flat on the floor and wrists straight while typing.</li>
+        <li>Take regular breaks to prevent eye strain and fatigue.</li>
+        <li>Use wrist rests and footrests as needed.</li>
+        <li>Arrange tools and components within easy reach to avoid awkward movements.</li>
+      </ul>
+      <h4 class="lesson-section-title">Do’s and Don’ts</h4>
+      <ul class="lesson-list">
+        <li><strong>Do:</strong> Sit with your back straight and monitor at eye level.</li>
+        <li><strong>Don’t:</strong> Slouch or lean forward for long periods.</li>
+        <li><strong>Do:</strong> Adjust lighting to reduce glare on the screen.</li>
+        <li><strong>Don’t:</strong> Place monitors too close to your eyes.</li>
+      </ul>
+      <h4 class="lesson-section-title">Stretching Exercises</h4>
+      <p class="lesson-paragraph">Try these quick stretches every 30–60 minutes:</p>
+      <ul class="lesson-list">
+        <li>Neck rotations and shoulder rolls.</li>
+        <li>Wrist and finger stretches.</li>
+        <li>Standing and stretching your back and legs.</li>
+      </ul>
+      <div class="lesson-highlight lesson-blue glass-card">
+        <strong>Tip:</strong>
+        <p>Follow the 20-20-20 rule: Every 20 minutes, look at something 20 feet away for 20 seconds to reduce eye strain.</p>
+      </div>
+    </div>
+  `
+  },
+  6: {
     title: "Chemical Safety",
+    short: "Handling chemicals safely in CSS.",
+    icon: "src/chemical.png",
     content: `
-        <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Chemical Safety in CSS</h3>
-        <img src="chem.jpg" alt="Chemical safety in computer labs" class="w-full rounded-lg shadow mb-4">
-        <p class="mb-4 text-gray-700 dark:text-gray-300">
-            Chemicals such as cleaning solvents, printer toner, and soldering flux are common in computer servicing. Mishandling these can cause skin irritation, respiratory problems, or even fires.
-        </p>
-
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Safe Handling Practices</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li>Store chemicals in labeled, sealed containers away from heat sources.</li>
-            <li>Wear gloves, masks, and goggles when handling hazardous substances.</li>
-            <li>Work in well-ventilated areas to avoid inhaling fumes.</li>
-            <li>Dispose of chemical waste according to local regulations.</li>
-            <li>Read and follow Material Safety Data Sheets (MSDS) for all chemicals used.</li>
-        </ul>
-
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">First Aid Procedures</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li>If toner contacts skin: rinse immediately with cold water.</li>
-            <li>If chemical splashes into eyes: flush with clean water for at least 15 minutes.</li>
-            <li>If fumes are inhaled: move to fresh air immediately.</li>
-            <li>Always report incidents to your supervisor or teacher.</li>
-        </ul>
-
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Color-Coded Labels</h4>
-        <p class="mb-4 text-gray-700 dark:text-gray-300">
-            Chemicals must be clearly labeled. For example:
-        </p>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li><span class="font-bold text-red-600">Red:</span> Flammable</li>
-            <li><span class="font-bold text-yellow-600">Yellow:</span> Reactive</li>
-            <li><span class="font-bold text-green-600">Green:</span> Safe / Non-hazardous</li>
-            <li><span class="font-bold text-blue-600">Blue:</span> Health Hazard</li>
-        </ul>
-
-        <div class="bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 p-4 rounded">
-            <p class="font-semibold text-red-700 dark:text-red-300">Warning:</p>
-            <p class="text-red-700 dark:text-red-300">
-                Never mix chemicals unless you are sure it is safe. Some combinations can produce toxic gases.
-            </p>
-        </div>
-    `
-},
-7: {
+    <div class="lesson-card-content glass-card">
+      <h3 class="lesson-section-title">Chemical Safety in CSS</h3>
+      <img src="src/chemical.png" alt="Chemical safety in computer labs" class="lesson-img" />
+      <p class="lesson-paragraph">
+        Chemicals such as cleaning solvents, printer toner, and soldering flux are common in computer servicing. Mishandling these can cause skin irritation, respiratory problems, or even fires.
+      </p>
+      <h4 class="lesson-section-title">Safe Handling Practices</h4>
+      <ul class="lesson-list">
+        <li>Store chemicals in labeled, sealed containers away from heat sources.</li>
+        <li>Wear gloves, masks, and goggles when handling hazardous substances.</li>
+        <li>Work in well-ventilated areas to avoid inhaling fumes.</li>
+        <li>Dispose of chemical waste according to local regulations.</li>
+        <li>Read and follow Material Safety Data Sheets (MSDS) for all chemicals used.</li>
+      </ul>
+      <h4 class="lesson-section-title">First Aid Procedures</h4>
+      <ul class="lesson-list">
+        <li>If toner contacts skin: rinse immediately with cold water.</li>
+        <li>If chemical splashes into eyes: flush with clean water for at least 15 minutes.</li>
+        <li>If fumes are inhaled: move to fresh air immediately.</li>
+        <li>Always report incidents to your supervisor or teacher.</li>
+      </ul>
+      <h4 class="lesson-section-title">Color-Coded Labels</h4>
+      <ul class="lesson-list">
+        <li><span style="color:#dc2626;font-weight:bold;">Red:</span> Flammable</li>
+        <li><span style="color:#eab308;font-weight:bold;">Yellow:</span> Reactive</li>
+        <li><span style="color:#059669;font-weight:bold;">Green:</span> Safe / Non-hazardous</li>
+        <li><span style="color:#2563eb;font-weight:bold;">Blue:</span> Health Hazard</li>
+      </ul>
+      <div class="lesson-highlight lesson-red glass-card">
+        <strong>Warning:</strong>
+        <p>Never mix chemicals unless you are sure it is safe. Some combinations can produce toxic gases.</p>
+      </div>
+    </div>
+  `
+  },
+  7: {
     title: "Emergency Preparedness",
+    short: "Preparing for emergencies in CSS.",
+    icon: "src/emer.png",
     content: `
-        <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Emergency Preparedness</h3>
-        <img src="emergency.jpg" alt="Emergency preparedness drill" class="w-full rounded-lg shadow mb-4">
-        <p class="mb-4 text-gray-700 dark:text-gray-300">
-            Being prepared for emergencies can save lives and minimize damage. This includes knowing what to do in case of fire, electrical accidents, chemical spills, or medical emergencies.
-        </p>
+    <div class="lesson-card-content glass-card">
+      <h3 class="lesson-section-title">Emergency Preparedness</h3>
+      <img src="src/emergency.png" alt="Emergency preparedness drill" class="lesson-img" />
+      <p class="lesson-paragraph">
+        Being prepared for emergencies can save lives and minimize damage. This includes knowing what to do in case of fire, electrical accidents, chemical spills, or medical emergencies.
+      </p>
+      <h4 class="lesson-section-title">Basic Guidelines</h4>
+      <ul class="lesson-list">
+        <li>Know the location of fire exits, alarms, and extinguishers.</li>
+        <li>Be familiar with evacuation routes and assembly points.</li>
+        <li>Participate in regular emergency drills and training.</li>
+        <li>Keep emergency contact numbers visible and accessible.</li>
+        <li>Report all incidents and near-misses to supervisors immediately.</li>
+      </ul>
+      <h4 class="lesson-section-title">Types of Fire Extinguishers</h4>
+      <ul class="lesson-list">
+        <li><strong>Class A:</strong> For wood, paper, cloth (ordinary combustibles).</li>
+        <li><strong>Class B:</strong> For flammable liquids like oil or gasoline.</li>
+        <li><strong>Class C:</strong> For electrical fires — most relevant in CSS labs.</li>
+      </ul>
+      <h4 class="lesson-section-title">Emergency Kit Checklist</h4>
+      <ul class="lesson-list">
+        <li>Flashlight with spare batteries</li>
+        <li>First aid kit</li>
+        <li>Whistle for signaling</li>
+        <li>List of emergency contacts</li>
+        <li>Basic tools (pliers, wrench, screwdriver)</li>
+      </ul>
+      <h4 class="lesson-section-title">Roles and Responsibilities</h4>
+      <ul class="lesson-list">
+        <li><strong>Fire Marshal:</strong> Ensures safe evacuation.</li>
+        <li><strong>First Aid Responder:</strong> Provides immediate care for injuries.</li>
+        <li><strong>Communicator:</strong> Calls emergency services and informs supervisors.</li>
+      </ul>
+      <div class="lesson-highlight lesson-yellow glass-card">
+        <strong>Remember:</strong>
+        <p>Do not attempt to fight large fires. Evacuate immediately and let professionals handle the situation.</p>
+      </div>
+    </div>
+  `
+  }
+  // Add more lessons as needed
+};
 
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Basic Guidelines</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li>Know the location of fire exits, alarms, and extinguishers.</li>
-            <li>Be familiar with evacuation routes and assembly points.</li>
-            <li>Participate in regular emergency drills and training.</li>
-            <li>Keep emergency contact numbers visible and accessible.</li>
-            <li>Report all incidents and near-misses to supervisors immediately.</li>
-        </ul>
+document.addEventListener('DOMContentLoaded', function () {
+  // Palette/theme sync with settings
+  const palette = localStorage.getItem('palette') || 'light';
+  document.documentElement.classList.remove(
+    'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+  );
+  document.documentElement.classList.add('palette-' + palette);
 
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Types of Fire Extinguishers</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li><b>Class A:</b> For wood, paper, cloth (ordinary combustibles).</li>
-            <li><b>Class B:</b> For flammable liquids like oil or gasoline.</li>
-            <li><b>Class C:</b> For electrical fires — most relevant in CSS labs.</li>
-        </ul>
+  function getLessonsProgress() {
+    const lessons = JSON.parse(localStorage.getItem('lessons')) || { completed: [] };
+    return lessons;
+  }
+  function setLessonsProgress(lessons) {
+    localStorage.setItem('lessons', JSON.stringify(lessons));
+  }
 
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Emergency Kit Checklist</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li>Flashlight with spare batteries</li>
-            <li>First aid kit</li>
-            <li>Whistle for signaling</li>
-            <li>List of emergency contacts</li>
-            <li>Basic tools (pliers, wrench, screwdriver)</li>
-        </ul>
-
-        <h4 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Roles and Responsibilities</h4>
-        <ul class="list-disc pl-5 mb-4 text-gray-800 dark:text-white">
-            <li><b>Fire Marshal:</b> Ensures safe evacuation.</li>
-            <li><b>First Aid Responder:</b> Provides immediate care for injuries.</li>
-            <li><b>Communicator:</b> Calls emergency services and informs supervisors.</li>
-        </ul>
-
-        <div class="bg-yellow-50 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 rounded">
-            <p class="font-semibold text-yellow-700 dark:text-yellow-300">Remember:</p>
-            <p class="text-yellow-700 dark:text-yellow-300">
-                Do not attempt to fight large fires. Evacuate immediately and let professionals handle the situation.
-            </p>
-        </div>
-    `
-}
-           
-        };
-
-        // Load lessons progress from localStorage
-        function getLessonsProgress() {
-            const lessons = JSON.parse(localStorage.getItem('lessons')) || { completed: [] };
-            return lessons;
-        }
-        function setLessonsProgress(lessons) {
-            localStorage.setItem('lessons', JSON.stringify(lessons));
-        }
-
-        // Render lesson cards
-        function renderLessonCards() {
-            const lessons = getLessonsProgress();
-            const container = document.getElementById('lesson-cards');
-            container.innerHTML = '';
-            Object.entries(lessonsContent).forEach(([id, lesson]) => {
-                const completed = lessons.completed.includes(Number(id));
-                container.innerHTML += `
-                    <div class="lesson-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer" data-lesson="${id}">
-                        <div class="flex items-start">
-                            <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900 mr-4">
-                                <i class="fas fa-book-open text-blue-600 dark:text-blue-300"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800 dark:text-white">${lesson.title}
-                                    ${completed ? '<i class="fas fa-check-circle text-green-600 dark:text-green-300 ml-2"></i>' : ''}
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300 mt-1">${lesson.short || ''}</p>
-                            </div>
+  // Render lesson cards
+  function renderLessonCards() {
+    const lessons = getLessonsProgress();
+    const container = document.getElementById('lesson-cards');
+    container.innerHTML = '';
+    Object.keys(lessonsContent).forEach(id => {
+        const lesson = lessonsContent[id];
+        const completed = lessons.completed.includes(Number(id));
+        container.innerHTML += `
+            <div class="lesson-row">
+                <div class="lesson-card" data-lesson="${id}" tabindex="0">
+                    <div class="lesson-card-body">
+                        <span class="lesson-icon-bg">
+                            <img src="${lesson.icon}" alt="Lesson Icon" class="lesson-icon" />
+                        </span>
+                        <div class="lesson-info">
+                            <h5 class="lesson-title">${lesson.title} ${completed ? '<span class="lesson-complete">&#10003;</span>' : ''}</h5>
+                            <p class="lesson-short">${lesson.short || ''}</p>
                         </div>
                     </div>
-                `;
-            });
-            // Add click listeners
-            document.querySelectorAll('.lesson-card').forEach(card => {
-                card.onclick = () => showLessonDetail(card.getAttribute('data-lesson'));
-            });
-        }
-
-        // Show lesson detail
-        function showLessonDetail(id) {
-            const lesson = lessonsContent[id];
-            if (!lesson) return;
-            document.getElementById('lessons-list').classList.add('hidden');
-            document.getElementById('lesson-detail').classList.remove('hidden');
-            document.getElementById('lesson-title').textContent = lesson.title;
-            document.getElementById('lesson-content').innerHTML = lesson.content;
-            // Mark complete button state
-            const lessons = getLessonsProgress();
-            const btn = document.getElementById('mark-complete');
-            if (lessons.completed.includes(Number(id))) {
-                btn.textContent = 'Completed';
-                btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-                btn.classList.add('bg-green-600', 'hover:bg-green-700');
-                btn.disabled = true;
-            } else {
-                btn.textContent = 'Mark as Complete';
-                btn.classList.remove('bg-green-600', 'hover:bg-green-700');
-                btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
-                btn.disabled = false;
-                btn.onclick = function() {
-                    lessons.completed.push(Number(id));
-                    setLessonsProgress(lessons);
-                    showLessonDetail(id);
-                };
-            }
-        }
-
-        // Back to lessons list
-        document.getElementById('back-to-list').onclick = function() {
-            document.getElementById('lesson-detail').classList.add('hidden');
-            document.getElementById('lessons-list').classList.remove('hidden');
-            renderLessonCards();
+                </div>
+            </div>
+        `;
+    });
+    // Add click listeners to .lesson-card
+    document.querySelectorAll('.lesson-card').forEach(card => {
+        card.onclick = function() {
+            showLessonDetail(card.getAttribute('data-lesson'));
         };
+    });
+  }
 
-        // Initial render
+  // Show lesson detail
+  function showLessonDetail(id) {
+    const lesson = lessonsContent[id];
+    if (!lesson) return;
+    const lessonsList = document.getElementById('lessons-list');
+    const lessonDetail = document.getElementById('lesson-detail');
+    lessonsList.classList.add('hidden');
+    lessonDetail.classList.remove('hidden');
+    document.getElementById('lesson-title').textContent = lesson.title;
+    document.getElementById('lesson-content').innerHTML = lesson.content;
+    // Mark complete button state
+    const lessons = getLessonsProgress();
+    const btn = document.getElementById('mark-complete');
+    if (lessons.completed.includes(Number(id))) {
+        btn.textContent = 'Completed';
+        btn.disabled = true;
+    } else {
+        btn.textContent = 'Mark as Complete';
+        btn.disabled = false;
+        btn.onclick = function() {
+            lessons.completed.push(Number(id));
+            setLessonsProgress(lessons);
+            showLessonDetail(id);
+        };
+    }
+    document.getElementById('back-to-list').onclick = function() {
+        lessonDetail.classList.add('hidden');
+        lessonsList.classList.remove('hidden');
         renderLessonCards();
-    </script>
+    };
+  }
+
+  // Initial render
+  renderLessonCards();
+  document.getElementById('lesson-detail').classList.add('hidden');
+  document.getElementById('lessons-list').classList.remove('hidden');
+});
+</script>
 </body>
 </html>

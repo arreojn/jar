@@ -1,235 +1,411 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Assessment | OHS CSS App</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' }
-  </script>
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="h-full bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-<div class="min-h-full flex flex-col">
+<body>
+<div class="main-wrapper">
   <!-- Header -->
-  <header class="bg-blue-600 text-white shadow-md dark:bg-gray-800">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <h1 class="text-xl font-bold">Occupational Health and Safety Procedures - Computer System Servicing</h1>
-      <!-- Light/Dark Mode Toggle -->
-      <button id="theme-toggle"
-              class="ml-4 p-2 rounded-full bg-white dark:bg-gray-700 text-blue-600 dark:text-yellow-300 shadow transition-colors"
-              title="Toggle light/dark mode">
-        <i id="theme-icon" class="fas"></i>
-      </button>
+  <header class="header small-header">
+    <div class="header-container">
+      <h1 class="header-title">Occupational Health and Safety Procedures - CSS</h1>
     </div>
   </header>
 
+  <!-- Greeting Block -->
+  <div id="greeting" class="greeting-block" style="display:flex;justify-content:center;">
+      <!-- Greeting will be injected here -->
+  </div>
+
   <!-- Main Content -->
-  <main class="flex-grow container mx-auto px-4 py-6 pb-24">
+  <main class="main-content">
     <!-- Intro Section -->
-    <section id="quiz-intro" class="text-center">
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Assessment Quiz</h2>
-      <p class="mb-6 text-gray-600 dark:text-gray-300">Test your knowledge. Each quiz has 10 random questions.</p>
-      <button id="start-quiz-btn" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
-        Start Quiz
-      </button>
-
-      <!-- Quiz History Table -->
-      <div class="mt-10">
-        <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-3">Quiz History</h3>
-        <div class="overflow-x-auto">
-          <table class="min-w-full bg-white dark:bg-gray-800 rounded-lg shadow">
-            <thead>
-              <tr class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-                <th class="px-4 py-2 text-left">Date</th>
-                <th class="px-4 py-2 text-left">Time</th>
-                <th class="px-4 py-2 text-left">Score</th>
-                <th class="px-4 py-2 text-left">Remarks</th>
-              </tr>
-            </thead>
-            <tbody id="history-body" class="text-gray-700 dark:text-gray-300"></tbody>
-          </table>
-        </div>
-      </div>
+    <section id="quiz-intro" class="intro-block">
+      <h2 class="main-title">Assessment Quiz</h2>
+      <p class="main-desc">Test your knowledge. Each quiz has 10 random questions.</p>
+      <button id="start-quiz-btn" class="button start-quiz-btn" style="margin-top:1rem;">Start Quiz</button>
     </section>
 
-    <!-- Questions Section -->
-<section id="quiz-questions" class="hidden">
-  <div class="mb-4 text-center">
-    <div class="w-full max-w-md mx-auto bg-gray-200 dark:bg-gray-700 rounded-full h-4">
-      <div id="quiz-progress-bar" class="bg-blue-600 h-4 rounded-full transition-all duration-300" style="width:0%"></div>
+    <!-- Quiz History Table (moved outside intro) -->
+    <div class="quiz-history feature-card" style="margin-top:2rem; max-width:1100px; width:98%; margin-left:auto; margin-right:auto;">
+      <h3 class="feature-title">Quiz History</h3>
+      <div class="history-table-wrapper">
+        <table class="history-table">
+          <thead>
+            <tr class="history-header-row">
+              <th class="history-header">Date</th>
+              <th class="history-header">Time</th>
+              <th class="history-header">Score</th>
+              <th class="history-header">Remarks</th>
+            </tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <h3 id="q-text" class="text-xl font-semibold text-gray-800 dark:text-white mb-4"></h3>
-  <div id="q-options" class="space-y-3"></div>
-  <div class="mt-6 flex justify-between">
-    <button id="questions-back" 
-      class="px-4 py-2 bg-gray-500 text-gray-100 dark:text-white rounded-lg shadow hover:bg-gray-600 dark:hover:bg-gray-700 transition">
-      Back
-    </button>
-    <button id="next-btn" 
-      class="px-4 py-2 bg-green-600 text-gray-100 dark:text-white rounded-lg shadow hover:bg-green-700 dark:hover:bg-green-800 transition">
-      Next
-    </button>
-    <button id="submit-btn" type="button"
-      class="hidden px-4 py-2 bg-blue-600 text-gray-100 dark:text-white rounded-lg shadow hover:bg-blue-700 dark:hover:bg-blue-800 transition">
-      Submit
-    </button>
-  </div>
-</section>
 
-
-
-    <!-- Results Section -->
-    <section id="quiz-results" class="hidden text-center">
-      <h2 id="result-title" class="text-2xl font-bold mb-4 text-gray-800 dark:text-white"></h2>
-<p id="result-percent" class="text-4xl font-extrabold mb-2 text-gray-800 dark:text-white"></p>
-
-      <p id="result-desc" class="mb-4 text-gray-600 dark:text-gray-300"></p>
-      <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-6">
-        <div id="result-bar" class="bg-green-600 h-3 rounded-full" style="width:0%"></div>
+    <!-- Questions Section (hidden by default) -->
+    <section id="quiz-questions" class="feature-card quiz-questions hidden" style="margin-top:2rem;">
+      <div class="progress-bar-bg" style="margin-bottom:1.2rem;">
+        <div id="quiz-progress-bar" class="progress-bar" style="width:0%"></div>
       </div>
-      <p id="result-correct" class="mb-6 text-gray-700 dark:text-gray-300"></p>
-      <div class="flex justify-center space-x-4">
-        <button id="review-btn" class="px-4 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition">
-          Review
-        </button>
-        <button id="retake-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
-          Retake
-        </button>
+      <h3 id="q-text" class="question-text" style="margin-bottom:1.2rem;"></h3>
+      <div id="q-options" class="question-options"></div>
+      <div class="question-controls" style="margin-top:1.2rem;">
+        <button id="prev-btn" class="button prev-btn">Previous</button>
+        <button id="next-btn" class="button next-btn">Next</button>
+        <button id="submit-btn" type="button" class="button submit-btn hidden">Submit</button>
       </div>
     </section>
 
-    <!-- Review Section -->
-    <section id="quiz-review" class="hidden">
-      <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Review Answers</h2>
-      <div id="review-container" class="space-y-6"></div>
-      <button id="review-back" class="mt-6 px-4 py-2 bg-gray-500 text-white rounded-lg shadow hover:bg-gray-600 transition">
-        Back to Results
-      </button>
+    <!-- Results Section (hidden by default) -->
+    <section id="quiz-results" class="feature-card quiz-results hidden" style="margin-top:2rem;">
+      <h2 id="result-title" class="feature-title"></h2>
+      <p id="result-percent" class="result-percent"></p>
+      <p id="result-desc" class="result-desc"></p>
+      <div class="result-bar-bg">
+        <div id="result-bar" class="result-bar" style="width:0%"></div>
+      </div>
+      <p id="result-correct" class="result-correct"></p>
+      <div class="result-controls">
+        <button id="review-btn" class="button review-btn">Review</button>
+        <button id="retake-btn" class="button retake-btn">Retake</button>
+      </div>
+    </section>
+
+    <!-- Review Section (hidden by default) -->
+    <section id="quiz-review" class="feature-card quiz-review hidden" style="margin-top:2rem;">
+      <h2 class="feature-title">Review Answers</h2>
+      <div id="review-container" class="review-container"></div>
+      <button id="review-back" class="button review-back">Back to Results</button>
     </section>
   </main>
 
   <!-- Mobile Icon Navigation Bar -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow flex justify-around py-2 z-40">
-    <a href="home.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-      <i class="fas fa-home text-xl"></i>
-      <span class="text-xs">Home</span>
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-link">
+      <img src="src/home.png" alt="Home" class="nav-img">
+      <span class="nav-label">Home</span>
     </a>
-    <a href="lessons.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-      <i class="fas fa-book text-xl"></i>
-      <span class="text-xs">Lessons</span>
+    <a href="lessons.html" class="nav-link">
+      <img src="src/book.png" alt="Lessons" class="nav-img">
+      <span class="nav-label">Lessons</span>
     </a>
-    <a href="checklist.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-      <i class="fas fa-clipboard-list text-xl"></i>
-      <span class="text-xs">Checklist</span>
+    <a href="checklist.html" class="nav-link">
+      <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+      <span class="nav-label">Checklist</span>
     </a>
-    <a href="assessment.html" class="flex flex-col items-center text-blue-600 dark:text-blue-300">
-      <i class="fas fa-question-circle text-xl"></i>
-      <span class="text-xs">Assessment</span>
+    <a href="assessment.html" class="nav-link active">
+      <img src="src/assessment.png" alt="Assessment" class="nav-img">
+      <span class="nav-label">Assessment</span>
+    </a>
+    <a href="settings.html" class="nav-link">
+      <img src="src/settings.png" alt="Settings" class="nav-img">
+      <span class="nav-label">Settings</span>
     </a>
   </nav>
 </div>
 
 <!-- Quiz Script -->
 <script>
-  // Dark/Light Mode
   document.addEventListener('DOMContentLoaded', function () {
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
+    // Palette/theme sync with settings
+    const palette = localStorage.getItem('palette') || 'light';
+    document.documentElement.classList.remove(
+      'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+    );
+    document.documentElement.classList.add('palette-' + palette);
 
-    function updateIcon(isDark) {
-      themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    // Greeting logic
+    function showGreeting() {
+        let name = 'Guest';
+        let image = null;
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            try {
+                const parsed = JSON.parse(userData);
+                if (parsed.name) name = parsed.name;
+                if (parsed.image) image = parsed.image;
+            } catch (e) {}
+        }
+        const initial = name && name.length > 0 ? name.trim()[0].toUpperCase() : 'G';
+        const avatarHtml = image
+            ? `<img src="${image}" alt="Learner Photo" class="greeting-avatar">`
+            : `<div class="greeting-avatar">${initial}</div>`;
+        document.getElementById('greeting').innerHTML = `
+            <div class="greeting-card">
+                ${avatarHtml}
+                <div class="greeting-texts">
+                    <div class="greeting-title">Hello, ${name}!</div>
+                    <div class="greeting-sub">Are you ready for the assessment?</div>
+                </div>
+            </div>
+        `;
     }
+    showGreeting();
 
-    function setTheme(mode) {
-      if (mode === 'dark') {
-        document.documentElement.classList.add('dark');
-        updateIcon(true);
-      } else {
-        document.documentElement.classList.remove('dark');
-        updateIcon(false);
-      }
-      localStorage.setItem('theme', mode);
-    }
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-
-    themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.contains('dark');
-      setTheme(isDark ? 'light' : 'dark');
-    });
-    
-  // Load quiz history on page load
-  loadQuizHistory();
+    // Load quiz history on page load
+    loadQuizHistory();
   });
 
   /***********************
    * Quiz logic
    ***********************/
- const pool = [
-  // --- Existing 30 ---
-  { q: "Which PPE should be worn when handling chemicals?", options: ["Helmet","Gloves & mask","Safety shoes","Earplugs"], answer: "Gloves & mask", explanation: "Chemicals require gloves and masks for protection."},
-  { q: "What should you do before repairing electrical equipment?", options: ["Disconnect power source","Wear sunglasses","Check email","Turn on aircon"], answer: "Disconnect power source", explanation: "Always disconnect power before working."},
-  { q: "Which extinguisher is suitable for electrical fires?", options: ["Water","Foam","CO₂ (Carbon dioxide)","Sand"], answer: "CO₂ (Carbon dioxide)", explanation: "CO₂ extinguishers are non-conductive and suitable for electrical fires."},
-  { q: "Why keep cutting tools sharp?", options: ["They look better","Prevent accidents","Save money","None"], answer: "Prevent accidents", explanation: "Sharp tools need less force and reduce slips."},
-  { q: "When should you follow the 20-20-20 rule to reduce eye strain?", options: ["Every hour","Every 2 hours","Every 20 minutes","Never"], answer: "Every 20 minutes", explanation: "Every 20 minutes, look at something 20 feet away for 20 seconds."},
-  { q: "Where should flammable materials be stored?", options: ["Near machines","Away from heat sources","In hallways","Anywhere"], answer: "Away from heat sources", explanation: "Keep flammable materials far from ignition sources."},
-  { q: "If a power cable is damaged, what should you do?", options: ["Tape it","Ignore it","Replace it","Hide it"], answer: "Replace it", explanation: "Damaged cables must be replaced to prevent shocks and fire."},
-  { q: "How should you lift heavy computer equipment properly?", options: ["Bend knees and lift","Twist back while lifting","Use arms only","Jump"], answer: "Bend knees and lift", explanation: "Use legs, keep the back straight and avoid twisting."},
-  { q: "Why is ergonomic seating important when working long hours?", options: ["Headaches","Back pain","Laziness","Allergies"], answer: "Back pain", explanation: "Proper ergonomics reduce back strain and fatigue."},
-  { q: "What does workload management help to prevent?", options: ["Reduce stress","Get more overtime","Work faster","None"], answer: "Reduce stress", explanation: "Balanced workload reduces stress and errors."},
-  { q: "What should you always know during an emergency?", options: ["Location of exits","Wi-Fi password","Boss' birthday","Laptop model"], answer: "Location of exits", explanation: "Always know exits and assembly points."},
-  { q: "What should you do before handling static-sensitive components?", options: ["Use anti-static strap","Wear sandals","Hold component by pins","Blow on it"], answer: "Use anti-static strap", explanation: "Anti-static measures protect components from ESD."},
-  { q: "Why should you check power supply voltage before connecting equipment?", options: ["To save energy","To avoid short circuit","To reduce cost","To increase speed"], answer: "To avoid short circuit", explanation: "Checking voltage prevents damage and hazards."},
-  { q: "Where should fire extinguishers be placed in a computer lab?", options: ["Near exits","In locked cabinets","Next to monitors","Under desks"], answer: "Near exits", explanation: "Fire extinguishers should be accessible near exits."},
-  { q: "When should you report an unsafe workplace condition?", options: ["Immediately","After work","Next week","Never"], answer: "Immediately", explanation: "Report hazards as soon as they are observed."},
-  { q: "Who is responsible for ensuring safety protocols are followed in the workplace?", options: ["Supervisor and employees","Customers","Visitors","Only IT staff"], answer: "Supervisor and employees", explanation: "Both management and staff share safety responsibility."},
-  { q: "How can you prevent tripping hazards in the workplace?", options: ["Keep cables organized","Leave wires loose","Hide wires under carpets","Ignore them"], answer: "Keep cables organized", explanation: "Cable management prevents tripping and accidents."},
-  { q: "What PPE should be used when soldering electronic components?", options: ["Sunglasses","Safety goggles and gloves","Safety shoes only","No PPE needed"], answer: "Safety goggles and gloves", explanation: "Protective equipment prevents burns and eye injury."},
-  { q: "Why should you never eat or drink near computer equipment?", options: ["It looks messy","It may damage devices","It reduces performance","It wastes time"], answer: "It may damage devices", explanation: "Spills can cause short circuits and permanent damage."},
-  { q: "Where should you place heavy equipment like servers?", options: ["On stable racks","On chairs","On the floor","On a desk edge"], answer: "On stable racks", explanation: "Servers should be placed securely to avoid falls."},
-  { q: "When should you wash your hands before working with hardware?", options: ["After meals","Before handling components","After using phone","Before sitting"], answer: "Before handling components", explanation: "Clean hands prevent static and dust contamination."},
-  { q: "How can you reduce risk of electrocution while troubleshooting?", options: ["Use insulated tools","Touch wires directly","Work barefoot","Ignore safety signs"], answer: "Use insulated tools", explanation: "Insulated tools protect against electric shock."},
-  { q: "What should you do if you smell burning plastic from a computer?", options: ["Continue working","Shut it down immediately","Call a friend","Ignore it"], answer: "Shut it down immediately", explanation: "Power off equipment to avoid fire hazards."},
-  { q: "Who should perform repairs on high-voltage computer equipment?", options: ["Any student","Untrained worker","Qualified technician","Anyone nearby"], answer: "Qualified technician", explanation: "Only certified personnel should handle high-voltage systems."},
-  { q: "Why is ventilation important in computer rooms?", options: ["To reduce dust","To prevent overheating","To look nice","To save space"], answer: "To prevent overheating", explanation: "Ventilation ensures equipment does not overheat."},
-  { q: "Where should you dispose of used electronic components?", options: ["Trash bin","E-waste collection center","Garden","Burn them"], answer: "E-waste collection center", explanation: "Electronic waste should be recycled properly."},
-  { q: "When should you lock out/tag out equipment?", options: ["During lunch break","Before maintenance","After work hours","Never"], answer: "Before maintenance", explanation: "Lockout/tagout prevents accidental power-on during repair."},
-  { q: "How should you store tools after using them?", options: ["Leave on the floor","Return to toolbox","Give to a friend","Hide them"], answer: "Return to toolbox", explanation: "Proper storage prevents accidents and tool loss."},
-  { q: "What is the first thing to do when someone gets an electric shock?", options: ["Pull them away by hand","Turn off power source","Pour water","Run"], answer: "Turn off power source", explanation: "Always disconnect electricity before helping."},
-  { q: "Why is proper lighting needed in computer servicing areas?", options: ["For energy saving","To see clearly and avoid mistakes","To reduce stress","For decoration"], answer: "To see clearly and avoid mistakes", explanation: "Good lighting prevents errors and accidents."},
-  { q: "What should you wear when working in noisy computer server rooms?", options: ["Ear protection","Helmet","Safety shoes","None"], answer: "Ear protection", explanation: "Ear protection reduces risk of hearing loss."},
-  { q: "Why should you avoid using wet hands when plugging devices?", options: ["It is uncomfortable","It causes electric shock","It reduces performance","It makes devices slower"], answer: "It causes electric shock", explanation: "Moisture increases risk of electrocution."},
-  { q: "When should you test fire alarms in a computer facility?", options: ["Weekly","Monthly","Yearly","Never"], answer: "Monthly", explanation: "Regular testing ensures fire alarms work properly."},
-  { q: "Where should first aid kits be located in a workplace?", options: ["Locked office","Accessible area","Storage room","Garage"], answer: "Accessible area", explanation: "First aid kits must be easy to access during emergencies."},
-  { q: "How do you prevent dust buildup inside computer systems?", options: ["Cover with plastic","Regular cleaning","Ignore it","Place outdoors"], answer: "Regular cleaning", explanation: "Dust removal prevents overheating and component failure."},
-  { q: "Who should approve safety procedures in a computer lab?", options: ["Manager or safety officer","Any student","Visitors","Anyone available"], answer: "Manager or safety officer", explanation: "Safety procedures must be approved by authorized personnel."},
-  { q: "Why is labeling of cables important?", options: ["Looks neat","Easier troubleshooting","For decoration","None"], answer: "Easier troubleshooting", explanation: "Labels help identify connections quickly and safely."},
-  { q: "When should safety inspections be conducted in ICT facilities?", options: ["Regularly","Only after accidents","Never","Once"], answer: "Regularly", explanation: "Frequent inspections detect hazards before accidents occur."},
-  { q: "What should you do when a fire starts near a workstation?", options: ["Run immediately","Use proper extinguisher","Call IT support","Ignore it"], answer: "Use proper extinguisher", explanation: "Fire must be controlled using correct extinguisher type."},
-  { q: "How should chemicals like cleaning solvents be stored?", options: ["With food","Sealed in labeled containers","On desks","Beside wires"], answer: "Sealed in labeled containers", explanation: "Proper storage prevents accidental spills and hazards."},
-  { q: "Why is training important for OHS compliance?", options: ["To reduce costs","To ensure safe practices","To work faster","To impress managers"], answer: "To ensure safe practices", explanation: "Training equips workers with safety knowledge."},
-  { q: "Who should be informed about accidents in the workplace?", options: ["Supervisor","Coworkers only","Nobody","Visitors"], answer: "Supervisor", explanation: "Accidents must be reported to supervisors for proper action."},
-  { q: "When is it safe to work alone in computer laboratories?", options: ["During working hours with permission","Anytime","Never","Only at night"], answer: "During working hours with permission", explanation: "Supervision ensures immediate help if accidents occur."},
-  { q: "What is the safest way to transport monitors or CPUs?", options: ["Carry with both hands","Drag by cables","Hold upside down","Kick gently"], answer: "Carry with both hands", explanation: "Secure handling prevents equipment damage and injury."},
-  { q: "Where should emergency exit signs be placed?", options: ["Hidden areas","Clearly visible locations","Behind furniture","On the ceiling"], answer: "Clearly visible locations", explanation: "Exit signs must guide people quickly during evacuation."},
-  { q: "How can you minimize repetitive strain injuries?", options: ["Stretch and take breaks","Work nonstop","Ignore pain","Use wrong posture"], answer: "Stretch and take breaks", explanation: "Breaks prevent long-term muscle and joint damage."},
-  { q: "Why should you ground yourself before working with hardware?", options: ["To avoid static discharge","To save energy","To look professional","To reduce weight"], answer: "To avoid static discharge", explanation: "Grounding prevents damage to sensitive components."},
-  { q: "What should be done if a chemical spill occurs in a computer lab?", options: ["Clean with water","Report and follow safety procedure","Ignore it","Cover with paper"], answer: "Report and follow safety procedure", explanation: "Chemical spills must be handled with caution and reported."},
-  { q: "Who should you contact first during a workplace fire?", options: ["Fire department","Friends","IT staff","Neighbors"], answer: "Fire department", explanation: "Emergency responders must be contacted immediately."},
-  { q: "How should extension cords be used safely?", options: ["Do not overload","Connect many devices","Hide under rugs","Use damaged cords"], answer: "Do not overload", explanation: "Overloading causes overheating and fire risk."}
-];
+  const pool = [
+  { q: "While preparing to clean spilled acid in the computer lab, which PPE should you wear to stay safe?", 
+  options: ["Helmet","Gloves and mask","Safety shoes","Earplugs"], 
+  answer: "Gloves and mask", 
+  explanation: "Chemical spills require gloves and a mask to protect skin and respiratory system."},
 
+{ q: "Before repairing a faulty power supply unit, what is the FIRST safety step you must take?", 
+  options: ["Disconnect power source","Wear sunglasses","Check email","Turn on aircon"], 
+  answer: "Disconnect power source", 
+  explanation: "Disconnecting power ensures no live current is present, preventing shock."},
+
+{ q: "An electrical fire starts inside a CPU. Which extinguisher is safest to use?", 
+  options: ["Water","Foam","CO₂ (Carbon dioxide)","Sand"], 
+  answer: "CO₂ (Carbon dioxide)", 
+  explanation: "CO₂ extinguishers are non-conductive and effective for electrical fires."},
+
+{ q: "Why must cutting tools (e.g., screwdrivers, cutters) remain sharp during servicing?", 
+  options: ["They look better","Prevent accidents","Save money","None"], 
+  answer: "Prevent accidents", 
+  explanation: "Sharp tools need less force, preventing slips and accidental injuries."},
+
+{ q: "After working on a computer for long hours, when should you follow the 20-20-20 rule to avoid eye strain?", 
+  options: ["Every hour","Every 2 hours","Every 20 minutes","Never"], 
+  answer: "Every 20 minutes", 
+  explanation: "Every 20 minutes, look at something 20 feet away for 20 seconds."},
+
+{ q: "A box of paint thinner is delivered to the lab. Where should it be stored?", 
+  options: ["Near machines","Away from heat sources","In hallways","Anywhere"], 
+  answer: "Away from heat sources", 
+  explanation: "Flammable chemicals should be stored far from ignition sources."},
+
+{ q: "You notice a damaged power cable connected to a server. What should you do?", 
+  options: ["Tape it temporarily","Ignore it","Replace it immediately","Hide it under the desk"], 
+  answer: "Replace it immediately", 
+  explanation: "Damaged cables pose shock and fire risks; they must be replaced."},
+
+{ q: "When lifting a heavy monitor, what is the safest technique to avoid back injury?", 
+  options: ["Bend knees and lift","Twist your back while lifting","Use arms only","Jump quickly"], 
+  answer: "Bend knees and lift", 
+  explanation: "Use your legs, keep your back straight, and avoid twisting."},
+
+{ q: "Why is ergonomic seating essential for IT professionals working long hours?", 
+  options: ["To prevent back pain","To look professional","To reduce laziness","To prevent allergies"], 
+  answer: "To prevent back pain", 
+  explanation: "Proper ergonomics reduce back strain and fatigue during long sitting periods."},
+
+{ q: "If a technician is assigned too many tasks in a short period, what workplace risk increases?", 
+  options: ["Stress and errors","More overtime pay","Faster results","No effect"], 
+  answer: "Stress and errors", 
+  explanation: "Overloading workers leads to stress, mistakes, and lower productivity."},
+
+{ q: "During a fire drill in the computer lab, what should you always be aware of?", 
+  options: ["Location of exits","Wi-Fi password","Boss' birthday","Computer brand"], 
+  answer: "Location of exits", 
+  explanation: "Knowing exits ensures safe evacuation during emergencies."},
+
+{ q: "Before handling static-sensitive RAM modules, what safety measure should you take?", 
+  options: ["Wear an anti-static wrist strap","Wear sandals","Hold component by pins","Blow on it"], 
+  answer: "Wear an anti-static wrist strap", 
+  explanation: "Anti-static protection prevents electrostatic discharge from damaging components."},
+
+{ q: "Before connecting a new piece of equipment to the outlet, why should you check the voltage?", 
+  options: ["To save energy","To avoid short circuit","To reduce cost","To increase speed"], 
+  answer: "To avoid short circuit", 
+  explanation: "Checking compatibility prevents damage and fire hazards."},
+
+{ q: "Where should fire extinguishers be placed inside a computer lab?", 
+  options: ["Near exits","In locked cabinets","Next to monitors","Under desks"], 
+  answer: "Near exits", 
+  explanation: "Extinguishers should be accessible near exits for safe use."},
+
+{ q: "You find loose ceiling wires sparking in the lab. When should you report this hazard?", 
+  options: ["Immediately","After work","Next week","Never"], 
+  answer: "Immediately", 
+  explanation: "Hazards must be reported right away to prevent accidents."},
+
+{ q: "Who holds responsibility for ensuring workplace safety protocols are followed?", 
+  options: ["Supervisor and employees","Customers","Visitors","Only IT staff"], 
+  answer: "Supervisor and employees", 
+  explanation: "Both management and staff share safety responsibility."},
+
+{ q: "To avoid tripping hazards in a computer lab, what is the best practice?", 
+  options: ["Keep cables organized","Leave wires loose","Hide wires under carpets","Ignore them"], 
+  answer: "Keep cables organized", 
+  explanation: "Cable management reduces accidents."},
+
+{ q: "During soldering of electronic components, which PPE is required?", 
+  options: ["Sunglasses","Safety goggles and gloves","Safety shoes only","No PPE"], 
+  answer: "Safety goggles and gloves", 
+  explanation: "Goggles and gloves prevent burns and eye injury."},
+
+{ q: "Why must food and drinks be avoided near workstations?", 
+  options: ["It looks messy","It may damage devices","It reduces performance","It wastes time"], 
+  answer: "It may damage devices", 
+  explanation: "Spills can cause short circuits and permanent damage."},
+
+{ q: "Where is the safest place to position heavy servers?", 
+  options: ["On stable racks","On chairs","On the floor","On desk edges"], 
+  answer: "On stable racks", 
+  explanation: "Servers must be placed on racks to prevent falls."},
+
+{ q: "When should technicians wash their hands before hardware work?", 
+  options: ["After meals","Before handling components","After using phone","Before sitting"], 
+  answer: "Before handling components", 
+  explanation: "Clean hands prevent static and dust contamination."},
+
+{ q: "While troubleshooting a live system, how do you reduce electrocution risks?", 
+  options: ["Use insulated tools","Touch wires directly","Work barefoot","Ignore safety signs"], 
+  answer: "Use insulated tools", 
+  explanation: "Insulated tools protect against electric shock."},
+
+{ q: "You smell burning plastic from a running PC. What should you do first?", 
+  options: ["Continue working","Shut it down immediately","Call a friend","Ignore it"], 
+  answer: "Shut it down immediately", 
+  explanation: "Shut down the system immediately to prevent fire."},
+
+{ q: "Who should handle repairs on high-voltage power supplies?", 
+  options: ["Any student","Untrained worker","Qualified technician","Anyone nearby"], 
+  answer: "Qualified technician", 
+  explanation: "Only certified professionals should work with high-voltage systems."},
+
+{ q: "Why is ventilation necessary in computer rooms?", 
+  options: ["To reduce dust","To prevent overheating","To look nice","To save space"], 
+  answer: "To prevent overheating", 
+  explanation: "Ventilation ensures heat is dissipated properly."},
+
+{ q: "Where is the proper disposal site for used electronic components?", 
+  options: ["Trash bin","E-waste collection center","Garden","Burn them"], 
+  answer: "E-waste collection center", 
+  explanation: "Electronic waste must be recycled at proper facilities."},
+
+{ q: "When conducting computer maintenance, when should you apply lockout/tagout procedures?", 
+  options: ["During lunch break","Before maintenance","After work hours","Never"], 
+  answer: "Before maintenance", 
+  explanation: "This prevents accidental power-on during repair."},
+
+{ q: "What should be done with tools after using them?", 
+  options: ["Leave on the floor","Return to toolbox","Give to a friend","Hide them"], 
+  answer: "Return to toolbox", 
+  explanation: "Proper storage prevents accidents and tool loss."},
+
+{ q: "Someone in the lab is being electrocuted. What should you do first?", 
+  options: ["Pull them away by hand","Turn off power source","Pour water","Run"], 
+  answer: "Turn off power source", 
+  explanation: "Disconnect the power source before assisting."},
+
+{ q: "Why is proper lighting important in computer servicing rooms?", 
+  options: ["For energy saving","To see clearly and avoid mistakes","To reduce stress","For decoration"], 
+  answer: "To see clearly and avoid mistakes", 
+  explanation: "Clear lighting prevents errors and accidents."},
+
+{ q: "If you are assigned to work in a noisy server room, what PPE should you use?", 
+  options: ["Ear protection","Helmet","Safety shoes","None"], 
+  answer: "Ear protection", 
+  explanation: "Ear protection prevents hearing damage."},
+
+{ q: "Why should you never plug devices with wet hands?", 
+  options: ["It is uncomfortable","It causes electric shock","It reduces performance","It makes devices slower"], 
+  answer: "It causes electric shock", 
+  explanation: "Moisture increases shock risks."},
+
+{ q: "How often should fire alarms in a computer lab be tested?", 
+  options: ["Weekly","Monthly","Yearly","Never"], 
+  answer: "Monthly", 
+  explanation: "Regular monthly testing ensures reliability."},
+
+{ q: "Where should workplace first aid kits be located?", 
+  options: ["Locked office","Accessible area","Storage room","Garage"], 
+  answer: "Accessible area", 
+  explanation: "First aid must always be easy to reach."},
+
+{ q: "How do you prevent dust buildup inside computer systems?", 
+  options: ["Cover with plastic","Regular cleaning","Ignore it","Place outdoors"], 
+  answer: "Regular cleaning", 
+  explanation: "Cleaning prevents overheating and component damage."},
+
+{ q: "Who should authorize safety procedures in a computer lab?", 
+  options: ["Manager or safety officer","Any student","Visitors","Anyone available"], 
+  answer: "Manager or safety officer", 
+  explanation: "Only authorized personnel may approve safety procedures."},
+
+{ q: "Why is cable labeling essential in ICT facilities?", 
+  options: ["Looks neat","Easier troubleshooting","For decoration","None"], 
+  answer: "Easier troubleshooting", 
+  explanation: "Labels help identify connections quickly and safely."},
+
+{ q: "How often should safety inspections be performed in ICT facilities?", 
+  options: ["Regularly","Only after accidents","Never","Once"], 
+  answer: "Regularly", 
+  explanation: "Frequent inspections detect hazards early."},
+
+{ q: "A fire breaks out near a workstation. What should you do?", 
+  options: ["Run immediately","Use the correct extinguisher","Call IT support","Ignore it"], 
+  answer: "Use the correct extinguisher", 
+  explanation: "Always fight small fires with the right extinguisher type."},
+
+{ q: "How should cleaning solvents and chemicals be stored in the lab?", 
+  options: ["With food","Sealed in labeled containers","On desks","Beside wires"], 
+  answer: "Sealed in labeled containers", 
+  explanation: "Proper storage prevents leaks and hazards."},
+
+{ q: "Why is OHS training required for ICT workers?", 
+  options: ["To reduce costs","To ensure safe practices","To work faster","To impress managers"], 
+  answer: "To ensure safe practices", 
+  explanation: "Training equips staff with safety knowledge."},
+
+{ q: "Who must be informed immediately after any workplace accident?", 
+  options: ["Supervisor","Coworkers only","Nobody","Visitors"], 
+  answer: "Supervisor", 
+  explanation: "Supervisors must be alerted for proper action."},
+
+{ q: "When is it acceptable to work alone in a computer lab?", 
+  options: ["During working hours with permission","Anytime","Never","Only at night"], 
+  answer: "During working hours with permission", 
+  explanation: "Supervision ensures safety and quick response."},
+
+{ q: "What is the safest method to carry monitors or CPUs?", 
+  options: ["Carry with both hands","Drag by cables","Hold upside down","Kick gently"], 
+  answer: "Carry with both hands", 
+  explanation: "Secure handling avoids accidents."},
+
+{ q: "Where should emergency exit signs be placed in ICT facilities?", 
+  options: ["Hidden areas","Clearly visible locations","Behind furniture","On ceiling corners"], 
+  answer: "Clearly visible locations", 
+  explanation: "Signs must clearly guide evacuation routes."},
+
+{ q: "How can ICT staff minimize repetitive strain injuries?", 
+  options: ["Stretch and take breaks","Work nonstop","Ignore pain","Use wrong posture"], 
+  answer: "Stretch and take breaks", 
+  explanation: "Breaks and posture exercises prevent RSI."},
+
+{ q: "Why should technicians ground themselves before touching hardware?", 
+  options: ["To avoid static discharge","To save energy","To look professional","To reduce weight"], 
+  answer: "To avoid static discharge", 
+  explanation: "Grounding prevents ESD from damaging parts."},
+
+{ q: "A student accidentally spills cleaning chemicals in the lab. What should you do?", 
+  options: ["Clean with water","Report and follow safety procedure","Ignore it","Cover with paper"], 
+  answer: "Report and follow safety procedure", 
+  explanation: "Chemical spills require proper reporting and handling."},
+
+{ q: "During a workplace fire, who should be contacted FIRST?", 
+  options: ["Fire department","Friends","IT staff","Neighbors"], 
+  answer: "Fire department", 
+  explanation: "Emergency responders must be contacted immediately."},
+
+{ q: "What is the safest way to use extension cords in ICT labs?", 
+  options: ["Do not overload","Connect many devices","Hide under rugs","Use damaged cords"], 
+  answer: "Do not overload", 
+  explanation: "Overloading extension cords causes fire risks."},
+
+];
 
   function shuffle(array) {
     const a = array.slice();
@@ -261,13 +437,10 @@
   const reviewSection = document.getElementById('quiz-review');
 
   const startBtn = document.getElementById('start-quiz-btn');
-  const qNumber = document.getElementById('q-number');
-  const qTotal = document.getElementById('q-total');
   const qText = document.getElementById('q-text');
   const qOptions = document.getElementById('q-options');
   const nextBtn = document.getElementById('next-btn');
   const submitBtn = document.getElementById('submit-btn');
-  const questionsBack = document.getElementById('questions-back');
 
   const resultPercent = document.getElementById('result-percent');
   const resultTitle = document.getElementById('result-title');
@@ -276,108 +449,80 @@
   const resultBar = document.getElementById('result-bar');
   const reviewBtn = document.getElementById('review-btn');
   const retakeBtn = document.getElementById('retake-btn');
-  const historyBody = document.getElementById('history-body');
 
   const reviewContainer = document.getElementById('review-container');
   const reviewBack = document.getElementById('review-back');
 
+  const quizHistoryCard = document.querySelector('.quiz-history');
+
   function renderQuestion() {
-  const q = state.questions[state.current];
-  // Update progress bar
-  const progressBar = document.getElementById('quiz-progress-bar');
-  if (progressBar && state.questions.length > 0) {
-    const percent = Math.round(((state.current + 1) / state.questions.length) * 100);
-    progressBar.style.width = percent + '%';
+    const prevBtn = document.getElementById('prev-btn');
+    if (prevBtn) {
+      if (state.current > 0) {
+        prevBtn.classList.remove('hidden');
+      } else {
+        prevBtn.classList.add('hidden');
+      }
+      if (!prevBtn._bound) {
+        prevBtn.addEventListener('click', () => {
+          if (state.current > 0) {
+            state.current--;
+            renderQuestion();
+          }
+        });
+        prevBtn._bound = true;
+      }
+    }
+    const q = state.questions[state.current];
+    const progressBar = document.getElementById('quiz-progress-bar');
+    if (progressBar && state.questions.length > 0) {
+      const percent = Math.round(((state.current + 1) / state.questions.length) * 100);
+      progressBar.style.width = percent + '%';
+    }
+
+    qText.textContent = q.question;
+    qOptions.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const label = document.createElement('label');
+      label.className = 'block p-3 border rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
+      label.innerHTML = `
+        <input type="radio" name="option" value="${i}" class="mr-2">
+        <span class="text-gray-800 dark:text-white">${opt}</span>
+      `;
+      qOptions.appendChild(label);
+    });
+
+    if (state.answers[state.current] !== undefined) {
+      const selectedInput = qOptions.querySelector(`input[value="${state.answers[state.current]}"]`);
+      if (selectedInput) selectedInput.checked = true;
+    }
+
+    if (state.current === state.questions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    } else {
+      nextBtn.classList.remove('hidden');
+      submitBtn.classList.add('hidden');
+    }
   }
-
-  qText.textContent = q.question;
-  qOptions.innerHTML = '';
-  q.options.forEach((opt, i) => {
-    const label = document.createElement('label');
-    label.className = 'block p-3 border rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700';
-    label.innerHTML = `
-      <input type="radio" name="option" value="${i}" class="mr-2">
-      <span class="text-gray-800 dark:text-white">${opt}</span>
-    `;
-    qOptions.appendChild(label);
-  });
-
-  // restore selected answer if user navigates back
-  if (state.answers[state.current] !== undefined) {
-    const selectedInput = qOptions.querySelector(`input[value="${state.answers[state.current]}"]`);
-    if (selectedInput) selectedInput.checked = true;
-  }
-
-  if (state.current === state.questions.length - 1) {
-    nextBtn.classList.add('hidden');
-    submitBtn.classList.remove('hidden');
-  } else {
-    nextBtn.classList.remove('hidden');
-    submitBtn.classList.add('hidden');
-  }
-}
-
-submitBtn.addEventListener('click', () => {
-  const selected = document.querySelector('input[name="option"]:checked');
-  if (!selected) { alert('Please select an answer'); return; }
-  
-  // Save the last answer
-  state.answers[state.current] = parseInt(selected.value);
-
-  // --- calculate score safely ---
-  const correct = state.questions.reduce((acc, q, i) => 
-    acc + (q.correctIndex === state.answers[i] ? 1 : 0), 0
-  );
-  const percent = Math.round((correct / state.questions.length) * 100);
-
-  resultPercent.textContent = percent + '%';
-  resultCorrect.textContent = `${correct} of ${state.questions.length} correct`;
-  resultBar.style.width = percent + '%';
-  if (percent >= 80) {
-    resultTitle.textContent = 'Excellent!';
-    resultDesc.textContent = 'You passed the quiz.';
-    resultBar.className = 'bg-green-600 h-3 rounded-full';
-  } else {
-    resultTitle.textContent = 'Keep Practicing!';
-    resultDesc.textContent = 'You can improve with another try.';
-    resultBar.className = 'bg-red-600 h-3 rounded-full';
-  }
-
-  // Save to history
-  const now = new Date();
-  const quizHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
-  quizHistory.push({
-    date: now.toLocaleDateString(),
-    time: now.toLocaleTimeString(),
-    score: `${correct} of ${state.questions.length} correct (${percent}%)`,
-    remarks: percent >= 80 ? 'Passed' : 'Failed'
-  });
-  localStorage.setItem('quizHistory', JSON.stringify(quizHistory));
-  loadQuizHistory();
-
-  showSection(resultsSection);
-});
 
   function showSection(show) {
-    [intro, questionsSection, resultsSection, reviewSection].forEach(s => s.classList.add('hidden'));
-    show.classList.remove('hidden');
+    intro.classList.add('hidden');
+    questionsSection.classList.add('hidden');
+    resultsSection.classList.add('hidden');
+    reviewSection.classList.add('hidden');
+    if (show) show.classList.remove('hidden');
+    // Show quiz history only when intro is shown
+    if (quizHistoryCard) {
+      if (show === intro) {
+        quizHistoryCard.classList.remove('hidden');
+      } else {
+        quizHistoryCard.classList.add('hidden');
+      }
+    }
   }
 
-  function loadQuizHistory() {
-    const historyBody = document.getElementById('history-body');
-    const quizHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
-    historyBody.innerHTML = '';
-    quizHistory.forEach(entry => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td class="px-4 py-2">${entry.date}</td>
-        <td class="px-4 py-2">${entry.time}</td>
-        <td class="px-4 py-2">${entry.score}</td>
-        <td class="px-4 py-2">${entry.remarks}</td>
-      `;
-      historyBody.appendChild(row);
-    });
-  }
+  showSection(intro);
 
   startBtn.addEventListener('click', () => {
     state.questions = pickQuestions(pool, 10);
@@ -385,6 +530,7 @@ submitBtn.addEventListener('click', () => {
     state.answers = [];
     renderQuestion();
     showSection(questionsSection);
+    if (quizHistoryCard) quizHistoryCard.classList.add('hidden');
   });
 
   nextBtn.addEventListener('click', () => {
@@ -395,13 +541,50 @@ submitBtn.addEventListener('click', () => {
     renderQuestion();
   });
 
+  submitBtn.addEventListener('click', () => {
+    const selected = document.querySelector('input[name="option"]:checked');
+    if (!selected) { alert('Please select an answer'); return; }
+    state.answers[state.current] = parseInt(selected.value);
+
+    const correct = state.questions.reduce((acc, q, i) => 
+      acc + (q.correctIndex === state.answers[i] ? 1 : 0), 0
+    );
+    const percent = Math.round((correct / state.questions.length) * 100);
+
+    resultPercent.textContent = percent + '%';
+    resultCorrect.textContent = `${correct} of ${state.questions.length} correct`;
+    resultBar.style.width = percent + '%';
+    if (percent >= 80) {
+      resultTitle.textContent = 'Excellent!';
+      resultDesc.textContent = 'You passed the quiz.';
+      resultBar.className = 'bg-green-600 h-3 rounded-full';
+    } else {
+      resultTitle.textContent = 'Keep Practicing!';
+      resultDesc.textContent = 'You can improve with another try.';
+      resultBar.className = 'bg-red-600 h-3 rounded-full';
+    }
+
+    const now = new Date();
+    const quizHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+    quizHistory.push({
+      date: now.toLocaleDateString(),
+      time: now.toLocaleTimeString(),
+      score: `${correct} of ${state.questions.length} correct (${percent}%)`,
+      remarks: percent >= 80 ? 'Passed' : 'Failed'
+    });
+    localStorage.setItem('quizHistory', JSON.stringify(quizHistory));
+    loadQuizHistory();
+
+    showSection(resultsSection);
+  });
+
   reviewBtn.addEventListener('click', () => {
     reviewContainer.innerHTML = '';
     state.questions.forEach((q,i)=>{
       const user = state.answers[i];
+      const isCorrect = user === q.correctIndex;
       const div = document.createElement('div');
-      div.className = 'p-4 border rounded-lg ' +
-        (user===q.correctIndex?'bg-green-100 dark:bg-green-800':'bg-red-100 dark:bg-red-800');
+      div.className = 'p-4 border rounded-lg mb-4 ' + (isCorrect ? 'review-correct' : 'review-wrong');
       div.innerHTML = `
         <p class="font-semibold">${i+1}. ${q.question}</p>
         <p>Your answer: ${q.options[user]||'No answer'}</p>
@@ -413,9 +596,27 @@ submitBtn.addEventListener('click', () => {
     showSection(reviewSection);
   });
 
-  reviewBack.addEventListener('click', ()=> showSection(resultsSection));
+  if (reviewBack) {
+    reviewBack.addEventListener('click', ()=> showSection(resultsSection));
+  }
   retakeBtn.addEventListener('click', ()=> showSection(intro));
-  questionsBack.addEventListener('click', ()=> showSection(intro));
+
+  function loadQuizHistory() {
+    const historyBody = document.getElementById('history-body');
+    const quizHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+    historyBody.innerHTML = '';
+    quizHistory.slice().reverse().forEach(entry => {
+      const remarksClass = entry.remarks === 'Passed' ? 'remarks-passed' : 'remarks-failed';
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td class="px-4 py-2 text-gray-800 dark:text-white bg-white dark:bg-gray-800">${entry.date}</td>
+        <td class="px-4 py-2 text-gray-800 dark:text-white bg-white dark:bg-gray-800">${entry.time || ''}</td>
+        <td class="px-4 py-2 text-gray-800 dark:text-white bg-white dark:bg-gray-800">${entry.score || ''}</td>
+        <td class="px-4 py-2 ${remarksClass}">${entry.remarks || ''}</td>
+      `;
+      historyBody.appendChild(row);
+    });
+  }
 </script>
 </body>
 </html>

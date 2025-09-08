@@ -4,53 +4,194 @@
     <meta charset="UTF-8">
     <title>Occupational Health and Safety Procedures - Computer System Servicing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body {
-            margin: 0;
-            height: 100vh;
-            width: 100vw;
+            /* Soft gradient background for glassmorphism */
+            background: linear-gradient(135deg, #2563eb 0%, #facc15 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #2563eb 0%, #facc15 100%);
         }
-        .splash-container {
+        .main-center {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .glass-card {
+            background: rgba(255,255,255,0.22);
+            border-radius: 2rem;
+            box-shadow: 0 12px 48px rgba(37,99,235,0.18);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 3.5rem 2.5rem 2.5rem 2.5rem;
+            margin: 2.5rem auto;
+            max-width: 540px;
             text-align: center;
-            color: #fff;
-            background: rgba(0,0,0,0.15);
-            padding: 2rem 2.5rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            color: #1e293b;
         }
         .splash-logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 1.5rem;
+            width: 130px;
+            height: 130px;
+            margin-bottom: 1.8rem;
             border-radius: 50%;
-            background: #fff;
-            object-fit: contain;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 24px rgba(37,99,235,0.10);
+            background: rgba(255,255,255,0.45);
+            backdrop-filter: blur(4px);
         }
         .splash-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            line-height: 1.4;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 8px rgba(37,99,235,0.10);
+            line-height: 1.3;
+        }
+        .user-form h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 1.5rem;
+        }
+        .user-form label {
+            display: block;
+            margin: 1.2rem 0 0.3rem 0;
+            font-weight: 500;
+            color: #1e293b;
+            text-align: left;
+            font-size: 1.1rem;
+        }
+        .user-form input[type="text"] {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border-radius: 1rem;
+            border: 2px solid #2563eb;
+            background: rgba(255,255,255,0.55);
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+            outline: none;
+            transition: border 0.2s;
+        }
+        .user-form input[type="text"]:focus {
+            border-color: #facc15;
+        }
+        .user-form button[type="submit"] {
+            background: linear-gradient(90deg, #2563eb 60%, #facc15 100%);
+            color: #fff;
+            border: none;
+            border-radius: 1rem;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.10);
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .user-form button[type="submit"]:hover {
+            background: linear-gradient(90deg, #1d4ed8 60%, #eab308 100%);
+            transform: scale(1.04);
+        }
+        @media (max-width: 700px) {
+            .glass-card {
+                padding: 1.5rem 0.7rem;
+                max-width: 98vw;
+            }
+            .splash-logo {
+                width: 80px;
+                height: 80px;
+            }
+            .splash-title {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="splash-container">
-        <img src="logo.png" alt="Logo" class="splash-logo">
-        <div class="splash-title">
-            Occupational Health and Safety Procedures<br>
-            Computer System Servicing
+    <div class="main-center">
+        <div id="splash-container" class="glass-card">
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <img src="src/logo.png" alt="Logo" class="splash-logo" style="display:block; margin:0 auto;">
+            </div>
+            <div class="splash-title">
+                Occupational Health and Safety Procedures<br>
+                Computer System Servicing
+            </div>
+        </div>
+        <div id="user-form" class="glass-card user-form" style="display: none;">
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                <img src="src/logo.png" alt="Logo" style="width:90px;height:90px;display:block;margin:0 auto 10px auto;border-radius:50%;box-shadow:0 2px 8px rgba(37,99,235,0.10);background:rgba(255,255,255,0.45);backdrop-filter:blur(2px);">
+            </div>
+            <h2 style="margin-top:0;">
+                Welcome! Please enter your details to continue.
+            </h2>
+            <form id="details-form">
+                <label for="complete-name">Complete Name:</label>
+                <input type="text" id="complete-name" name="complete-name" required>
+                <label for="lrn">Learner Reference Number (LRN):</label>
+                <input type="text" id="lrn" name="lrn" pattern="\d{12}" maxlength="12" required>
+                <label for="learner-image">Upload Your Photo:</label>
+                <input type="file" id="learner-image" name="learner-image" accept="image/*">
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
+
     <script>
-        setTimeout(function() {
-            window.location.href = "home.html";
-        }, 2000);
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                // Not first time, proceed to home
+                setTimeout(function() {
+                    window.location.href = "home.html";
+                }, 2000);
+            } else {
+                // First time, show form
+                document.getElementById('splash-container').style.display = 'none';
+                document.getElementById('user-form').style.display = 'block';
+            }
+        });
+
+        document.getElementById('details-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('complete-name').value.trim();
+            const lrn = document.getElementById('lrn').value.trim();
+            const imageInput = document.getElementById('learner-image');
+            const file = imageInput.files[0];
+
+            if (name === '') {
+                alert('Please enter your complete name.');
+                return;
+            }
+
+            if (lrn.length !== 12 || !/^\d{12}$/.test(lrn)) {
+                alert('LRN must be exactly 12 digits.');
+                return;
+            }
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    const data = { name: name, lrn: lrn, image: imageData };
+                    localStorage.setItem('userData', JSON.stringify(data));
+                    localStorage.setItem('name', name);
+                    window.location.href = "home.html";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const data = { name: name, lrn: lrn, image: null };
+                localStorage.setItem('userData', JSON.stringify(data));
+                localStorage.setItem('name', name);
+                window.location.href = "home.html";
+            }
+        });
     </script>
 </body>
 </html>

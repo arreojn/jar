@@ -1,61 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Checklist | OHS CSS App</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' }
-  </script>
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="h-full bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-<div class="min-h-full flex flex-col">
+<body>
+<div class="main-wrapper">
   <!-- Header -->
-  <header class="bg-blue-600 text-white shadow-md dark:bg-gray-800">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <h1 class="text-xl font-bold">Occupational Health and Safety Procedures - Computer System Servicing</h1>
-      <!-- Light/Dark Mode Toggle -->
-      <button id="theme-toggle"
-              class="ml-4 p-2 rounded-full bg-white dark:bg-gray-700 text-blue-600 dark:text-yellow-300 shadow transition-colors"
-              title="Toggle light/dark mode">
-        <i id="theme-icon" class="fas"></i>
-      </button>
+  <header class="header small-header">
+    <div class="header-container">
+      <h1 class="header-title">Occupational Health and Safety Procedures - CSS</h1>
     </div>
   </header>
+    <div id="greeting" class="greeting-block" style="display:flex;justify-content:center;">
+      <!-- Greeting will be injected here -->
+  </div>
 
   <!-- Main Content -->
-  <main class="flex-grow container mx-auto px-4 py-6 pb-24">
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Safety Checklist</h2>
-      <button id="reset-btn" class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition">
-        Reset
-      </button>
+  <main class="main-content">
+    <div class="intro-block">
+      <h2 class="main-title">Safety Checklist</h2>
+      <p class="main-desc">Track and complete all safety procedures for Computer System Servicing.</p>
     </div>
 
     <!-- Progress Bar -->
-    <div class="mb-6">
-      <div class="flex justify-between mb-2">
-        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Checklist Progress</span>
-        <span id="checklist-progress" class="text-sm font-medium text-gray-700 dark:text-gray-300">0/24</span>
+    <div class="progress-block">
+      <div class="progress-labels">
+        <span class="progress-label">Checklist Progress</span>
+        <span id="checklist-progress" class="progress-value">0/24</span>
       </div>
-      <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-        <div id="checklist-progress-bar" class="bg-green-600 h-2.5 rounded-full" style="width:0%"></div>
+      <div class="progress-bar-bg">
+        <div id="checklist-progress-bar" class="progress-bar" style="width:0%"></div>
       </div>
     </div>
 
     <!-- Checklist Items -->
-    <div class="space-y-4">
+    <div class="checklist-category-list">
 
       <!-- General Safety -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">General Safety</h3>
-        <div class="space-y-3">
-          <div class="flex items-center">
-            <input type="checkbox" id="check-1" class="custom-checkbox mr-3" data-category="general">
-            <label for="check-1" class="text-gray-700 dark:text-gray-300">Wear appropriate personal protective equipment (PPE)</label>
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">General Safety</h3>
+        <div class="category-items">
+          <div class="checklist-item">
+            <input type="checkbox" id="check-1" class="custom-checkbox" data-category="general">
+            <label for="check-1" class="checklist-label">Wear appropriate personal protective equipment (PPE)</label>
           </div>
           <div class="flex items-center">
             <input type="checkbox" id="check-2" class="custom-checkbox mr-3" data-category="general">
@@ -69,9 +59,9 @@
       </div>
 
       <!-- Electrical Safety -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">Electrical Safety</h3>
-        <div class="space-y-3">
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">Electrical Safety</h3>
+        <div class="category-items">
           <div class="flex items-center">
             <input type="checkbox" id="check-4" class="custom-checkbox mr-3" data-category="electrical">
             <label for="check-4" class="text-gray-700 dark:text-gray-300">Disconnect power before working on equipment</label>
@@ -92,9 +82,9 @@
       </div>
 
       <!-- Tool Safety -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">Tool Safety</h3>
-        <div class="space-y-3">
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">Tool Safety</h3>
+        <div class="category-items">
           <div class="flex items-center">
             <input type="checkbox" id="check-8" class="custom-checkbox mr-3" data-category="tools">
             <label for="check-8" class="text-gray-700 dark:text-gray-300">Use tools only for their intended purpose</label>
@@ -111,9 +101,9 @@
       </div>
 
       <!-- Fire Safety -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">Fire Safety</h3>
-        <div class="space-y-3">
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">Fire Safety</h3>
+        <div class="category-items">
           <div class="flex items-center">
             <input type="checkbox" id="check-11" class="custom-checkbox mr-3" data-category="fire">
             <label for="check-11" class="text-gray-700 dark:text-gray-300">Keep flammable materials away from heat sources</label>
@@ -130,9 +120,9 @@
       </div>
 
       <!-- Ergonomic Safety -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">Ergonomic Safety</h3>
-        <div class="space-y-3">
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">Ergonomic Safety</h3>
+        <div class="category-items">
           <div class="flex items-center">
             <input type="checkbox" id="check-14" class="custom-checkbox mr-3" data-category="ergonomic">
             <label for="check-14" class="text-gray-700 dark:text-gray-300">Adjust workstation to maintain proper posture</label>
@@ -149,9 +139,9 @@
       </div>
 
       <!-- Chemical Safety -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">Chemical Safety</h3>
-        <div class="space-y-3">
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">Chemical Safety</h3>
+        <div class="category-items">
           <div class="flex items-center">
             <input type="checkbox" id="check-17" class="custom-checkbox mr-3" data-category="chemical">
             <label for="check-17" class="text-gray-700 dark:text-gray-300">Store solvents and chemicals in labeled containers</label>
@@ -168,9 +158,9 @@
       </div>
 
       <!-- Psychological Safety -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">Psychological Safety</h3>
-        <div class="space-y-3">
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">Psychological Safety</h3>
+        <div class="category-items">
           <div class="flex items-center">
             <input type="checkbox" id="check-20" class="custom-checkbox mr-3" data-category="psychological">
             <label for="check-20" class="text-gray-700 dark:text-gray-300">Manage workload to reduce stress and fatigue</label>
@@ -187,9 +177,9 @@
       </div>
 
       <!-- Emergency Preparedness -->
-      <div class="checklist-category bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
-        <h3 class="font-bold text-lg text-gray-800 dark:text-white mb-3">Emergency Preparedness</h3>
-        <div class="space-y-3">
+      <div class="feature-card checklist-category">
+        <h3 class="feature-title">Emergency Preparedness</h3>
+        <div class="category-items">
           <div class="flex items-center">
             <input type="checkbox" id="check-23" class="custom-checkbox mr-3" data-category="emergency">
             <label for="check-23" class="text-gray-700 dark:text-gray-300">Know the location of fire exits and assembly points</label>
@@ -202,25 +192,34 @@
       </div>
 
     </div>
+
+    <!-- Move reset button to bottom -->
+    <div style="width:100%; display:flex; justify-content:center; margin-top:2rem;">
+      <button id="reset-btn" class="button reset-btn">Reset</button>
+    </div>
   </main>
 
   <!-- Mobile Icon Navigation Bar -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow flex justify-around py-2 z-40">
-    <a href="home.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-      <i class="fas fa-home text-xl"></i>
-      <span class="text-xs">Home</span>
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-link">
+      <img src="src/home.png" alt="Home" class="nav-img">
+      <span class="nav-label">Home</span>
     </a>
-    <a href="lessons.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-      <i class="fas fa-book text-xl"></i>
-      <span class="text-xs">Lessons</span>
+    <a href="lessons.html" class="nav-link">
+      <img src="src/book.png" alt="Lessons" class="nav-img">
+      <span class="nav-label">Lessons</span>
     </a>
-    <a href="checklist.html" class="flex flex-col items-center text-blue-600 dark:text-blue-300">
-      <i class="fas fa-clipboard-list text-xl"></i>
-      <span class="text-xs">Checklist</span>
+    <a href="checklist.html" class="nav-link active">
+      <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+      <span class="nav-label">Checklist</span>
     </a>
-    <a href="assessment.html" class="flex flex-col items-center text-gray-600 dark:text-gray-300">
-      <i class="fas fa-question-circle text-xl"></i>
-      <span class="text-xs">Assessment</span>
+    <a href="assessment.html" class="nav-link">
+      <img src="src/assessment.png" alt="Assessment" class="nav-img">
+      <span class="nav-label">Assessment</span>
+    </a>
+    <a href="settings.html" class="nav-link">
+      <img src="src/settings.png" alt="Settings" class="nav-img">
+      <span class="nav-label">Settings</span>
     </a>
   </nav>
 </div>
@@ -340,5 +339,43 @@
     `;
     document.head.appendChild(style);
   })();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Palette/theme sync with settings
+    const palette = localStorage.getItem('palette') || 'light';
+    document.documentElement.classList.remove(
+      'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+    );
+    document.documentElement.classList.add('palette-' + palette);
+
+    // Greeting logic
+    function showGreeting() {
+        let name = 'Guest';
+        let image = null;
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            try {
+                const parsed = JSON.parse(userData);
+                if (parsed.name) name = parsed.name;
+                if (parsed.image) image = parsed.image;
+            } catch (e) {}
+        }
+        const initial = name && name.length > 0 ? name.trim()[0].toUpperCase() : 'G';
+        const avatarHtml = image
+            ? `<img src="${image}" alt="Learner Photo" class="greeting-avatar">`
+            : `<div class="greeting-avatar">${initial}</div>`;
+        document.getElementById('greeting').innerHTML = `
+            <div class="greeting-card">
+                ${avatarHtml}
+                <div class="greeting-texts">
+                    <div class="greeting-title">Hello, ${name}!</div>
+                    <div class="greeting-sub">Let's check if you followed the OHS Procedures</div>
+                </div>
+            </div>
+        `;
+    }
+    showGreeting();
+  });
 </script>
-</body
+</body>
+</html>

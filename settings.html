@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Settings - OHS CSS</title>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+  <div class="main-wrapper">
+    <!-- Header -->
+    <header class="header small-header">
+      <div class="header-container">
+        <h1 class="header-title">Occupational Health and Safety Procedures - CSS</h1>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+  <main class="main-content">
+      <div class="settings-intro">
+        <h2 class="settings-title">Customize Your Experience</h2>
+        <p class="settings-desc">Adjust appearance, palettes, and themes for a personalized interface.</p>
+      </div>
+
+      <!-- Appearance Card -->
+         <!-- ...existing code... -->
+      <div class="settings-options">
+        <div class="appearance-card">
+          <div class="appearance-header">
+            <span class="appearance-icon"><i class="fas fa-palette"></i></span>
+            <h3 class="appearance-title">Appearance</h3>
+          </div>
+          <label for="palette-select" class="palette-label">Choose a Color Palette</label>
+          <select id="palette-select" class="palette-select">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="emerald">Emerald</option>
+            <option value="sunset">Sunset</option>
+            <option value="royal">Royal</option>
+            <option value="slate">Slate</option>
+            <option value="rose">Rose</option>
+            <option value="amber">Amber</option>
+            <option value="teal">Teal</option>
+            <option value="crimson">Crimson</option>
+            <option value="indigo">Indigo</option>
+          </select>
+          <!-- Avatar and Change Photo Button -->
+          <div id="avatar-block" style="margin-top:2rem; display:flex; flex-direction:column; align-items:center;">
+            <!-- Avatar will be injected here -->
+          </div>
+        </div>
+      </div>
+    <!-- ...existing code... -->
+    </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Palette system (optional, if you use themes)
+    const palette = localStorage.getItem('palette') || 'light';
+    document.documentElement.classList.remove(
+        'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+    );
+    document.documentElement.classList.add('palette-' + palette);
+
+    // Avatar logic
+    function showAvatar() {
+        let name = 'Guest';
+        let image = null;
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            try {
+                const parsed = JSON.parse(userData);
+                if (parsed.name) name = parsed.name;
+                if (parsed.image) image = parsed.image;
+            } catch (e) {}
+        }
+        const initial = name && name.length > 0 ? name.trim()[0].toUpperCase() : 'G';
+        const avatarHtml = image
+            ? `<img src="${image}" alt="Learner Photo" class="avatar-settings">`
+            : `<div class="avatar-settings">${initial}</div>`;
+        document.getElementById('avatar-block').innerHTML = `
+            ${avatarHtml}
+            <button class="change-photo-btn" id="change-photo-btn">Change Photo</button>
+            <input type="file" id="photo-input" accept="image/*" style="display:none;">
+        `;
+        document.getElementById('change-photo-btn').onclick = function() {
+            document.getElementById('photo-input').click();
+        };
+        document.getElementById('photo-input').onchange = function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    let updatedData = { name, image: ev.target.result };
+                    // Preserve LRN if present
+                    const prevData = localStorage.getItem('userData');
+                    if (prevData) {
+                        try {
+                            const parsed = JSON.parse(prevData);
+                            if (parsed.lrn) updatedData.lrn = parsed.lrn;
+                        } catch (e) {}
+                    }
+                    localStorage.setItem('userData', JSON.stringify(updatedData));
+                    showAvatar();
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+    }
+    showAvatar();
+});
+</script>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-link">
+        <img src="src/home.png" alt="Home" class="nav-img">
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="lessons.html" class="nav-link">
+        <img src="src/book.png" alt="Lessons" class="nav-img">
+        <span class="nav-label">Lessons</span>
+      </a>
+      <a href="checklist.html" class="nav-link">
+        <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+        <span class="nav-label">Checklist</span>
+      </a>
+      <a href="assessment.html" class="nav-link">
+        <img src="src/assessment.png" alt="Assessment" class="nav-img">
+        <span class="nav-label">Assessment</span>
+      </a>
+      <a href="settings.html" class="nav-link active">
+        <img src="src/settings.png" alt="Settings" class="nav-img">
+        <span class="nav-label">Settings</span>
+      </a>
+    </nav>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Palette system (optional, if you use themes)
+    const palette = localStorage.getItem('palette') || 'light';
+    document.documentElement.classList.remove(
+        'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+    );
+    document.documentElement.classList.add('palette-' + palette);
+
+    // Avatar logic
+    function showAvatar() {
+        let name = 'Guest';
+        let image = null;
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            try {
+                const parsed = JSON.parse(userData);
+                if (parsed.name) name = parsed.name;
+                if (parsed.image) image = parsed.image;
+            } catch (e) {}
+        }
+        const initial = name && name.length > 0 ? name.trim()[0].toUpperCase() : 'G';
+        const avatarHtml = image
+            ? `<img src="${image}" alt="Learner Photo" class="avatar-settings">`
+            : `<div class="avatar-settings">${initial}</div>`;
+        document.getElementById('avatar-block').innerHTML = `
+            ${avatarHtml}
+            <button class="change-photo-btn" id="change-photo-btn">Change Photo</button>
+            <input type="file" id="photo-input" accept="image/*" style="display:none;">
+        `;
+        document.getElementById('change-photo-btn').onclick = function() {
+            document.getElementById('photo-input').click();
+        };
+        document.getElementById('photo-input').onchange = function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    let updatedData = { name, image: ev.target.result };
+                    // Preserve LRN if present
+                    const prevData = localStorage.getItem('userData');
+                    if (prevData) {
+                        try {
+                            const parsed = JSON.parse(prevData);
+                            if (parsed.lrn) updatedData.lrn = parsed.lrn;
+                        } catch (e) {}
+                    }
+                    localStorage.setItem('userData', JSON.stringify(updatedData));
+                    showAvatar();
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+    }
+    showAvatar();
+});
+</script>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-link">
+        <img src="src/home.png" alt="Home" class="nav-img">
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="lessons.html" class="nav-link">
+        <img src="src/book.png" alt="Lessons" class="nav-img">
+        <span class="nav-label">Lessons</span>
+      </a>
+      <a href="checklist.html" class="nav-link">
+        <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+        <span class="nav-label">Checklist</span>
+      </a>
+      <a href="assessment.html" class="nav-link">
+        <img src="src/assessment.png" alt="Assessment" class="nav-img">
+        <span class="nav-label">Assessment</span>
+      </a>
+      <a href="settings.html" class="nav-link active">
+        <img src="src/settings.png" alt="Settings" class="nav-img">
+        <span class="nav-label">Settings</span>
+      </a>
+    </nav>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Palette system (optional, if you use themes)
+    const palette = localStorage.getItem('palette') || 'light';
+    document.documentElement.classList.remove(
+        'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+    );
+    document.documentElement.classList.add('palette-' + palette);
+
+    // Avatar logic
+    function showAvatar() {
+        let name = 'Guest';
+        let image = null;
+        const userData = localStorage.getItem('userData');
+        if (userData) {
+            try {
+                const parsed = JSON.parse(userData);
+                if (parsed.name) name = parsed.name;
+                if (parsed.image) image = parsed.image;
+            } catch (e) {}
+        }
+        const initial = name && name.length > 0 ? name.trim()[0].toUpperCase() : 'G';
+        const avatarHtml = image
+            ? `<img src="${image}" alt="Learner Photo" class="avatar-settings">`
+            : `<div class="avatar-settings">${initial}</div>`;
+        document.getElementById('avatar-block').innerHTML = `
+            ${avatarHtml}
+            <button class="change-photo-btn" id="change-photo-btn">Change Photo</button>
+            <input type="file" id="photo-input" accept="image/*" style="display:none;">
+        `;
+        document.getElementById('change-photo-btn').onclick = function() {
+            document.getElementById('photo-input').click();
+        };
+        document.getElementById('photo-input').onchange = function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    let updatedData = { name, image: ev.target.result };
+                    // Preserve LRN if present
+                    const prevData = localStorage.getItem('userData');
+                    if (prevData) {
+                        try {
+                            const parsed = JSON.parse(prevData);
+                            if (parsed.lrn) updatedData.lrn = parsed.lrn;
+                        } catch (e) {}
+                    }
+                    localStorage.setItem('userData', JSON.stringify(updatedData));
+                    showAvatar();
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+    }
+    showAvatar();
+});
+</script>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-link">
+        <img src="src/home.png" alt="Home" class="nav-img">
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="lessons.html" class="nav-link">
+        <img src="src/book.png" alt="Lessons" class="nav-img">
+        <span class="nav-label">Lessons</span>
+      </a>
+      <a href="checklist.html" class="nav-link">
+        <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+        <span class="nav-label">Checklist</span>
+      </a>
+      <a href="assessment.html" class="nav-link">
+        <img src="src/assessment.png" alt="Assessment" class="nav-img">
+        <span class="nav-label">Assessment</span>
+      </a>
+      <a href="settings.html" class="nav-link active">
+        <img src="src/settings.png" alt="Settings" class="nav-img">
+        <span class="nav-label">Settings</span>
+      </a>
+    </nav>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+      const paletteSelect = document.getElementById('palette-select');
+      function setPalette(palette) {
+        document.documentElement.classList.remove('palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo');
+        document.documentElement.classList.add('palette-' + palette);
+        localStorage.setItem('palette', palette);
+      }
+      const savedPalette = localStorage.getItem('palette');
+      if (savedPalette) {
+        setPalette(savedPalette);
+        paletteSelect.value = savedPalette;
+      } else {
+        setPalette('light');
+        paletteSelect.value = 'light';
+      }
+      paletteSelect.addEventListener('change', function() {
+        setPalette(this.value);
+      });
+    });
+  </script>
+
+  <!-- Custom Palette CSS -->
+  <style>
+  /* Palette styles */
+  .palette-light {
+    --bg-main: #f3f4f6;
+    --bg-header: #2563eb;
+    --text-main: #1f2937;
+    --text-header: #fff;
+  }
+  .palette-dark {
+    --bg-main: #111827;
+    --bg-header: #1f2937;
+    --text-main: #f3f4f6;
+    --text-header: #fff;
+  }
+  .palette-emerald {
+    --bg-main: #ecfdf5;
+    --bg-header: #059669;
+    --text-main: #064e3b;
+    --text-header: #fff;
+  }
+  .palette-sunset {
+    --bg-main: #fff7ed;
+    --bg-header: #f97316;
+    --text-main: #7c2d12;
+    --text-header: #fff;
+  }
+  .palette-royal {
+    --bg-main: #f3f0ff;
+    --bg-header: #8b5cf6;
+    --text-main: #3b0764;
+    --text-header: #fff;
+  }
+  .palette-slate {
+    --bg-main: #f8fafc;
+    --bg-header: #64748b;
+    --text-main: #0f172a;
+    --text-header: #fff;
+  }
+  .palette-rose {
+    --bg-main: #fff1f2;
+    --bg-header: #ec4899;
+    --text-main: #831843;
+    --text-header: #fff;
+  }
+  .palette-amber {
+    --bg-main: #fffbeb;
+    --bg-header: #f59e42;
+    --text-main: #78350f;
+    --text-header: #fff;
+  }
+  .palette-teal {
+    --bg-main: #f0fdfa;
+    --bg-header: #14b8a6;
+    --text-main: #134e4a;
+    --text-header: #fff;
+  }
+  .palette-crimson {
+    --bg-main: #fef2f2;
+    --bg-header: #dc2626;
+    --text-main: #7f1d1d;
+    --text-header: #fff;
+  }
+  .palette-indigo {
+    --bg-main: #eef2ff;
+    --bg-header: #4338ca;
+    --text-main: #1e1b4b;
+    --text-header: #fff;
+  }
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  header {
+    background-color: var(--bg-header) !important;
+    color: var(--text-header) !important;
+  }
+  header h1 {
+    color: var(--text-header) !important;
+  }
+  .feature-card {
+    background-color: var(--bg-main) !important;
+    color: var(--text-main) !important;
+  }
+  nav {
+    background-color: var(--bg-main) !important;
+    color: var(--text-main) !important;
+  }
+  </style>
+</body>
+</html>
