@@ -5,6 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Lessons | OHS CSS App</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/lesson-card.css">
+  <style>
+    .search-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+    .search-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.75rem 1rem;
+      border: 2px solid rgba(37,99,235,0.2);
+      border-radius: 1rem;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+    .progress-indicator {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.8);
+      padding: 0.75rem 1.5rem;
+      border-radius: 1rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(37,99,235,0.1);
+    }
+    .progress-bar-bg {
+      width: 200px;
+      height: 8px;
+      background: rgba(37,99,235,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #facc15);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .greeting-card {
+      animation: fadeInUp 0.8s ease-out;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .lesson-card {
+      animation: fadeIn 0.6s ease-out;
+      animation-fill-mode: both;
+    }
+    .lesson-card:nth-child(1) { animation-delay: 0.1s; }
+    .lesson-card:nth-child(2) { animation-delay: 0.2s; }
+    .lesson-card:nth-child(3) { animation-delay: 0.3s; }
+    .lesson-card:nth-child(4) { animation-delay: 0.4s; }
+    .lesson-card:nth-child(5) { animation-delay: 0.5s; }
+    .lesson-card:nth-child(6) { animation-delay: 0.6s; }
+    .lesson-card:nth-child(7) { animation-delay: 0.7s; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .lesson-detail-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: rgba(255,255,255,0.9);
+      border-radius: 1.5rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(37,99,235,0.15);
+    }
+    .lesson-detail-content h3 {
+      color: #2563eb;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .lesson-detail-content p {
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .lesson-detail-content ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .lesson-detail-content li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
 </head>
 <body>
 <div class="main-wrapper">
@@ -18,13 +120,20 @@
 <div id="greeting" class="greeting-block" style="display:flex;justify-content:center;">
     <!-- Greeting will be injected here -->
 </div>
-    <div id="greeting" class="greeting-block" style="display:flex;justify-content:center;">
-      <!-- Greeting will be injected here -->
-  </div>
+
   <main class="main-content">
     <section id="lessons-list">
-      <h2 class="main-title">Lessons</h2>
-      <div id="lesson-cards"></div>
+      <h2 class="main-title" >Occupational Health and Safety Procedures - Lessons</h2>
+      <div class="search-container">
+        <input type="text" id="lesson-search" placeholder="Search lessons..." class="search-input">
+        <div id="progress-indicator" class="progress-indicator">
+          <span id="progress-text">0% Complete</span>
+          <div class="progress-bar-bg">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div id="lesson-cards" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;"></div>
     </section>
     <section id="lesson-detail" class="hidden">
       <h2 id="lesson-title" class="main-title"></h2>
@@ -58,13 +167,6 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Palette system (optional, if you use themes)
-    const palette = localStorage.getItem('palette') || 'light';
-    document.documentElement.classList.remove(
-        'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
-    );
-    document.documentElement.classList.add('palette-' + palette);
-
     // Greeting logic
     function showGreeting() {
         let name = 'Guest';
@@ -104,7 +206,9 @@ const lessonsContent = {
     icon: "src/book.png",
     content: `
       <div class="lesson-card-content glass-card">
-        <h3 class="lesson-section-title">What is Occupational Health and Safety (OHS)?</h3>
+<img src="src/ohsbanner.gif" alt="Introduction to OHS" class="lesson-img-banner" />
+            <video class="lesson-video" src="src/introtoOHS.mp4" controls autoplay muted></video>
+            <p class="video-source">Source: Occupational Health and Safety (OHS) Standards in CSS | Computer Systems Servicing Guide - https://www.youtube.com/watch?v=m5gxAICpKps</p>
         <p class="lesson-paragraph">
           Occupational Health and Safety (OHS) refers to laws, standards, and best practices that ensure the safety and well-being of workers in Computer System Servicing (CSS).
         </p>
@@ -179,7 +283,9 @@ const lessonsContent = {
     icon: "src/electrical.png",
     content: `
     <div class="lesson-card-content glass-card">
-      <h3 class="lesson-section-title">Understanding Electrical Hazards in CSS</h3>
+<img src="src/elecbanner.gif" alt="Electrical Safety" class="lesson-img-banner" />
+           <video class="lesson-video" src="src/electricalhazard.mp4" controls autoplay muted></video>
+           <p class="video-source">Source: OSHA Electrical Safety: How To Prevent Electrical Hazards - https://www.youtube.com/watch?v=TMT6f3tZQSk</p>
       <p class="lesson-paragraph">
         Computer System Servicing (CSS) involves handling electrical and electronic components. Without proper precautions, workers are exposed to risks such as <strong>electric shocks, burns, equipment damage, fires, or even fatalities</strong>.
       </p>
@@ -254,7 +360,9 @@ const lessonsContent = {
     icon: "src/fire.png",
     content: `
     <div class="lesson-card-content glass-card">
-      <h3 class="lesson-section-title">Fire Hazards in Computer System Servicing</h3>
+<img src="src/firebanner.gif" alt="Fire Safety" class="lesson-img-banner" />
+           <video class="lesson-video" src="src/firesafety.mp4" controls autoplay muted></video>
+           <p class="video-source">Source: Fire Emergency and Fire Prevention at your workplace - https://www.youtube.com/watch?v=ReL-DM9xhpI </p>
       <p class="lesson-paragraph">
         Computer equipment and work environments present several potential fire hazards that technicians must be aware of. Fires in IT or electronics workplaces not only threaten human lives but can also damage expensive equipment, destroy important data, and interrupt business operations.
       </p>
@@ -273,7 +381,7 @@ const lessonsContent = {
           </ul>
         </div>
         <div class="lesson-hazard glass-card">
-          <img src="src/fireext.png" alt="Fire Extinguisher" class="lesson-img" />
+          <img src="src/firepreven.png" alt="Fire Extinguisher" class="lesson-img" />
           <h4>Fire Prevention Measures</h4>
           <ul>
             <li>Schedule regular equipment maintenance and cleaning</li>
@@ -358,7 +466,9 @@ const lessonsContent = {
     icon: "src/hazardiden.png",
     content: `
     <div class="lesson-card-content glass-card">
-      <h3 class="lesson-section-title">Understanding Hazards in CSS</h3>
+<img src="src/hazardidentificationbanner.gif" alt="Hazard Identification" class="lesson-img-banner" />
+         <video class="lesson-video" src="src/hazardidentification.mp4" controls autoplay muted></video>
+         <p class="video-source">Source: Hazard and Risk -- What's the difference? - https://www.youtube.com/watch?v=_GwVTdsnN1E</p>
       <p class="lesson-paragraph">
         Hazard identification is the process of recognizing potential sources of harm in the workplace. In computer system servicing, hazards can be physical, chemical, biological, ergonomic, electrical, or psychological in nature.
       </p>
@@ -503,8 +613,9 @@ const lessonsContent = {
     icon: "src/ergonomics.png",
     content: `
     <div class="lesson-card-content glass-card">
-      <h3 class="lesson-section-title">Ergonomics in Computer System Servicing</h3>
-      <img src="src/ergonomic.png" alt="Ergonomic workstation example" class="lesson-img" />
+<img src="src/ergobanner.gif" alt="Ergonomic workstation example" class="lesson-img-banner" />
+           <video class="lesson-video" src="src/ergonomicsvideo.mp4" controls autoplay muted></video>
+           <p class="video-source">Source: Ergonomics in the Workplace - https://www.youtube.com/watch?v=n-iAK4vusqk </p>
       <p class="lesson-paragraph">
         Ergonomics is the science of designing the workplace, keeping in mind the capabilities and limitations of the worker. In CSS, proper ergonomics helps prevent injuries such as back pain, eye strain, and repetitive strain injuries.
       </p>
@@ -543,8 +654,9 @@ const lessonsContent = {
     icon: "src/chemical.png",
     content: `
     <div class="lesson-card-content glass-card">
-      <h3 class="lesson-section-title">Chemical Safety in CSS</h3>
-      <img src="src/chemical.png" alt="Chemical safety in computer labs" class="lesson-img" />
+<img src="src/chemicalbanner.gif" alt="Chemical safety in computer labs" class="lesson-img-banner" />
+            <video class="lesson-video" src="src/chemicalsafety.mp4" controls autoplay muted></video>
+            <p class="video-source">Source: Working Safely with Chemicals - https://www.youtube.com/watch?v=LqfHVWr-r28 </p>
       <p class="lesson-paragraph">
         Chemicals such as cleaning solvents, printer toner, and soldering flux are common in computer servicing. Mishandling these can cause skin irritation, respiratory problems, or even fires.
       </p>
@@ -583,8 +695,9 @@ const lessonsContent = {
     icon: "src/emer.png",
     content: `
     <div class="lesson-card-content glass-card">
-      <h3 class="lesson-section-title">Emergency Preparedness</h3>
-      <img src="src/emergency.png" alt="Emergency preparedness drill" class="lesson-img" />
+<img src="src/emergency.jpg" alt="Emergency preparedness drill" class="lesson-img-banner" />
+            <video class="lesson-video" src="src/emergencypreparedness.mp4" controls autoplay muted></video>
+            <p class="video-source">Source: 6 Steps to Developing an Emergency Action Plan for Your Facility - https://www.youtube.com/watch?v=cgDcnGwZUh4 </p>
       <p class="lesson-paragraph">
         Being prepared for emergencies can save lives and minimize damage. This includes knowing what to do in case of fire, electrical accidents, chemical spills, or medical emergencies.
       </p>
@@ -626,6 +739,31 @@ const lessonsContent = {
   // Add more lessons as needed
 };
 
+function getLessonsProgress() {
+  const lessons = JSON.parse(localStorage.getItem('lessons')) || { completed: [] };
+  return lessons;
+}
+
+function updateProgressBar() {
+  const lessons = getLessonsProgress();
+  const total = Object.keys(lessonsContent).length;
+  const completedCount = lessons.completed.length;
+  const percent = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+  const progressBar = document.getElementById('progress-bar');
+  const progressText = document.getElementById('progress-text');
+  if (progressBar) {
+    progressBar.style.width = percent + '%';
+  }
+  if (progressText) {
+    progressText.textContent = percent + '% Complete';
+  }
+}
+
+function setLessonsProgress(lessons) {
+  localStorage.setItem('lessons', JSON.stringify(lessons));
+  updateProgressBar();
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   // Palette/theme sync with settings
   const palette = localStorage.getItem('palette') || 'light';
@@ -634,43 +772,42 @@ document.addEventListener('DOMContentLoaded', function () {
   );
   document.documentElement.classList.add('palette-' + palette);
 
-  function getLessonsProgress() {
-    const lessons = JSON.parse(localStorage.getItem('lessons')) || { completed: [] };
-    return lessons;
-  }
-  function setLessonsProgress(lessons) {
-    localStorage.setItem('lessons', JSON.stringify(lessons));
-  }
-
   // Render lesson cards
-  function renderLessonCards() {
+  function renderLessonCards(filterText = '') {
     const lessons = getLessonsProgress();
     const container = document.getElementById('lesson-cards');
     container.innerHTML = '';
     Object.keys(lessonsContent).forEach(id => {
-        const lesson = lessonsContent[id];
-        const completed = lessons.completed.includes(Number(id));
-        container.innerHTML += `
-            <div class="lesson-row">
-                <div class="lesson-card" data-lesson="${id}" tabindex="0">
-                    <div class="lesson-card-body">
-                        <span class="lesson-icon-bg">
-                            <img src="${lesson.icon}" alt="Lesson Icon" class="lesson-icon" />
-                        </span>
-                        <div class="lesson-info">
-                            <h5 class="lesson-title">${lesson.title} ${completed ? '<span class="lesson-complete">&#10003;</span>' : ''}</h5>
-                            <p class="lesson-short">${lesson.short || ''}</p>
-                        </div>
-                    </div>
-                </div>
+      const lesson = lessonsContent[id];
+      const completed = lessons.completed.includes(Number(id));
+      // Filter lessons by title or short description based on filterText
+      if (filterText) {
+        const lowerFilter = filterText.toLowerCase();
+        if (!lesson.title.toLowerCase().includes(lowerFilter) && !lesson.short.toLowerCase().includes(lowerFilter)) {
+          return; // skip this lesson if it doesn't match filter
+        }
+      }
+      container.innerHTML += `
+        <div class="lesson-card lesson-hazard glass-card" data-lesson="${id}" tabindex="0" style="flex: 1 1 300px; max-width: 320px; min-width: 280px;">
+          <div class="lesson-card-body">
+            <span class="lesson-icon-bg">
+              <img src="${lesson.icon}" alt="Lesson Icon" class="lesson-icon" />
+            </span>
+            <div class="lesson-info">
+              <h5 class="lesson-title">${lesson.title} ${completed ? '<span class="lesson-complete">&#10003;</span>' : ''}</h5>
+              <p class="lesson-short">${lesson.short || ''}</p>
             </div>
-        `;
+          </div>
+        </div>
+      `;
     });
     // Add click listeners to .lesson-card
     document.querySelectorAll('.lesson-card').forEach(card => {
-        card.onclick = function() {
-            showLessonDetail(card.getAttribute('data-lesson'));
-        };
+      card.onclick = function() {
+        document.getElementById('greeting').style.display = 'none';
+        showLessonDetail(card.getAttribute('data-lesson'));
+        window.scrollTo(0, 0);
+      };
     });
   }
 
@@ -683,34 +820,61 @@ document.addEventListener('DOMContentLoaded', function () {
     lessonsList.classList.add('hidden');
     lessonDetail.classList.remove('hidden');
     document.getElementById('lesson-title').textContent = lesson.title;
-    document.getElementById('lesson-content').innerHTML = lesson.content;
+    document.getElementById('lesson-content').innerHTML = `<div class="lesson-detail-content">${lesson.content}</div>`;
     // Mark complete button state
     const lessons = getLessonsProgress();
     const btn = document.getElementById('mark-complete');
     if (lessons.completed.includes(Number(id))) {
-        btn.textContent = 'Completed';
-        btn.disabled = true;
+      btn.textContent = 'Completed';
+      btn.disabled = true;
     } else {
-        btn.textContent = 'Mark as Complete';
-        btn.disabled = false;
-        btn.onclick = function() {
-            lessons.completed.push(Number(id));
-            setLessonsProgress(lessons);
-            showLessonDetail(id);
-        };
+      btn.textContent = 'Mark as Complete';
+      btn.disabled = false;
+      btn.onclick = function() {
+        lessons.completed.push(Number(id));
+        setLessonsProgress(lessons);
+        showLessonDetail(id);
+      };
     }
     document.getElementById('back-to-list').onclick = function() {
-        lessonDetail.classList.add('hidden');
-        lessonsList.classList.remove('hidden');
-        renderLessonCards();
+      document.getElementById('greeting').style.display = 'flex';
+      lessonDetail.classList.add('hidden');
+      lessonsList.classList.remove('hidden');
+      renderLessonCards();
+      window.scrollTo(0, 0);
     };
   }
 
   // Initial render
   renderLessonCards();
+  updateProgressBar();
   document.getElementById('lesson-detail').classList.add('hidden');
   document.getElementById('lessons-list').classList.remove('hidden');
+
+  // Add event listener for search input to filter lessons dynamically
+  const searchInput = document.getElementById('lesson-search');
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      const filterText = this.value.trim();
+      renderLessonCards(filterText);
+    });
+  }
 });
+
+function updateProgressBar() {
+  const lessons = getLessonsProgress();
+  const total = Object.keys(lessonsContent).length;
+  const completedCount = lessons.completed.length;
+  const percent = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+  const progressBar = document.getElementById('progress-bar');
+  const progressText = document.getElementById('progress-text');
+  if (progressBar) {
+    progressBar.style.width = percent + '%';
+  }
+  if (progressText) {
+    progressText.textContent = percent + '% Complete';
+  }
+}
 </script>
 </body>
 </html>

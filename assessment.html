@@ -531,6 +531,7 @@
     renderQuestion();
     showSection(questionsSection);
     if (quizHistoryCard) quizHistoryCard.classList.add('hidden');
+    document.getElementById('greeting').style.display = 'none';
   });
 
   nextBtn.addEventListener('click', () => {
@@ -599,7 +600,10 @@
   if (reviewBack) {
     reviewBack.addEventListener('click', ()=> showSection(resultsSection));
   }
-  retakeBtn.addEventListener('click', ()=> showSection(intro));
+  retakeBtn.addEventListener('click', ()=> {
+    showSection(intro);
+    document.getElementById('greeting').style.display = 'flex';
+  });
 
   function loadQuizHistory() {
     const historyBody = document.getElementById('history-body');

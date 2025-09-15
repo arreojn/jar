@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Contact | OHS CSS App</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+<div class="main-wrapper">
+  <!-- Header -->
+  <header class="header small-header">
+    <div class="header-container">
+      <h1 class="header-title">Contact Us</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="contact-hero">
+      <h1 class="contact-hero-title">Get In Touch</h1>
+      <p class="contact-hero-subtitle">
+        Have questions about occupational health and safety in computer system servicing?
+        We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+      </p>
+    </section>
+
+    <!-- Contact Content -->
+    <div class="contact-content">
+      <!-- Contact Form -->
+      <section class="contact-form-section">
+        <h2 class="contact-section-title">
+          <span class="contact-section-icon">📧</span>
+          Send us a Message
+        </h2>
+
+        <div id="form-message" class="form-message" style="display: none;"></div>
+
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" name="name" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" id="subject" name="subject" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" class="form-textarea" required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+      </section>
+
+      <!-- Contact Information -->
+      <section class="contact-info-section">
+        <h2 class="contact-section-title">
+          <span class="contact-section-icon">📍</span>
+          Contact Information
+        </h2>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📧</div>
+          <div class="contact-info-content">
+            <h4>Email</h4>
+            <p>info@ohscss.edu.ph<br>support@ohscss.edu.ph</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📞</div>
+          <div class="contact-info-content">
+            <h4>Phone</h4>
+            <p>+63 (2) 123-4567<br>+63 (2) 987-6543</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">🏢</div>
+          <div class="contact-info-content">
+            <h4>Office Address</h4>
+            <p>Computer System Servicing Department<br>Technical Education Center<br>Manila, Philippines 1000</p>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">🕒</div>
+          <div class="contact-info-content">
+            <h4>Office Hours</h4>
+            <p>Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday: 9:00 AM - 12:00 PM<br>Sunday: Closed</p>
+          </div>
+        </div>
+
+        <!-- Map Placeholder -->
+        <div class="contact-map">
+          <iframe
+            src="https://www.google.com/maps/place//@17.1635615,120.4321692,17z/data=!5m1!1e1?hl=en&entry=ttu&g_ep=EgoyMDI1MDkwMy4wIKXMDSoASAFQAw%3D%3D"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Navigation -->
+  <nav class="bottom-nav">
+    <a href="home.html" class="nav-link">
+      <img src="src/home.png" alt="Home" class="nav-img">
+      <span class="nav-label">Home</span>
+    </a>
+    <a href="lessons.html" class="nav-link">
+      <img src="src/book.png" alt="Lessons" class="nav-img">
+      <span class="nav-label">Lessons</span>
+    </a>
+    <a href="checklist.html" class="nav-link">
+      <img src="src/checklist1.png" alt="Checklist" class="nav-img">
+      <span class="nav-label">Checklist</span>
+    </a>
+    <a href="assessment.html" class="nav-link">
+      <img src="src/assessment.png" alt="Assessment" class="nav-img">
+      <span class="nav-label">Assessment</span>
+    </a>
+    <a href="settings.html" class="nav-link">
+      <img src="src/settings.png" alt="Settings" class="nav-img">
+      <span class="nav-label">Settings</span>
+    </a>
+  </nav>
+</div>
+
+<script>
+// Theme management
+document.addEventListener('DOMContentLoaded', function() {
+    const palette = localStorage.getItem('palette') || 'light';
+    document.documentElement.classList.remove(
+        'palette-light','palette-dark','palette-emerald','palette-sunset','palette-royal','palette-slate','palette-rose','palette-amber','palette-teal','palette-crimson','palette-indigo'
+    );
+    document.documentElement.classList.add('palette-' + palette);
+
+    // Contact form handling
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+
+        // Simulate form submission (replace with actual API call)
+        console.log('Form submitted:', data);
+
+        // Show success message
+        formMessage.className = 'form-message success';
+        formMessage.textContent = 'Thank you for your message! We\'ll get back to you soon.';
+        formMessage.style.display = 'block';
+
+        // Reset form
+        contactForm.reset();
+
+        // Hide message after 5 seconds
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    });
+});
+</script>
+</body>
+</html>

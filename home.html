@@ -20,66 +20,66 @@
         </div>
 
         <!-- Main Content Area -->
-    <main class="main-content">
-            <div class="intro-block">
-                <h2 class="main-title">Occupational Health & Safety</h2>
+    <main class="main-content" role="main" aria-label="Main content area">
+            <section class="intro-block" aria-labelledby="intro-title">
+                <h2 id="intro-title" class="main-title">Occupational Health & Safety</h2>
                 <p class="main-desc">Learn essential safety procedures for Computer System Servicing to protect yourself and others in the workplace.</p>
-            </div>
+            </section>
 
             <!-- Quick Stats -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-icon"><img src="src/book.png" alt="Lessons" class="stat-img"></div>
+            <section class="stats-row" aria-label="Quick statistics">
+                <article class="stat-card" tabindex="0" role="region" aria-labelledby="lessons-label completed-lessons">
+                    <div class="stat-icon"><img src="src/book.png" alt="Lessons" class="stat-img" aria-hidden="true"></div>
                     <div class="stat-info">
-                        <p class="stat-label">Lessons</p>
-                        <p class="stat-value" id="completed-lessons">0/7</p>
+                        <p id="lessons-label" class="stat-label">Lessons</p>
+                        <p id="completed-lessons" class="stat-value" aria-live="polite" aria-atomic="true">0/7</p>
                     </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><img src="src/checklist1.png" alt="Checklist" class="stat-img"></div>
+                </article>
+                <article class="stat-card" tabindex="0" role="region" aria-labelledby="checklist-label completed-checklist">
+                    <div class="stat-icon"><img src="src/checklist1.png" alt="Checklist" class="stat-img" aria-hidden="true"></div>
                     <div class="stat-info">
-                        <p class="stat-label">Checklist</p>
-                        <p class="stat-value" id="completed-checklist">0/24</p>
+                        <p id="checklist-label" class="stat-label">Checklist</p>
+                        <p id="completed-checklist" class="stat-value" aria-live="polite" aria-atomic="true">0/24</p>
                     </div>
-                </div>
-            </div>
+                </article>
+            </section>
 
             <!-- Progress Bar -->
-            <div class="progress-block">
+            <section class="progress-block" aria-label="Progress bar">
                 <div class="progress-labels">
-                    <span class="progress-label">Your Progress</span>
-                    <span class="progress-value" id="progress-percent">0%</span>
+                    <span class="progress-label">Overall Progress</span>
+                    <span class="progress-value" id="progress-percent" aria-live="polite" aria-atomic="true">0%</span>
                 </div>
-                <div class="progress-bar-bg">
+                <div class="progress-bar-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progress bar">
                     <div id="progress-bar" class="progress-bar" style="width:0%"></div>
                 </div>
-            </div>
+            </section>
 
 
             <!-- Feature Cards -->
-            <div class="feature-row">
-                <a href="lessons.html" class="feature-card">
-                    <div class="feature-icon"><img src="src/lesson.png" alt="Educational Content" class="feature-img"></div>
+            <section class="feature-row" aria-label="Feature cards">
+                <a href="lessons.html" class="feature-card" role="link" tabindex="0" aria-describedby="desc-educational-content">
+                    <div class="feature-icon"><img src="src/lesson.png" alt="Educational Content" class="feature-img" aria-hidden="true"></div>
                     <div class="feature-info">
-                        <h3 class="feature-title">Educational Content</h3>
-                        <p class="feature-desc">Learn OHS procedures for CSS</p>
+                        <h3 class="feature-title" id="title-educational-content">Educational Content</h3>
+                        <p class="feature-desc" id="desc-educational-content">Learn OHS procedures for CSS</p>
                     </div>
                 </a>
-                <a href="checklist.html" class="feature-card">
-                    <div class="feature-icon"><img src="src/checklist2.png" alt="Safety Checklist" class="feature-img"></div>
+                <a href="checklist.html" class="feature-card" role="link" tabindex="0" aria-describedby="desc-safety-checklist">
+                    <div class="feature-icon"><img src="src/checklist2.png" alt="Safety Checklist" class="feature-img" aria-hidden="true"></div>
                     <div class="feature-info">
-                        <h3 class="feature-title">Safety Checklist</h3>
-                        <p class="feature-desc">Track your safety procedures</p>
+                        <h3 class="feature-title" id="title-safety-checklist">Safety Checklist</h3>
+                        <p class="feature-desc" id="desc-safety-checklist">Track your safety procedures</p>
                     </div>
                 </a>
-                <a href="assessment.html" class="feature-card">
-                    <div class="feature-icon"><img src="src/assessment.png" alt="Assessment" class="feature-img"></div>
+                <a href="assessment.html" class="feature-card" role="link" tabindex="0" aria-describedby="desc-assessment">
+                    <div class="feature-icon"><img src="src/assessment.png" alt="Assessment" class="feature-img" aria-hidden="true"></div>
                     <div class="feature-info">
-                        <h3 class="feature-title">Assessment</h3>
-                        <p class="feature-desc">Test your knowledge</p>
+                        <h3 class="feature-title" id="title-assessment">Assessment</h3>
+                        <p class="feature-desc" id="desc-assessment">Test your knowledge</p>
                     </div>
                 </a>
-            </div>
+            </section>
         </main>
         <!-- Mobile Icon Navigation Bar -->
         <nav class="bottom-nav">
@@ -184,7 +184,7 @@
         }
         updateStats();
         window.addEventListener('storage', function(e) {
-            if (e.key === 'quizHistory') {
+            if (e.key === 'quizHistory' || e.key === 'lessons' || e.key === 'checklist') {
                 updateStats();
             }
         });
